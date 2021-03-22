@@ -1,0 +1,109 @@
+@import "src/assets/scss/colors";
+
+mat-form-field {
+  width: 100%;
+}
+
+.no-overflow-textarea {
+  textarea {
+    border-left: 1px solid $app-main;
+    border-right: 1px solid $app-main;
+    overflow: hidden;
+    padding: 5px;
+  }
+}
+
+
+//check box
+.app-checkbox-input {
+  ::ng-deep .mat-ripple {
+    display: none !important;
+  }
+}
+
+.app-checkbox-input-readonly {
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+  }
+
+  cursor: default !important;
+
+  ::ng-deep .mat-checkbox-inner-container {
+    overflow: hidden;
+  }
+}
+
+@mixin app-checkbox-color($color) {
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    background-color: $color !important;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $color;
+  }
+}
+
+.app-checkbox-input-default {
+  @include app-checkbox-color($app-secondary-light);
+}
+
+.app-checkbox-input-green {
+  @include app-checkbox-color($app-success);
+}
+
+.app-checkbox-input-blue {
+  @include app-checkbox-color($app-primary);
+}
+
+.app-checkbox-input-red {
+  @include app-checkbox-color($app-error);
+}
+
+
+//radio button
+@mixin box($color) {
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    opacity: 0 !important;
+    background-color: $color !important;
+  }
+
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: $color !important;
+  }
+
+  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $color !important;
+  }
+}
+
+.app-radio-button-default {
+  @include box($app-secondary-light);
+}
+
+.app-radio-button-green {
+  @include box($app-success);
+}
+
+.app-radio-button-blue {
+  @include box($app-primary);
+}
+
+.app-radio-button-red {
+  @include box($app-error);
+}
+
+::ng-deep .mat-radio-label {
+  width: fit-content !important;
+  cursor: pointer !important;
+}
+
+.radio-button-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.disabled-radio-checkbox-input {
+  ::ng-deep label {
+    cursor: default !important;
+  }
+}

@@ -1,0 +1,11 @@
+<div class="app-modal">
+  <span mat-dialog-close class="close-button">
+    <mat-icon>clear</mat-icon>
+  </span>
+  <title mat-dialog-title *ngIf="configuration?.text">
+    {{configuration?.text | conditionalTranslation: configuration?.translate}}
+  </title>
+  <mat-dialog-content [class.app-modal-content-max-width]="configuration?.modalContentMaxWidth">
+    <ng-content></ng-content>
+  </mat-dialog-content>
+</div>

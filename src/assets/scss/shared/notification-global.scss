@@ -1,0 +1,23 @@
+@import "src/assets/scss/colors";
+
+.notification {
+  margin-top: 70px !important;
+  color: $app-white !important;
+
+  .mat-button-wrapper {
+    color: $app-white !important;
+    font-weight: bold !important;
+  }
+}
+
+.success-notification {
+  background-color: $app-success !important;
+}
+
+.error-notification {
+  background-color: $app-error !important;
+}
+
+.warn-notification {
+  background-color: $app-warn !important;
+}

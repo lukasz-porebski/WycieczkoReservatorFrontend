@@ -1,0 +1,83 @@
+@import "src/assets/scss/colors";
+
+.action-column-width {
+  flex: 0 0 60px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.action-button {
+  padding: 0 25px;
+}
+
+.disable-table {
+  opacity: 0.5;
+}
+
+.empty-table {
+  min-height: 30vh;
+}
+
+.empty-table-cell {
+  width: 100%;
+
+  span {
+    margin: 0 auto;
+  }
+}
+
+.number-column-type {
+  width: 100%;
+  text-align: right;
+}
+
+.app-table-checkbox-input {
+  width: 100%;
+  text-align: center;
+
+  ::ng-deep .mat-ripple {
+    display: none !important;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    background-color: $app-primary !important;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $app-primary;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+  }
+
+  mat-checkbox {
+    cursor: default !important;
+  }
+
+  ::ng-deep .mat-checkbox-layout {
+    margin-bottom: 0 !important;
+  }
+}
+
+.table-margin > .inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 -50% 0 0;
+  transform: translate(-50%, -50%);
+}
+
+.cell-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.filter {
+  width: 100%;
+}

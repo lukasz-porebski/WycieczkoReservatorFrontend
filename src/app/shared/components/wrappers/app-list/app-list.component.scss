@@ -1,0 +1,31 @@
+.list-row {
+  > span {
+    float: left;
+  }
+
+  > div {
+    float: left;
+  }
+}
+
+.list-row-label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.list-row-icon {
+  cursor: pointer;
+}
+
+.list-row-icon-container {
+  margin: 0 auto !important;
+  height: fit-content !important;
+}
+
+::ng-deep .app-list {
+  .app-list-max-width {
+    > .mat-list-item-content {
+      padding: 0 !important;
+    }
+  }
+}

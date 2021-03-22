@@ -1,0 +1,121 @@
+<mat-form-field *ngIf="configuration.filter" class="filter">
+  <mat-label>{{translateRoute + 'FILTER' | translate}}</mat-label>
+  <input matInput (keyup)="applyFilter($event)" [placeholder]="configuration.filter.placeholder">
+</mat-form-field>
+
+<div class="table-margin">
+  <mat-table class="mat-elevation-z8"
+             [class.disable-table]="shouldShowSpinner"
+             [dataSource]="dataSource"
+             matSort>
+
+    <ng-container *ngFor="let column of configuration.columns"
+                  [matColumnDef]="configuration.getColumnName(column)"
+                  [sticky]="column.sticky"
+                  [stickyEnd]="column.stickyEnd">
+      <mat-header-cell *matHeaderCellDef
+                       [style]="'min-width:' + column.minWidth"
+                       mat-sort-header>
+        {{configuration.getColumnNameTranslateRoute(column) | translate}}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let data"
+                [style]="'min-width:' + column.minWidth"
+                [ngSwitch]="column.type">
+        <img *ngIf="column.imgPatch && column.imgPatch(data)"
+             class="cell-img"
+             [src]="column.imgPatch(data)">
+        <ng-template [ngSwitchCase]="AppTableColumnType.Text">
+          {{column.getData(data)}}
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Number">
+          <span class="number-column-type">{{column.getData(data)}}</span>
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Date">
+          {{column.getData(data) | date: DateFormat.Date}}
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.DateWithTime">
+          {{column.getData(data) | date: DateFormat.DateWithTime}}
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Hours">
+          {{column.getData(data) | date: DateFormat.Hours : 'UTC'}}
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Minutes">
+          {{column.getData(data) | date: DateFormat.Minutes : 'UTC'}}
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Boolean">
+          <div class="app-table-checkbox-input">
+            <mat-checkbox [checked]="column.getData(data)"
+                          [disableRipple]="true"
+                          (click)="$event.preventDefault()">
+            </mat-checkbox>
+          </div>
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Percent">
+          {{getPercent(column.getData(data))}}
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container *ngFor="let column of configuration.columnsWithIcon"
+                  [matColumnDef]="column.columnName">
+      <mat-header-cell *matHeaderCellDef class="action-column-width">
+      </mat-header-cell>
+      <mat-cell *matCellDef="let data" class="action-column-width">
+        <button mat-icon-button
+                class="action-button"
+                [disabled]="shouldShowSpinner"
+                (click)="column.onClick(data)">
+          <mat-icon>{{column.icon}}</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container *ngIf="configuration.actionsDefinition"
+                  [matColumnDef]="configuration.actionsDefinition.name"
+                  [stickyEnd]="configuration.actionsDefinition.stickyEnd">
+      <mat-header-cell *matHeaderCellDef class="action-column-width"></mat-header-cell>
+      <mat-cell *matCellDef="let data" class="action-column-width">
+        <button mat-icon-button
+                class="action-button"
+                [disabled]="shouldShowSpinner"
+                [matMenuTriggerFor]="actions">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #actions="matMenu">
+          <button mat-menu-item
+                  *ngFor="let action of configuration.actionsDefinition.actions"
+                  [hidden]="applyBooleanOrCallableColumnValue(action.hide, data)"
+                  (click)="action.onClick(data)"
+                  [disabled]="action.disabled(data)">
+            <mat-icon *ngIf="action.icon">{{action.icon}}</mat-icon>
+            <span *ngIf="action.name">{{configuration.getColumnNameTranslateRoute(action) | translate}}</span>
+          </button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tableIsEmptyColumn">
+      <mat-footer-cell *matFooterCellDef class="empty-table-cell">
+        <span>{{translateRoute + 'EMPTY_TABLE' | translate}}</span>
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="configuration.columnNames; sticky: configuration.headerSticky"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: configuration.columnNames;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['tableIsEmptyColumn']"
+                    class="empty-table"
+                    [hidden]="isTableEmpty">
+    </mat-footer-row>
+  </mat-table>
+
+  <mat-paginator *ngIf="configuration.paginator"
+                 [pageSizeOptions]="configuration.paginator.getPageSizes()"
+                 [pageSize]="configuration.paginator.defaultPageSize"
+                 [showFirstLastButtons]="configuration.paginator.showFirstLastButtons">
+  </mat-paginator>
+
+  <div *ngIf="shouldShowSpinner" class="inner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</div>

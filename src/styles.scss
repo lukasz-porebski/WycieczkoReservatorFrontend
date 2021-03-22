@@ -1,4 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+@import "assets/scss/shared/notification-global";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+.center-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  > * {
+    width: 100%;
+  }
+}
+
+mat-form-field {
+  margin: 5px 0;
+}
+
+.table-margin {
+  margin: 15px auto;
+}
+
+.center-button {
+  margin: 0 auto !important;
+}
+
+.mat-h1 {
+  text-align: center;
+}
+
+.center-row-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-h1 {
+  width: 100%;
+  text-align: center;
+}
+
+button:focus {
+  outline: 0 !important;
+}

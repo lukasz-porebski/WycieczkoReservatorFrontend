@@ -1,0 +1,27 @@
+<div *ngIf="isAnyMessage" class="container error-container">
+  <div class="row center-row-content">
+    <div class="col error-icon">
+      <mat-icon>error</mat-icon>
+    </div>
+    <div *ngIf="isOnlyOneMessage" class="col error-text error-text-one-line">
+      <ng-container *ngIf="translateMessage">
+        {{messages[0] | translate}}
+      </ng-container>
+      <ng-container *ngIf="!translateMessage">
+        {{messages[0]}}
+      </ng-container>
+    </div>
+    <div *ngIf="!isOnlyOneMessage" class="col error-text">
+      <ul class="error-text-list">
+        <li *ngFor="let message of messages">
+          <ng-container *ngIf="translateMessage">
+            {{message | translate}}
+          </ng-container>
+          <ng-container *ngIf="!translateMessage">
+            {{message}}
+          </ng-container>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

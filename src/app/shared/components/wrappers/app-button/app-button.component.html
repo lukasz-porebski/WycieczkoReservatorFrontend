@@ -1,0 +1,35 @@
+<div class="app-button"
+     [className]="configuration.color + '-color'">
+  <button *ngIf="!configuration?.matStepperNext"
+          #appButtonStepper
+          mat-raised-button
+          [matTooltip]="configuration.tooltip"
+          [disabled]="configuration?.disabled || disabled"
+          [color]="matColor"
+          (click)="configuration?.onClick()">
+    <ng-template [ngIf]="configuration.label?.translate">
+      {{configuration.label?.text | translate }}
+    </ng-template>
+
+    <ng-template [ngIf]="!configuration.label?.translate">
+      {{configuration.label?.text}}
+    </ng-template>
+  </button>
+
+  <button *ngIf="configuration?.matStepperNext"
+          #appButton
+          mat-raised-button
+          matStepperNext
+          [matTooltip]="configuration.tooltip"
+          [disabled]="configuration?.disabled || disabled"
+          [color]="matColor"
+          (click)="configuration?.onClick()">
+    <ng-template [ngIf]="configuration.label?.translate">
+      {{configuration.label?.text | translate }}
+    </ng-template>
+
+    <ng-template [ngIf]="!configuration.label?.translate">
+      {{configuration.label?.text}}
+    </ng-template>
+  </button>
+</div>

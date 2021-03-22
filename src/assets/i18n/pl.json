@@ -1,0 +1,54 @@
+{
+  "APP_NAME": "WycieczkoReservator",
+  "CORE": {
+    "USER_IDENTITY": {
+      "CONTENT": "Trwa logowanie. Potrwa to tylko chwilę."
+    }
+  },
+  "MODULES": {
+    "HOME": {
+      "HEADER": "Zezwolenie na dostęp",
+      "CONTENT_FIRST_SENTENCE": "F_t.",
+      "CONTENT_SECOND_SENTENCE": "S_T",
+      "BUTTON": "Przycisk"
+    }
+  },
+  "SHARED": {
+    "ATTRIBUTES": {
+      "EMAIL": {
+        "FIELD_NAME": "Email",
+        "ERRORS": {
+          "INCORRECT_FORMAT": "Nieprawidłowy format adresu email"
+        }
+      },
+      "ERRORS": {
+        "REQUIRED": "To pole jest wymagane"
+      }
+    },
+    "COMPONENTS": {
+      "NAV_TOP_BAR": {
+        "LOG_OUT": "Wyloguj"
+      },
+      "MENU": {
+        "TRIPS": {
+          "MENU_NAME": "Wycieczki"
+        }
+      },
+      "APP_TABLE": {
+        "EMPTY_TABLE": "Tablica jest pusta",
+        "FILTER": "Filtr",
+        "PAGINATOR": {
+          "ITEMS_PER_PAGE_LABEL": "Liczba wierszy na stronę"
+        }
+      }
+    }
+  },
+  "ERRORS": {
+    "USER": {
+      "AHC": {
+        "5": "Podany adreas email jest już zajęty",
+        "6": "Nieprawidłowy login lub hasło"
+      }
+    }
+  }
+}

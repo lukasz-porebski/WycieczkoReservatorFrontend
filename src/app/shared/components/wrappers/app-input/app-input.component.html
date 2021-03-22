@@ -1,0 +1,100 @@
+<mat-form-field *ngIf="basicInput">
+  <input
+    matInput
+    [readonly]="configuration.readonly"
+    [type]="basicInput.type"
+    [disabled]="configuration.disabled"
+    [formControl]="basicInput.formControl"
+    [maxlength]="basicInput.maxLength"
+    placeholder="{{ createLabel() | conditionalTranslation:configuration.label?.translate}}">
+
+  <button *ngIf="basicInput.passwordShowButton"
+          mat-icon-button
+          matSuffix (click)="basicInput.changePasswordHideState()"
+          [attr.aria-pressed]="basicInput.isPasswordHidden">
+    <mat-icon>{{basicInput.isPasswordHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </button>
+
+  <mat-hint align="end">
+    <ng-template [ngTemplateOutlet]="hintContent"></ng-template>
+  </mat-hint>
+
+  <mat-error *ngIf="basicInput.attribute?.error?.isAny">
+    {{basicInput.attribute?.error?.message | translate}}
+  </mat-error>
+</mat-form-field>
+
+
+<mat-form-field *ngIf="textAreaInput"
+                [class.no-overflow-textarea]="textAreaInput.noOverflow">
+  <mat-label>
+    {{ createLabel() | conditionalTranslation:configuration.label?.translate}}
+  </mat-label>
+
+  <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            [readonly]="configuration.readonly"
+            [disabled]="configuration.disabled"
+            [formControl]="textAreaInput.formControl"
+            [cdkAutosizeMinRows]="textAreaInput.minRows"
+            [cdkAutosizeMaxRows]="textAreaInput.maxRows">
+    </textarea>
+
+  <mat-hint align="end">
+    <ng-template [ngTemplateOutlet]="hintContent"></ng-template>
+  </mat-hint>
+
+  <mat-error *ngIf="textAreaInput.attribute?.error?.isAny">
+    {{textAreaInput.attribute?.error?.message | translate}}
+  </mat-error>
+
+</mat-form-field>
+
+
+<div *ngIf="checkboxInput"
+     class="app-checkbox-input"
+     [className]="getCheckBoxColorClass(checkboxInput.color)">
+  <mat-checkbox [class.app-checkbox-input-readonly]="configuration.readonly"
+                [labelPosition]="checkboxInput.labelPosition"
+                [disableRipple]="true"
+                [disabled]="configuration.disabled"
+                [formControl]="checkboxInput.formControl"
+                (click)="configuration.readonly ? $event.preventDefault() : null">
+    {{ createLabel() | conditionalTranslation:configuration.label?.translate}}
+  </mat-checkbox>
+</div>
+
+<div *ngIf="radioButtonInput && radioButtonInput.label" class="mb-2">
+  <mat-label>
+    {{ createLabel() | conditionalTranslation:configuration.label?.translate}}
+  </mat-label>
+</div>
+
+<mat-radio-group
+  *ngIf="radioButtonInput"
+  class="radio-group"
+  [className]="getRadioButtonColorClass(radioButtonInput.color)"
+  [formControl]="radioButtonInput.formControl">
+  <mat-radio-button *ngFor="let option of radioButtonInput.options"
+                    [class.readonly-radio-checkbox-input]="configuration.readonly"
+                    [class.disabled-radio-checkbox-input]="configuration.disabled"
+                    class="radio-button radio-button-rows"
+                    [disableRipple]="configuration.readonly"
+                    [disabled]="configuration.disabled"
+                    [value]="option"
+                    (click)="configuration.readonly ? $event.preventDefault() : null">
+    <span [className]="">
+      {{radioButtonInput.getOptionText(option) | conditionalTranslation: radioButtonInput.translateOptionLabel}}
+    </span>
+  </mat-radio-button>
+</mat-radio-group>
+
+<ng-template #hintContent>
+  <ng-container *ngIf="hintTemplate">
+    <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
+  </ng-container>
+  <ng-container *ngIf="!hintTemplate && basicInput?.hint?.hint">
+    {{configuration.label?.text + basicInput?.hint}}
+  </ng-container>
+</ng-template>
