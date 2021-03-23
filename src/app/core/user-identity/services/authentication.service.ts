@@ -26,7 +26,7 @@ export class AuthenticationService {
 
   private readonly _currentTokenSubject: BehaviorSubject<TokenModel>;
   private readonly _baseUrl = `${this._http.baseUrl}/authorization/`;
-  private readonly _redirectUrl = `${environment.appUrl}/${AppRouting.login.root}`;
+  private readonly _redirectUrl = `${environment.appUrl}/${AppRouting.account.root}`;
 
   constructor(private readonly _http: HttpService) {
     this._currentTokenSubject = new BehaviorSubject<TokenModel>(this._getTokenFromLocalStorage());
@@ -42,8 +42,8 @@ export class AuthenticationService {
     return this._http.get<string>(`${this._baseUrl}generate-url-for-code`, httpOptions);
   }
 
-  public logIn(code: string): Observable<TokenModel> {
-    return this._generateAccessToken(code)
+  public logIn(login: string, password: string): Observable<TokenModel> {
+    return this._generateAccessToken(null)
       .pipe(map(res => {
         const token = new TokenModel(res.accessToken, res.expiresIn);
         this._setToken(token);

@@ -19,7 +19,7 @@ export class UserIdentityComponent implements OnInit {
   ngOnInit(): void {
     const code = this._activatedRoute.snapshot.queryParams.code;
     this._authenticationService
-      .logIn(code)
+      .logIn(code, null)
       .subscribe(() => this._router.navigateByUrl(AppRouting.home.root));
   }
 }

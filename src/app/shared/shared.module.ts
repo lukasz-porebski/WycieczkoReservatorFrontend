@@ -71,16 +71,8 @@ const APP_EXPORT_PARTS = [
 
 @NgModule({
   declarations: [
-    NavigationComponent,
-    AppTableComponent,
-    AppInputComponent,
-    AppErrorComponent,
-    AppModalComponent,
-    ConditionalTranslationPipe,
-    AppButtonComponent,
-    TimeSpanPipe,
-    AppAsyncPageComponent,
-    AppListComponent,
+    ...APP_EXPORT_PARTS,
+    ConditionalTranslationPipe
   ],
   exports: [
     TranslateModule,
@@ -91,15 +83,15 @@ const APP_EXPORT_PARTS = [
     ...APP_EXPORT_PARTS,
     ...MATERIAL_MODULES,
   ],
-    imports: [
-        TranslateModule,
-        CommonModule,
-        RouterModule,
-        ReactiveFormsModule,
-        ClipboardModule,
-        ...MATERIAL_MODULES,
-        MatPaginatorModule,
-    ],
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    ClipboardModule,
+    ...MATERIAL_MODULES,
+    MatPaginatorModule,
+  ],
   providers: [
     TimeSpanPipe,
   ],

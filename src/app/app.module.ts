@@ -20,7 +20,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     AppComponent,
     HomeComponent,
-    UserIdentityComponent,
+    UserIdentityComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [ HttpClient ],
       },
     }),
-    SharedModule
+    SharedModule,
+    // AccountModule
   ],
   providers: [
     // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

@@ -11,6 +11,59 @@
       "CONTENT_FIRST_SENTENCE": "F_t.",
       "CONTENT_SECOND_SENTENCE": "S_T",
       "BUTTON": "Przycisk"
+    },
+    "ACCOUNT": {
+      "PAGES": {
+        "REGISTRATION": {
+          "STEPS": {
+            "REGISTRATION": {
+              "TITLE": "Rejestracja",
+              "REGISTER": "Zarejestruj",
+              "LOG_IN_QUESTION": "Masz już konto?",
+              "LOG_IN_OFFER": "Zaloguj się!"
+            },
+            "EMAIL_CONFIRMATION": {
+              "TITLE": "Potwierdzenie adresu email",
+              "MESSAGE": "Na podany adres email została wysłana wiadomość z kodem autoryzayjnym. Proszę go wpisać w poniższym polu",
+              "CODE": "Kod"
+            },
+            "DONE": {
+              "TITLE": "Gotowe",
+              "MESSAGE": "Zakończono rejestrację. Możesz teraz korzystać ze wszystkich oferowanych funkcji",
+              "GO_TO_QUIZZES_BUTTON": "Przejdź do quizów"
+            }
+          }
+        },
+        "LOG_IN": {
+          "TITLE": "Logowanie",
+          "LOG_IN_BUTTON": "Zaloguj",
+          "REGISTRATION_QUESTION": "Nie masz jeszcze konta?",
+          "REGISTRATION_OFFER": "Zarejestruj się!"
+        }
+      },
+      "ATTRIBUTES": {
+        "PASSWORD": {
+          "FIELD_NAME": "Hasło",
+          "HINT": "Ilość znaków musi mieścić się w przedziale 10-30",
+          "ERRORS": {
+            "INCORRECT_FORMAT": "Hasło musi zawierać małą i wielką literę, cyfrę oraz znak specjalny",
+            "WHITE_SPACE": "Hasło nie może zawierać spacji",
+            "LENGTH": "Ilość znaków musi mieścić się w przedziale 10-30"
+          }
+        },
+        "REPEATED_PASSWORD": {
+          "FIELD_NAME": "Powtórz hasło",
+          "ERRORS": {
+            "NOT_MATCH": "Hasła są różne"
+          }
+        },
+        "EMAIL_CONFIRMATION": {
+          "FIELD_NAME": "Kod",
+          "ERRORS": {
+            "NOT_MATCH": "Kod nie jest prawidłowy"
+          }
+        }
+      }
     }
   },
   "SHARED": {
