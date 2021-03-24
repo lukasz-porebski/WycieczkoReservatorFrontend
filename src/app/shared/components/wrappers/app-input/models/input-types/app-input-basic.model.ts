@@ -1,6 +1,6 @@
 import { AppInputBasicType } from '../../enums/app-input-basic-type.enum';
 import { IAttribute } from '../../../../../interfaces/attribute.interface';
-import { IAppInputHint, AppInputHintModel } from '../configurations/app-input-hint.model';
+import { AppInputHintModel, IAppInputHint } from '../configurations/app-input-hint.model';
 import { FormControl } from '@angular/forms';
 import { isDefined } from '../../../../../utils/utils';
 
@@ -25,6 +25,8 @@ export class AppInputBasicModel {
     return this._type;
   }
 
+  public readonly mask: string;
+
   public attribute?: IAttribute;
   public hint?: AppInputHintModel;
   public maxLength?: number;
@@ -41,10 +43,15 @@ export class AppInputBasicModel {
     this.hint = new AppInputHintModel(configuration.hint);
     this.maxLength = configuration.maxLength;
     this.passwordShowButton = configuration.passwordShowButton;
+    this.mask = this._getMask(this._type);
   }
 
   public changePasswordHideState(): void {
     this._isPasswordHidden = !this._isPasswordHidden;
     this._type = this._isPasswordHidden ? AppInputBasicType.password : AppInputBasicType.text;
+  }
+
+  private _getMask(type: AppInputBasicType): string {
+    return type === AppInputBasicType.zipCode ? '00-000' : null;
   }
 }

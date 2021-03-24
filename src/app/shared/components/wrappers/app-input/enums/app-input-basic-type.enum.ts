@@ -2,5 +2,6 @@ export enum AppInputBasicType {
   text = 'text',
   number = 'number',
   password = 'password',
-  email = 'email'
+  email = 'email',
+  zipCode = 'zip-code'
 }

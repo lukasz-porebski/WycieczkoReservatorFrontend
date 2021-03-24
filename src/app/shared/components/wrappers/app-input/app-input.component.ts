@@ -48,6 +48,7 @@ export class AppInputComponent {
       : this.configuration.label?.text;
   }
 
+
   public getCheckBoxColorClass(color: AppInputColor): string {
     return 'app-checkbox-input-' + color;
   }

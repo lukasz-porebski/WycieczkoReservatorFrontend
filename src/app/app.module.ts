@@ -12,6 +12,7 @@ import { HomeComponent } from './modules/home/home.component';
 import { UserIdentityComponent } from './core/user-identity/component/user-identity.component';
 import { TokenInterceptor } from './core/user-identity/interceptors/token.interceptor';
 
+
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
@@ -39,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   providers: [
     // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [ AppComponent ],

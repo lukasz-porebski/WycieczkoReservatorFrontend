@@ -1,6 +1,8 @@
 <app-async-page [showSpinner]="showSpinner">
   <mat-card>
-    <h1 class="mat-h1">{{translateRoute + 'TITLE' | translate }}</h1>
+    <mat-card-title>
+      {{translateRoute + 'TITLE' | translate }}
+    </mat-card-title>
 
     <app-input [configuration]="emailInput"></app-input>
 

@@ -14,31 +14,40 @@
     },
     "ACCOUNT": {
       "PAGES": {
-        "REGISTRATION": {
-          "STEPS": {
-            "REGISTRATION": {
-              "TITLE": "Rejestracja",
-              "REGISTER": "Zarejestruj",
-              "LOG_IN_QUESTION": "Masz już konto?",
-              "LOG_IN_OFFER": "Zaloguj się!"
-            },
-            "EMAIL_CONFIRMATION": {
-              "TITLE": "Potwierdzenie adresu email",
-              "MESSAGE": "Na podany adres email została wysłana wiadomość z kodem autoryzayjnym. Proszę go wpisać w poniższym polu",
-              "CODE": "Kod"
-            },
-            "DONE": {
-              "TITLE": "Gotowe",
-              "MESSAGE": "Zakończono rejestrację. Możesz teraz korzystać ze wszystkich oferowanych funkcji",
-              "GO_TO_QUIZZES_BUTTON": "Przejdź do quizów"
-            }
-          }
-        },
         "LOG_IN": {
           "TITLE": "Logowanie",
           "LOG_IN_BUTTON": "Zaloguj",
           "REGISTRATION_QUESTION": "Nie masz jeszcze konta?",
           "REGISTRATION_OFFER": "Zarejestruj się!"
+        },
+        "REGISTRATION": {
+          "TITLE": "Rejestracja",
+          "REGISTER": "Zarejestruj",
+          "LOG_IN_QUESTION": "Masz już konto?",
+          "LOG_IN_OFFER": "Zaloguj się!",
+          "ATTRIBUTES": {
+            "FIRST_NAME": {
+              "FIELD_NAME": "Imię"
+            },
+            "LAST_NAME": {
+              "FIELD_NAME": "Nazwisko"
+            },
+            "STREET_AND_NUMBER": {
+              "FIELD_NAME": "Ulica i numer"
+            },
+            "ZIP_CODE": {
+              "FIELD_NAME": "Kod pocztowy",
+              "ERRORS": {
+                "LENGTH": "Kod pocztowy musi składać się z 5 cyfr"
+              }
+            },
+            "CITY": {
+              "FIELD_NAME": "Miejscowość"
+            },
+            "PHONE_NUMBER": {
+              "FIELD_NAME": "Numer telefonu"
+            }
+          }
         }
       },
       "ATTRIBUTES": {

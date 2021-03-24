@@ -6,7 +6,7 @@ export abstract class PasswordValidator {
 
   public static format(control: AbstractControl): ValidationErrors | null {
     if (isNotDefined(control.value) || !PasswordValidator._isFormatValid(control.value)) {
-      return {format: true};
+      return { format: true };
     }
     return null;
   }
@@ -14,7 +14,7 @@ export abstract class PasswordValidator {
 
   public static containsWhiteSpace(control: AbstractControl): ValidationErrors | null {
     if (isNotDefined(control.value) || PasswordValidator._containsWhiteSpace(control.value)) {
-      return {containsWhiteSpace: true};
+      return { containsWhiteSpace: true };
     }
     return null;
   }
@@ -22,7 +22,7 @@ export abstract class PasswordValidator {
   public static properLength(min: number, max: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       if (isNotDefined(control.value) || !PasswordValidator._isLengthValid(control.value, min, max)) {
-        return {length: true};
+        return { length: true };
       }
       return null;
     };
@@ -31,7 +31,7 @@ export abstract class PasswordValidator {
   public static correctlyRepeated(passwordControl: AbstractControl): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       if (isNotDefined(control.value) || !PasswordValidator._isCorrectlyRepeated(passwordControl.value, control.value)) {
-        return {correctlyRepeated: true};
+        return { correctlyRepeated: true };
       }
       return null;
     };

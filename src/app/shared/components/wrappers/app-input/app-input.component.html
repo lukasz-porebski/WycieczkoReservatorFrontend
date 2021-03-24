@@ -6,6 +6,7 @@
     [disabled]="configuration.disabled"
     [formControl]="basicInput.formControl"
     [maxlength]="basicInput.maxLength"
+    [mask]="basicInput.mask"
     placeholder="{{ createLabel() | conditionalTranslation:configuration.label?.translate}}">
 
   <button *ngIf="basicInput.passwordShowButton"
@@ -30,7 +31,6 @@
   <mat-label>
     {{ createLabel() | conditionalTranslation:configuration.label?.translate}}
   </mat-label>
-
   <textarea matInput
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"

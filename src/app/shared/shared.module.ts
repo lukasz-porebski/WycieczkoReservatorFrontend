@@ -34,6 +34,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+
 
 const MATERIAL_MODULES = [
   MatSidenavModule,
@@ -91,6 +95,7 @@ const APP_EXPORT_PARTS = [
     ClipboardModule,
     ...MATERIAL_MODULES,
     MatPaginatorModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     TimeSpanPipe,

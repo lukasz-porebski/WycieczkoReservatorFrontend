@@ -18,7 +18,7 @@ export class RadioButtonAttribute<TData> implements IAttribute {
     this.formControl.setValue(v);
   }
 
-  readonly error = new ErrorModel();
+  public readonly error = new ErrorModel();
 
   public readonly translateRoute: string;
   public readonly options: TData[];

@@ -18,14 +18,14 @@ import { AccountRouting } from '../../../../core/configurations/routing/account/
 })
 export class LogInComponent implements OnInit {
   public get showSpinner(): boolean {
-    return this.userLogInEntity.whole.disabled;
+    return this.entity.whole.disabled;
   }
 
   public get disableLogInButton(): boolean {
-    return this.userLogInEntity.whole.invalid || this.userLogInEntity.whole.disabled;
+    return this.entity.whole.invalid || this.entity.whole.disabled;
   }
 
-  public readonly userLogInEntity = new LogInEntity();
+  public readonly entity = new LogInEntity();
   public readonly accountRouting = AccountRouting;
   public readonly translateRoute = 'MODULES.ACCOUNT.PAGES.LOG_IN.';
 
@@ -42,20 +42,20 @@ export class LogInComponent implements OnInit {
   public ngOnInit(): void {
     this.emailInput = new AppInputModel({
       label: {
-        text: this.userLogInEntity.email.translateRoute,
+        text: this.entity.email.translateRoute,
       },
       input: new AppInputBasicModel({
-        attribute: this.userLogInEntity.email,
+        attribute: this.entity.email,
         type: AppInputBasicType.email,
       }),
     });
 
     this.passwordInput = new AppInputModel({
       label: {
-        text: this.userLogInEntity.password.translateRoute,
+        text: this.entity.password.translateRoute,
       },
       input: new AppInputBasicModel({
-        attribute: this.userLogInEntity.password,
+        attribute: this.entity.password,
         type: AppInputBasicType.password,
         passwordShowButton: true,
       }),
@@ -70,15 +70,15 @@ export class LogInComponent implements OnInit {
   }
 
   public onLogIn(): void {
-    this.userLogInEntity.whole.disable();
+    this.entity.whole.disable();
     this._authenticationService
-      .logIn(this.userLogInEntity.email.value, this.userLogInEntity.password.value)
+      .logIn(this.entity.email.value, this.entity.password.value)
       .subscribe(
         () => this._router.navigate([AppRouting.home.root]),
         (error: string[]) => {
           this.errors = replaceIfNotDefined(error, [])
             .map(e => ErrorTranslator.getErrorTranslateRoute(e));
-          this.userLogInEntity.whole.enable();
+          this.entity.whole.enable();
         });
   }
 }

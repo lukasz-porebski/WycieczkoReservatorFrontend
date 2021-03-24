@@ -5,7 +5,7 @@ import { HttpService } from '../../../core/services/http.service';
 @Injectable({
   providedIn: AccountApiServiceModule
 })
-export class AccountService {
+export class AccountApiService {
   constructor(private readonly _http: HttpService) {
   }
 }

@@ -5,6 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountApiServiceModule } from './account-api-service.module';
 import { AccountComponent } from './account.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { AccountComponent } from './account.component';
   declarations: [
     AccountComponent,
     LogInComponent,
-    // RegistrationComponent
+    RegistrationComponent
   ],
 })
 export class AccountModule {
