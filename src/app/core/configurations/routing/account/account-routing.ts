@@ -6,4 +6,5 @@ export abstract class AccountRouting {
 
   public static readonly logIn = new RoutingPathModel(AppRoutes.account.children.logIn, AccountRouting.root);
   public static readonly registration = new RoutingPathModel(AppRoutes.account.children.registration, AccountRouting.root);
+  public static readonly passwordReminder = new RoutingPathModel(AppRoutes.account.children.passwordReminder, AccountRouting.root);
 }

@@ -18,7 +18,8 @@
           "TITLE": "Logowanie",
           "LOG_IN_BUTTON": "Zaloguj",
           "REGISTRATION_QUESTION": "Nie masz jeszcze konta?",
-          "REGISTRATION_OFFER": "Zarejestruj się!"
+          "REGISTRATION_OFFER": "Zarejestruj się!",
+          "REMIND_PASSWORD": "Przypomnij hasło"
         },
         "REGISTRATION": {
           "TITLE": "Rejestracja",
@@ -48,6 +49,26 @@
               "FIELD_NAME": "Numer telefonu"
             }
           }
+        },
+        "PASSWORD_REMINDER": {
+          "TITLE": "Przypomnienie hasła",
+          "BACK_TO_LOG_IN": "Wróc do logowania",
+          "STEPS": {
+            "USER_RECOGNITION": {
+              "TITLE": "Pytanie pomocnicze",
+              "GET_HELP_QUESTION": "Pobierz pytanie pomocnicze"
+            },
+            "USER_ANSWER": {
+              "TITLE": "Odpowiedź na pytanie pomocnicze",
+              "REMIND_PASSWORD": "Przypomnij hasło",
+              "USER_PASSWORD": "Twoje hasło to",
+              "ATTRIBUTES": {
+                "ANSWER": {
+                  "FIELD_NAME": "Odpowiedź"
+                }
+              }
+            }
+          }
         }
       },
       "ATTRIBUTES": {
@@ -71,6 +92,13 @@
           "ERRORS": {
             "NOT_MATCH": "Kod nie jest prawidłowy"
           }
+        }
+      },
+      "ENUMS": {
+        "PASSWORD_HELP_QUESTION": {
+          "DOG_NAME": "Imię psa",
+          "FRIEND_NAME": "Imię przyjaciela",
+          "BAND_NAME": "Nazwa zespołu"
         }
       }
     }

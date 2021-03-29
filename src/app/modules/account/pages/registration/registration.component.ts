@@ -4,7 +4,7 @@ import { AppInputModel } from '../../../../shared/components/wrappers/app-input/
 import { AppButtonModel } from '../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { AppInputBasicModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-basic.model';
 import { AppInputBasicType } from '../../../../shared/components/wrappers/app-input/enums/app-input-basic-type.enum';
-import { AccountApiService } from '../../services/account-api.service';
+import { UserApiService } from '../../services/user-api.service';
 import { AppInputHintAlign } from '../../../../shared/components/wrappers/app-input/enums/app-input-hint-align.enum';
 import { RegistrationEntity } from './entities/registration-entity';
 
@@ -32,7 +32,7 @@ export class RegistrationComponent implements OnInit {
   public errors: string[] = [];
   public showSpinner = false;
 
-  constructor(private readonly _accountApiService: AccountApiService) {
+  constructor(private readonly _accountApiService: UserApiService) {
   }
 
   public ngOnInit(): void {

@@ -3,7 +3,8 @@ export const AppRoutes = {
     path: 'account',
     children: {
       logIn: 'log-in',
-      registration: 'registration'
+      registration: 'registration',
+      passwordReminder: 'password-reminder'
     }
   },
   home: {

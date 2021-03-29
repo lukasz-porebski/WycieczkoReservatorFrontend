@@ -10,9 +10,15 @@
 
     <app-error [messages]="errors"></app-error>
 
-    <div class="register-suggestion">{{translateRoute + 'REGISTRATION_QUESTION' | translate}}
+    <div class="navigate-to-option">{{translateRoute + 'REGISTRATION_QUESTION' | translate}}
       <a [routerLink]="accountRouting.registration.absolutePath">
         {{translateRoute + 'REGISTRATION_OFFER' | translate}}
+      </a>
+    </div>
+
+    <div class="navigate-to-option">
+      <a [routerLink]="accountRouting.passwordReminder.absolutePath">
+        {{translateRoute + 'REMIND_PASSWORD' | translate}}
       </a>
     </div>
 

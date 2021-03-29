@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppTableComponent } from './components/wrappers/app-table/app-table.component';
 import { AppInputComponent } from './components/wrappers/app-input/app-input.component';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
@@ -35,6 +35,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { MatSelectModule } from '@angular/material/select';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -59,6 +60,8 @@ const MATERIAL_MODULES = [
   MatDatepickerModule,
   MatTooltipModule,
   MatSortModule,
+  MatSelectModule,
+  MatPaginatorModule,
 ];
 
 const APP_EXPORT_PARTS = [
@@ -86,6 +89,7 @@ const APP_EXPORT_PARTS = [
     ClipboardModule,
     ...APP_EXPORT_PARTS,
     ...MATERIAL_MODULES,
+    FormsModule,
   ],
   imports: [
     TranslateModule,
@@ -93,8 +97,8 @@ const APP_EXPORT_PARTS = [
     RouterModule,
     ReactiveFormsModule,
     ClipboardModule,
+    FormsModule,
     ...MATERIAL_MODULES,
-    MatPaginatorModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [
