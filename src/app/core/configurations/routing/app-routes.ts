@@ -10,4 +10,10 @@ export const AppRoutes = {
   home: {
     path: 'home',
   },
+  admin: {
+    path: 'admin',
+    children: {
+      usersList: 'users-list'
+    }
+  }
 };

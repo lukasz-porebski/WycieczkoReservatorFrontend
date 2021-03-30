@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { UserApiServiceModule } from '../user-api-service.module';
 import { HttpService } from '../../../core/services/http.service';
 import { Observable, of } from 'rxjs';
-import { AccessTokenApiModel } from '../../../core/user-identity/models/apis/access-token-api.model';
-import { map } from 'rxjs/operators';
 import { RemindPasswordRequestModel } from '../pages/password-reminder/models/requests/remind-password-request-model';
 import { PasswordHelpQuestion } from '../pages/registration/enums/password-help-question.enum';
 

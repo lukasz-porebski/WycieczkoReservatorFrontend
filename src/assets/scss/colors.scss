@@ -248,7 +248,7 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 }
 
 
-$app-primary: mat-color($theme-primary, 900);
+$app-primary: #3f51b5;
 $app-secondary-light: mat-color($theme-accent, 200);
 $app-secondary-dark: #22803e;
 $app-backgroud: $light-background;

@@ -4,6 +4,8 @@ import { AppRouting } from './core/configurations/routing/app-routing';
 import { NotAuthenticatedGuard } from './core/user-identity/guards/not-authenticated.guard';
 import { HomeComponent } from './modules/home/home.component';
 import { UserComponent } from './modules/user/user.component';
+import { NavigationComponent } from './shared/components/navigation/navigation.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +18,12 @@ const routes: Routes = [
     canActivate: [ NotAuthenticatedGuard ],
     component: UserComponent,
     loadChildren: () => import('./modules/user/user.module').then(mod => mod.UserModule)
+  },
+  {
+    path: AppRouting.admin.root,
+    // canActivate: [ NotAuthenticatedGuard ],
+    component: NavigationComponent,
+    loadChildren: () => import('./modules/admin/admin.module').then(mod => mod.AdminModule)
   },
   // {
   //   path: AppRouting.home.root,

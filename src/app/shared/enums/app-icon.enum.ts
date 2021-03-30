@@ -8,4 +8,6 @@ export enum AppIcon {
   Add = 'add',
   ContentCopy = 'content_copy',
   Code = 'code',
+  Lock = 'lock',
+  Password = 'password',
 }

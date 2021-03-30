@@ -101,6 +101,22 @@
           "BAND_NAME": "Nazwa zespołu"
         }
       }
+    },
+    "ADMIN": {
+      "PAGES": {
+        "USERS_LIST": {
+          "TITLE": "Lista użytkowników",
+          "COLUMNS": {
+            "EMAIL": "Email",
+            "FIRST_NAME": "Imię",
+            "LAST_NAME": "Nazwisko",
+            "ROLE": "Rola",
+            "CHANGE_ROLE": "Zmień rolę",
+            "BLOCK": "Zablokuj",
+            "FORCE_PASSWORD_CHANGE": "Wymuś zmianę hasła"
+          }
+        }
+      }
     }
   },
   "SHARED": {
@@ -122,6 +138,9 @@
       "MENU": {
         "TRIPS": {
           "MENU_NAME": "Wycieczki"
+        },
+        "ADMIN": {
+          "MENU_NAME": "Użytkownicy"
         }
       },
       "APP_TABLE": {

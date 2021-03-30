@@ -4,12 +4,13 @@ import { MenuFirstLevelModel } from './models/menu-first-level.model';
 import { MenuSecondLevelModel } from './models/menu-second-level.model';
 import { MatExpansionPanelHeader } from '@angular/material/expansion';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { isEmpty, isNotEmpty } from '../../utils/utils';
+import { isEmpty } from '../../utils/utils';
 import { MenuThirdLevelModel } from './models/menu-third-level.model';
 import { AppIcon } from '../../enums/app-icon.enum';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../core/user-identity/services/authentication.service';
 import { HomeRouting } from '../../../core/configurations/routing/children/home-routing';
+import { AppRouting } from '../../../core/configurations/routing/app-routing';
 
 @Component({
   selector: 'app-nav-bar',
@@ -32,6 +33,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.menu.push(this._tripMenu());
+    this.menu.push(this._adminMenu());
 
     this._setActiveMenuElements(this._router.url);
 
@@ -70,6 +72,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
     return new MenuFirstLevelModel(
       appTranslateRoute + 'MENU_NAME',
       HomeRouting.root,
+      AppIcon.List,
+      [],
+    );
+  }
+
+  private _adminMenu(): MenuFirstLevelModel {
+    const appTranslateRoute = this.translateRoute + 'MENU.ADMIN.';
+
+    return new MenuFirstLevelModel(
+      appTranslateRoute + 'MENU_NAME',
+      AppRouting.admin.root,
       AppIcon.List,
       [],
     );

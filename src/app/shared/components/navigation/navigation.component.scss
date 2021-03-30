@@ -7,6 +7,11 @@
     height: 100%;
   }
 
+  ::ng-deep .mat-expansion-panel {
+    margin: 1px;
+    border-radius: 0 !important;
+  }
+
   ::ng-deep .mat-expansion-panel-body {
     padding: 0 !important;
   }
@@ -18,11 +23,11 @@
   }
 
   mat-sidenav {
-    background-color: $app-black !important;
+    background-color: $app-primary !important;
   }
 
   ::ng-deep .mat-toolbar {
-    background-color: $app-black;
+    background-color: $app-primary;
   }
 }
 
