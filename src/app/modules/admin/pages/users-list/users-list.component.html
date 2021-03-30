@@ -1,5 +1,5 @@
-<app-async-page [showSpinner]="pageLoading">
-  <mat-card-header *ngIf="!pageLoading">
+<app-async-page>
+  <mat-card-header>
     <mat-card-title>{{translateRoute + 'TITLE' | translate}}</mat-card-title>
   </mat-card-header>
   <app-table [configuration]="tableConfig"></app-table>

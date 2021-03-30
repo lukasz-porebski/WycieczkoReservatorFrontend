@@ -2,7 +2,14 @@
   "APP_NAME": "WycieczkoReservator",
   "CORE": {
     "USER_IDENTITY": {
-      "CONTENT": "Trwa logowanie. Potrwa to tylko chwilę."
+      "CONTENT": "Trwa logowanie. Potrwa to tylko chwilę.",
+      "ENUMS": {
+        "USER_ROLE": {
+          "USER": "Użytkownik",
+          "GUIDE": "Przewodnik",
+          "ADMIN": "Administrator"
+        }
+      }
     }
   },
   "MODULES": {
@@ -114,6 +121,13 @@
             "CHANGE_ROLE": "Zmień rolę",
             "BLOCK": "Zablokuj",
             "FORCE_PASSWORD_CHANGE": "Wymuś zmianę hasła"
+          },
+          "MODALS": {
+            "USER_ROLE_CHANGE": {
+              "TITLE": "Zmiana roli użytkownika",
+              "CHANGE_ROLE": "Zmień rolę",
+              "OTHER_ROLES": "Inne role"
+            }
           }
         }
       }

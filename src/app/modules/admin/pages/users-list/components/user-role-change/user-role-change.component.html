@@ -1,0 +1,19 @@
+<app-modal [configuration]="modalConfig">
+  <app-async-page [showSpinner]="showSpinner">
+    <mat-form-field appearance="fill">
+      <mat-label>{{translateRoute + 'OTHER_ROLES' | translate}}</mat-label>
+      <mat-select [(ngModel)]="selectedRole.value">
+        <mat-option *ngFor="let role of otherRoles" [value]="role.value">
+          {{role.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-container">
+      <app-button class="center-button"
+                  [disabled]="showSpinner"
+                  [configuration]="button">
+      </app-button>
+    </div>
+  </app-async-page>
+</app-modal>

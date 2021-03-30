@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppTableColumnType } from '../../../../shared/components/wrappers/app-table/enums/app-table-column-type.enum';
 import { AppTableModel } from '../../../../shared/components/wrappers/app-table/models/app-table.model';
-import { tap } from 'rxjs/operators';
 import { UserListModel } from './models/user-list-model';
 import { Router } from '@angular/router';
 import { AdminApiService } from '../../services/admin-api.service';
 import { AppIcon } from '../../../../shared/enums/app-icon.enum';
+import { ModalService } from '../../../../shared/services/modal.service';
+import { UserRoleChangeComponent } from './components/user-role-change/user-role-change.component';
+import { AppTableComponent } from '../../../../shared/components/wrappers/app-table/app-table.component';
 
 @Component({
   selector: 'app-users-list',
@@ -13,24 +15,22 @@ import { AppIcon } from '../../../../shared/enums/app-icon.enum';
   styleUrls: [ './users-list.component.scss' ]
 })
 export class UsersListComponent implements OnInit {
+  @ViewChild(AppTableComponent) tableComponent: AppTableComponent;
+
   public readonly translateRoute = 'MODULES.ADMIN.PAGES.USERS_LIST.';
 
-  public pageLoading = true;
   public tableConfig: AppTableModel<UserListModel>;
 
   constructor(private readonly _adminApiService: AdminApiService,
-              private readonly _router: Router) {
+              private readonly _router: Router,
+              private readonly _modalService: ModalService) {
   }
 
   public ngOnInit(): void {
-    const users = this._adminApiService.getUsers().pipe(
-      tap(() => this.pageLoading = false),
-    );
-
     this.tableConfig = new AppTableModel<UserListModel>({
       translateRout: this.translateRoute + 'COLUMNS',
       headerSticky: true,
-      dataSource: users,
+      dataSource: this._adminApiService.getUsers(),
       filter: {},
       columns: [
         {
@@ -55,8 +55,15 @@ export class UsersListComponent implements OnInit {
           {
             icon: AppIcon.Edit,
             name: 'CHANGE_ROLE',
-            onClick: rowValue => {
-              console.log(rowValue);
+            onClick: user => {
+              this._modalService.open(UserRoleChangeComponent, {
+                data: user,
+                afterClosed: (changedRole: boolean) => {
+                  if (changedRole) {
+                    this.tableComponent.refreshDataSource();
+                  }
+                }
+              });
             }
           },
           {

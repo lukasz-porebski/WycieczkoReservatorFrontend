@@ -7,8 +7,7 @@ import { Subscription } from 'rxjs';
 
 export interface IModalConfiguration<TData = any> {
   data?: TData;
-
-  afterClosed?<TResult>(): (result: TResult) => void;
+  afterClosed?: (result: any) => void;
 }
 
 @Injectable({

@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { UserListModel } from '../pages/users-list/models/user-list-model';
 import { UserRole } from '../../../core/user-identity/enums/user-role.enum';
 import { AdminApiServiceModule } from '../admin-api-service.module';
+import { ChangeUserRoleRequestModel } from '../pages/users-list/components/user-role-change/models/requests/change-user-role-request-model';
 
 @Injectable({
   providedIn: AdminApiServiceModule
@@ -43,5 +44,9 @@ export class AdminApiService {
     });
 
     return of(users);
+  }
+
+  public changeRole(request: ChangeUserRoleRequestModel): Observable<boolean> {
+    return of(true);
   }
 }
