@@ -9,7 +9,7 @@ import { AppRouting } from '../../configurations/routing/app-routing';
 export class JwtInterceptor implements HttpInterceptor {
   private readonly _anonymousUrls: string[] = [
     AppRouting.home.root,
-    AppRouting.account.root,
+    AppRouting.user.root,
   ];
 
   constructor(private readonly _authenticationService: AuthenticationService) {

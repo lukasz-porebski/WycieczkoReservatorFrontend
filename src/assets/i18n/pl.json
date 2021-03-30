@@ -12,7 +12,7 @@
       "CONTENT_SECOND_SENTENCE": "S_T",
       "BUTTON": "Przycisk"
     },
-    "ACCOUNT": {
+    "USER": {
       "PAGES": {
         "LOG_IN": {
           "TITLE": "Logowanie",

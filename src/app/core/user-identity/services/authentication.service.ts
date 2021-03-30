@@ -26,7 +26,7 @@ export class AuthenticationService {
 
   private readonly _currentTokenSubject: BehaviorSubject<TokenModel>;
   private readonly _baseUrl = `${this._http.baseUrl}/authorization/`;
-  private readonly _redirectUrl = `${environment.appUrl}/${AppRouting.account.root}`;
+  private readonly _redirectUrl = `${environment.appUrl}/${AppRouting.user.root}`;
 
   constructor(private readonly _http: HttpService) {
     this._currentTokenSubject = new BehaviorSubject<TokenModel>(this._getTokenFromLocalStorage());

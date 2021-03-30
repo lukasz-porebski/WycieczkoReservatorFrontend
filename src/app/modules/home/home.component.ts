@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
       },
       onClick: () => {
         this.disablePage = true;
-        this._router.navigateByUrl(AppRouting.account.logIn.absolutePath);
+        this._router.navigateByUrl(AppRouting.user.logIn.absolutePath);
         // this._authenticationService
         //   .generateUrlForCode()
         //   .subscribe(url => window.location.href = url);

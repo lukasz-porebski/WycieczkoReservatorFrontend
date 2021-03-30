@@ -1,6 +1,6 @@
 export const AppRoutes = {
-  account: {
-    path: 'account',
+  user: {
+    path: 'user',
     children: {
       logIn: 'log-in',
       registration: 'registration',

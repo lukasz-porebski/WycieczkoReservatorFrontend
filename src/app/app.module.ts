@@ -36,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
     SharedModule,
-    // AccountModule
+    // UserModule
   ],
   providers: [
     // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

@@ -1,0 +1,34 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { UserRouting } from '../../core/configurations/routing/children/user-routing';
+import { LogInComponent } from './pages/log-in/log-in.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { PasswordReminderComponent } from './pages/password-reminder/password-reminder.component';
+
+
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: UserRouting.logIn.path
+  },
+  {
+    path: UserRouting.logIn.path,
+    component: LogInComponent
+  },
+  {
+    path: UserRouting.registration.path,
+    component: RegistrationComponent
+  },
+  {
+    path: UserRouting.passwordReminder.path,
+    component: PasswordReminderComponent
+  }
+];
+
+@NgModule({
+  imports: [ RouterModule.forChild(routes) ],
+  exports: [ RouterModule ]
+})
+export class UserRoutingModule {
+}

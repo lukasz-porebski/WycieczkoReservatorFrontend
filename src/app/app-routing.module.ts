@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppRouting } from './core/configurations/routing/app-routing';
 import { NotAuthenticatedGuard } from './core/user-identity/guards/not-authenticated.guard';
 import { HomeComponent } from './modules/home/home.component';
-import { AccountComponent } from './modules/account/account.component';
+import { UserComponent } from './modules/user/user.component';
 
 const routes: Routes = [
   {
@@ -12,10 +12,10 @@ const routes: Routes = [
     // canActivate: [ NotAuthenticatedGuard ]
   },
   {
-    path: AppRouting.account.root,
+    path: AppRouting.user.root,
     canActivate: [ NotAuthenticatedGuard ],
-    component: AccountComponent,
-    loadChildren: () => import('./modules/account/account.module').then(mod => mod.AccountModule)
+    component: UserComponent,
+    loadChildren: () => import('./modules/user/user.module').then(mod => mod.UserModule)
   },
   // {
   //   path: AppRouting.home.root,

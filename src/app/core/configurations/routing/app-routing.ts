@@ -1,7 +1,7 @@
-import { HomeRouting } from './home/home-routing';
-import { AccountRouting } from './account/account-routing';
+import { HomeRouting } from './children/home-routing';
+import { UserRouting } from './children/user-routing';
 
 export abstract class AppRouting {
-  public static readonly account = AccountRouting;
+  public static readonly user = UserRouting;
   public static readonly home = HomeRouting;
 }

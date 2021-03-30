@@ -9,7 +9,7 @@ import { MenuThirdLevelModel } from './models/menu-third-level.model';
 import { AppIcon } from '../../enums/app-icon.enum';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../core/user-identity/services/authentication.service';
-import { HomeRouting } from '../../../core/configurations/routing/home/home-routing';
+import { HomeRouting } from '../../../core/configurations/routing/children/home-routing';
 
 @Component({
   selector: 'app-nav-bar',
