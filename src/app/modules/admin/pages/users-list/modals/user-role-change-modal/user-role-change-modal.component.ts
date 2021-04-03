@@ -9,11 +9,11 @@ import { AppModalModel } from '../../../../../../shared/components/wrappers/app-
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 
 @Component({
-  selector: 'app-user-role-change',
-  templateUrl: './user-role-change.component.html',
-  styleUrls: [ './user-role-change.component.scss' ]
+  selector: 'app-user-role-change-modal',
+  templateUrl: './user-role-change-modal.component.html',
+  styleUrls: [ './user-role-change-modal.component.scss' ]
 })
-export class UserRoleChangeComponent implements OnInit {
+export class UserRoleChangeModalComponent implements OnInit {
   public get showSpinner(): boolean {
     return this._showSpinner;
   }
@@ -28,7 +28,7 @@ export class UserRoleChangeComponent implements OnInit {
   private _showSpinner = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: UserListModel,
-              private readonly _matDialogRef: MatDialogRef<UserRoleChangeComponent>,
+              private readonly _matDialogRef: MatDialogRef<UserRoleChangeModalComponent>,
               private readonly _userRoleFactory: UserRoleFactory,
               private readonly _adminApiService: AdminApiService) {
   }

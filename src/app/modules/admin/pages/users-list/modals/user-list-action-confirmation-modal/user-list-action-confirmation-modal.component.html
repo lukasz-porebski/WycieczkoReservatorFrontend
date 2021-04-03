@@ -1,0 +1,26 @@
+<app-modal [configuration]="modalConfig">
+  <app-async-page [showSpinner]="showSpinner">
+    <p>
+      {{translateRoute + data.actionText | translate}}
+      <strong>{{data.user.firstName}}{{data.user.lastName}}</strong>
+      ?
+    </p>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3">
+          <app-button [disabled]="showSpinner"
+                      [configuration]="noButton">
+          </app-button>
+        </div>
+        <div class="col-3">
+          <app-button [disabled]="showSpinner"
+                      [configuration]="yesButton">
+          </app-button>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+  </app-async-page>
+</app-modal>

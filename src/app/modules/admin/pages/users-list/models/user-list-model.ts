@@ -7,6 +7,8 @@ export class UserListModel {
   public readonly firstName: string;
   public readonly lastName: string;
   public readonly role: UserRole;
+  public readonly isBlocked: boolean;
+  public readonly isForcedPasswordChange: boolean;
 
   constructor(response: UserListModel) {
     if (isDefined(response)) {
@@ -15,6 +17,8 @@ export class UserListModel {
       this.firstName = response.firstName;
       this.lastName = response.lastName;
       this.role = response.role;
+      this.isBlocked = response.isBlocked;
+      this.isForcedPasswordChange = response.isForcedPasswordChange;
     }
   }
 }

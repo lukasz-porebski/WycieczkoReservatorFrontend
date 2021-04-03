@@ -10,4 +10,6 @@ export enum AppIcon {
   Code = 'code',
   Lock = 'lock',
   Password = 'password',
+  Undo = 'undo',
+  LockOpen = 'lock_open',
 }

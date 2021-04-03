@@ -136,13 +136,23 @@
             "ROLE": "Rola",
             "CHANGE_ROLE": "Zmień rolę",
             "BLOCK": "Zablokuj",
-            "FORCE_PASSWORD_CHANGE": "Wymuś zmianę hasła"
+            "UNBLOCK": "Odblokuj",
+            "FORCE_PASSWORD_CHANGE": "Wymuś zmianę hasła",
+            "UNDO_FORCE_PASSWORD_CHANGE": "Cofnij wymuszenie zmiany hasła"
           },
           "MODALS": {
             "USER_ROLE_CHANGE": {
               "TITLE": "Zmiana roli użytkownika",
               "CHANGE_ROLE": "Zmień rolę",
               "OTHER_ROLES": "Inne role"
+            },
+            "USER_LIST_ACTION": {
+              "ARE_YOU_SURE_YOU_WANT_TO_BLOCK_USER": "Czy na pewno zablokować użytkownika",
+              "ARE_YOU_SURE_YOU_WANT_TO_UNBLOCK_USER": "Czy na pewno odblokować użytkownika",
+              "ARE_YOU_SURE_YOU_WANT_TO_FORCE_PASSWORD_CHANGE": "Czy na pewno wymuśić zmianę hasła użytkownika",
+              "ARE_YOU_SURE_YOU_WANT_TO_UNDO_FORCE_PASSWORD_CHANGE": "Czy na pewno cofnąć wymuszenie zmiany hasła użytkownika",
+              "YES": "Tak",
+              "NO": "Nie"
             }
           }
         }
