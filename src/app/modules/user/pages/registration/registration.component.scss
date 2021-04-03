@@ -3,3 +3,12 @@
 .log-in-suggestion {
   padding: 15px 0;
 }
+
+.password-help-question {
+  width: 100%;
+}
+
+::ng-deep mat-card {
+  max-height: 97vh;
+  overflow: auto;
+}

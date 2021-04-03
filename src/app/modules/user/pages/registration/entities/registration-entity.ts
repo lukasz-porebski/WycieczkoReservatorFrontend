@@ -5,6 +5,7 @@ import { EmailAttribute } from '../../../attributes/email/email-attribute';
 import { RepeatedPasswordAttribute } from '../../../attributes/password/repeated-password-attribute';
 import { TextAttribute } from '../../../../../shared/attributes/text-attribute';
 import { ZipCodeAttribute } from './attributes/zip-code-attribute';
+import { PasswordHelpQuestion } from '../enums/password-help-question.enum';
 
 export class RegistrationEntity implements IEntity {
   public readonly email: EmailAttribute;
@@ -16,10 +17,13 @@ export class RegistrationEntity implements IEntity {
   public readonly zipCode: ZipCodeAttribute;
   public readonly city: TextAttribute;
   public readonly phoneNumber: TextAttribute;
+  public readonly passwordHelpQuestionAnswer: TextAttribute;
+
+  public selectedPasswordHelpQuestion: PasswordHelpQuestion;
 
   public readonly whole: FormGroup;
 
-  constructor() {
+  constructor(defaultPasswordHelpQuestion: PasswordHelpQuestion) {
     const translateRoute = 'MODULES.USER.PAGES.REGISTRATION.ATTRIBUTES.';
 
     this.email = new EmailAttribute();
@@ -31,6 +35,8 @@ export class RegistrationEntity implements IEntity {
     this.zipCode = new ZipCodeAttribute();
     this.streetAndNumber = new TextAttribute(translateRoute + 'STREET_AND_NUMBER.', true);
     this.phoneNumber = new TextAttribute(translateRoute + 'PHONE_NUMBER.', true);
+    this.passwordHelpQuestionAnswer = new TextAttribute(translateRoute + 'PASSWORD_HELP_QUESTION_ANSWER.', true);
+    this.selectedPasswordHelpQuestion = defaultPasswordHelpQuestion;
 
     this.whole = new FormGroup({
       email: this.email.formControl,

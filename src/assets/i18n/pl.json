@@ -34,6 +34,7 @@
           "REGISTER": "Zarejestruj",
           "LOG_IN_QUESTION": "Masz już konto?",
           "LOG_IN_OFFER": "Zaloguj się!",
+          "PASSWORD_HELP_QUESTION": "Pytanie pomocnicze do przypomnienia hasła",
           "ATTRIBUTES": {
             "FIRST_NAME": {
               "FIELD_NAME": "Imię"
@@ -55,6 +56,9 @@
             },
             "PHONE_NUMBER": {
               "FIELD_NAME": "Numer telefonu"
+            },
+            "PASSWORD_HELP_QUESTION_ANSWER": {
+              "FIELD_NAME": "Odpowiedź na pytanie pomocnicze"
             }
           }
         },

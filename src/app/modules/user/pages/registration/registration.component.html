@@ -37,6 +37,16 @@
 
       <app-input [configuration]="phoneNumberInput"></app-input>
 
+      <mat-form-field appearance="fill" class="password-help-question">
+        <mat-label>{{translateRoute + 'PASSWORD_HELP_QUESTION' | translate}}</mat-label>
+        <mat-select [(ngModel)]="entity.selectedPasswordHelpQuestion">
+          <mat-option *ngFor="let role of passwordHelpQuestions" [value]="role.value">
+            {{role.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <app-input [configuration]="passwordHelpQuestionAnswerInput"></app-input>
+
       <app-error [messages]="errors"></app-error>
 
       <app-button [disabled]="entity.whole.invalid || showSpinner"

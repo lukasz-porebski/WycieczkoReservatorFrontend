@@ -3,7 +3,6 @@ import { AppModalModel } from '../../../../../../shared/components/wrappers/app-
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserListModel } from '../../models/user-list-model';
-import { AdminApiService } from '../../../../services/admin-api.service';
 import { Observable } from 'rxjs/internal/Observable';
 
 export interface IUserListActionConfirmationModalData {
@@ -31,8 +30,7 @@ export class UserListActionConfirmationModalComponent implements OnInit {
   private _showSpinner = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: IUserListActionConfirmationModalData,
-              private readonly _matDialogRef: MatDialogRef<UserListActionConfirmationModalComponent>,
-              private readonly _adminApiService: AdminApiService) {
+              private readonly _matDialogRef: MatDialogRef<UserListActionConfirmationModalComponent>) {
   }
 
   public ngOnInit(): void {

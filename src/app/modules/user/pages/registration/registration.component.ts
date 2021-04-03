@@ -7,6 +7,7 @@ import { AppInputBasicType } from '../../../../shared/components/wrappers/app-in
 import { UserApiService } from '../../services/user-api.service';
 import { AppInputHintAlign } from '../../../../shared/components/wrappers/app-input/enums/app-input-hint-align.enum';
 import { RegistrationEntity } from './entities/registration-entity';
+import { PasswordHelpQuestionsFactory } from './factories/password-help-questions-factory';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +15,8 @@ import { RegistrationEntity } from './entities/registration-entity';
   styleUrls: [ './registration.component.scss' ]
 })
 export class RegistrationComponent implements OnInit {
-  public readonly entity = new RegistrationEntity();
+  public readonly passwordHelpQuestions = this._passwordHelpQuestionsFactory.createPasswordHelpQuestions();
+  public readonly entity = new RegistrationEntity(this.passwordHelpQuestions[0].value);
   public readonly translateRoute = 'MODULES.USER.PAGES.REGISTRATION.';
   public readonly userRouting = UserRouting;
 
@@ -27,12 +29,14 @@ export class RegistrationComponent implements OnInit {
   public zipCodeInput: AppInputModel;
   public cityInput: AppInputModel;
   public phoneNumberInput: AppInputModel;
+  public passwordHelpQuestionAnswerInput: AppInputModel;
 
   public button: AppButtonModel;
   public errors: string[] = [];
   public showSpinner = false;
 
-  constructor(private readonly _userApiService: UserApiService) {
+  constructor(private readonly _userApiService: UserApiService,
+              private readonly _passwordHelpQuestionsFactory: PasswordHelpQuestionsFactory) {
   }
 
   public ngOnInit(): void {
@@ -126,6 +130,16 @@ export class RegistrationComponent implements OnInit {
       input: new AppInputBasicModel({
         type: AppInputBasicType.text,
         attribute: this.entity.phoneNumber,
+      }),
+    });
+
+    this.passwordHelpQuestionAnswerInput = new AppInputModel({
+      label: {
+        text: this.entity.passwordHelpQuestionAnswer.translateRoute,
+      },
+      input: new AppInputBasicModel({
+        type: AppInputBasicType.text,
+        attribute: this.entity.passwordHelpQuestionAnswer,
       }),
     });
 
