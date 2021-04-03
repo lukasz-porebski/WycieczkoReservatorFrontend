@@ -4,7 +4,8 @@ export const AppRoutes = {
     children: {
       logIn: 'log-in',
       registration: 'registration',
-      passwordReminder: 'password-reminder'
+      passwordReminder: 'password-reminder',
+      passwordChanger: 'password-changer'
     }
   },
   home: {

@@ -26,7 +26,8 @@
           "LOG_IN_BUTTON": "Zaloguj",
           "REGISTRATION_QUESTION": "Nie masz jeszcze konta?",
           "REGISTRATION_OFFER": "Zarejestruj się!",
-          "REMIND_PASSWORD": "Przypomnij hasło"
+          "REMIND_PASSWORD": "Przypomnij hasło",
+          "CHANGE_PASSWORD": "Zmień hasło"
         },
         "REGISTRATION": {
           "TITLE": "Rejestracja",
@@ -73,6 +74,21 @@
                 "ANSWER": {
                   "FIELD_NAME": "Odpowiedź"
                 }
+              }
+            }
+          }
+        },
+        "PASSWORD_CHANGER": {
+          "TITLE": "Zmiana hasła",
+          "OLD_PASSWORD": "Obecne hasło",
+          "REPEAT_NEW_PASSWORD": "Powtórz nowe hasło",
+          "BACK_TO_LOG_IN": "Wróc do logowania",
+          "CHANGE_PASSWORD": "Zmień hasło",
+          "ATTRIBUTES": {
+            "NEW_PASSWORD": {
+              "FIELD_NAME": "Nowe hasło",
+              "ERRORS": {
+                "NEW_PASSWORD_IS_SAME_AS_OLD": "Nowe hasło musi być inne od poprzedniego"
               }
             }
           }

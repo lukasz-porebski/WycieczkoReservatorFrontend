@@ -1,7 +1,8 @@
 import { IAttribute } from '../../../../shared/interfaces/attribute.interface';
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { ErrorModel } from '../../../../shared/models/error.model';
 import { PasswordValidator } from './password-validator';
+import { replaceIfNotDefined } from '../../../../shared/utils/utils';
 
 export class PasswordAttribute implements IAttribute {
   public get value(): string {
@@ -41,12 +42,17 @@ export class PasswordAttribute implements IAttribute {
   public readonly translateRoute = 'MODULES.USER.ATTRIBUTES.PASSWORD.';
   public readonly minLength = 10;
   public readonly maxLength = 30;
-  public readonly formControl: FormControl = new FormControl(null, [
-    Validators.required,
-    PasswordValidator.format,
-    PasswordValidator.containsWhiteSpace,
-    PasswordValidator.properLength(this.minLength, this.maxLength)
-  ]);
+  public readonly formControl: FormControl;
 
-  private readonly _error = new ErrorModel();
+  protected readonly _error = new ErrorModel();
+
+  constructor(additionalValidators?: ValidatorFn[]) {
+    this.formControl = new FormControl(null, [
+      Validators.required,
+      PasswordValidator.format,
+      PasswordValidator.containsWhiteSpace,
+      PasswordValidator.properLength(this.minLength, this.maxLength),
+      ...replaceIfNotDefined(additionalValidators, [])
+    ]);
+  }
 }

@@ -4,6 +4,7 @@ import { UserRouting } from '../../core/configurations/routing/children/user-rou
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { PasswordReminderComponent } from './pages/password-reminder/password-reminder.component';
+import { PasswordChangerComponent } from './pages/password-changer/password-changer.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: UserRouting.passwordReminder.path,
     component: PasswordReminderComponent
+  },
+  {
+    path: UserRouting.passwordChanger.path,
+    component: PasswordChangerComponent
   }
 ];
 

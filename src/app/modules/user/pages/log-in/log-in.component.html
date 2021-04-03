@@ -10,6 +10,10 @@
 
     <app-error [messages]="errors"></app-error>
 
+    <app-button [disabled]="disableLogInButton"
+                [configuration]="button">
+    </app-button>
+
     <div class="navigate-to-option">{{translateRoute + 'REGISTRATION_QUESTION' | translate}}
       <a [routerLink]="userRouting.registration.absolutePath">
         {{translateRoute + 'REGISTRATION_OFFER' | translate}}
@@ -22,8 +26,11 @@
       </a>
     </div>
 
-    <app-button [disabled]="disableLogInButton"
-                [configuration]="button">
-    </app-button>
+    <div class="navigate-to-option">
+      <a [routerLink]="userRouting.passwordChanger.absolutePath">
+        {{translateRoute + 'CHANGE_PASSWORD' | translate}}
+      </a>
+    </div>
+
   </mat-card>
 </app-async-page>

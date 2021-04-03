@@ -9,6 +9,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { PasswordReminderComponent } from './pages/password-reminder/password-reminder.component';
 import { PasswordReminderUserRecognitionComponent } from './pages/password-reminder/components/password-reminder-user-recognition/password-reminder-user-recognition.component';
 import { PasswordReminderUserAnswerComponent } from './pages/password-reminder/components/password-reminder-user-answer/password-reminder-user-answer.component';
+import { PasswordChangerComponent } from './pages/password-changer/password-changer.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { PasswordReminderUserAnswerComponent } from './pages/password-reminder/c
     RegistrationComponent,
     PasswordReminderComponent,
     PasswordReminderUserRecognitionComponent,
-    PasswordReminderUserAnswerComponent
+    PasswordReminderUserAnswerComponent,
+    PasswordChangerComponent
   ],
 })
 export class UserModule {
