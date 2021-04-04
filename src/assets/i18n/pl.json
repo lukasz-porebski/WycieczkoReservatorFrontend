@@ -138,6 +138,8 @@
             "FIRST_NAME": "Imię",
             "LAST_NAME": "Nazwisko",
             "ROLE": "Rola",
+            "IS_BLOCKED": "Zablokowany",
+            "IS_FORCED_PASSWORD_CHANGE": "Wymuszona zmiana hasła",
             "CHANGE_ROLE": "Zmień rolę",
             "BLOCK": "Zablokuj",
             "UNBLOCK": "Odblokuj",
@@ -159,6 +161,51 @@
               "NO": "Nie"
             }
           }
+        },
+        "TRIP_PERSISTER": {
+          "CREATOR_TITLE": "Tworzenie wycieczki",
+          "EDITOR_TITLE": "Edycja wycieczki",
+          "TRIP_RANGE_DATE": "Okres trwania",
+          "FORM_OF_TRANSPORT": "Rodzaj transportu",
+          "CREATE_TRIP": "Utwórz wycieczkę",
+          "ATTRIBUTES": {
+            "TITLE": {
+              "FIELD_NAME": "Tytuł"
+            },
+            "DESCRIPTION": {
+              "FIELD_NAME": "Opis"
+            },
+            "PARTICIPANS": {
+              "FIELD_NAME": "Dozwolone liczby uczestników"
+            },
+            "PRICE_PER_SINGLE_PARTICIPANT": {
+              "FIELD_NAME": "Cena za jednego uczestnika"
+            },
+            "ROOM_SIZES": {
+              "FIELD_NAME": "Dozwolone rozmiary pokojów"
+            },
+            "PRICE_PER_SINGLE_ROOM": {
+              "FIELD_NAME": "Cena za pojedynczy pokój"
+            },
+            "MEAL": {
+              "FIELD_NAME": "Wyżywienie"
+            },
+            "PRICE_PER_SINGLE_DAY_OF_MEALS": {
+              "FIELD_NAME": "Cena za jeden dzień wyżywienia"
+            },
+            "DEPERTURE_LOCATION": {
+              "FIELD_NAME": "Miejsce wyjazdu"
+            },
+            "TRIP_LOCATION": {
+              "FIELD_NAME": "Miejsce wycieczki"
+            }
+          }
+        }
+      },
+      "ENUMS": {
+        "FORM_OF_TRANSPORT": {
+          "BUS": "Autokar",
+          "PLANE": "Samolot"
         }
       }
     }

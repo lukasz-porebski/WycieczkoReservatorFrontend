@@ -3,11 +3,11 @@ import { HttpService } from '../../../core/services/http.service';
 import { Observable, of } from 'rxjs';
 import { UserListModel } from '../pages/users-list/models/user-list-model';
 import { UserRole } from '../../../core/user-identity/enums/user-role.enum';
-import { AdminApiServiceModule } from '../admin-api-service.module';
+import { AdminServiceModule } from '../admin-service.module';
 import { ChangeUserRoleRequestModel } from '../pages/users-list/modals/user-role-change-modal/models/requests/change-user-role-request-model';
 
 @Injectable({
-  providedIn: AdminApiServiceModule
+  providedIn: AdminServiceModule
 })
 export class AdminApiService {
 

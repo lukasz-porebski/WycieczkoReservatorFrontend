@@ -1,0 +1,100 @@
+<app-async-page [showSpinner]="showSpinner">
+  <mat-card>
+    <div class="container">
+      <mat-card-title>
+        {{translateRoute + 'CREATOR_TITLE' | translate }}
+      </mat-card-title>
+
+      <app-input [configuration]="titleInput"></app-input>
+
+      <app-input [configuration]="descriptionInput"></app-input>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{entity.participants.translateRoute + 'FIELD_NAME' | translate}}</mat-label>
+            <mat-select [formControl]="entity.participants.formControl" multiple>
+              <mat-option *ngFor="let participant of entity.participants.allValues"
+                          [value]="participant">
+                {{participant}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <app-input [configuration]="pricePerSingleParticipantInput"></app-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{entity.roomSizes.translateRoute + 'FIELD_NAME' | translate}}</mat-label>
+            <mat-select [formControl]="entity.roomSizes.formControl" multiple>
+              <mat-option *ngFor="let roomSize of entity.roomSizes.allValues"
+                          [value]="roomSize">
+                {{roomSize}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <app-input [configuration]="pricePerSingleRoomInput"></app-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <app-input [configuration]="mealInput"></app-input>
+        </div>
+        <div class="col-6">
+          <app-input [configuration]="pricePerSingleDayOfMealsInput"></app-input>
+        </div>
+      </div>
+
+      <app-input [configuration]="departureLocationInput"></app-input>
+
+      <app-input [configuration]="tripLocationInput"></app-input>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{translateRoute + 'TRIP_RANGE_DATE' | translate}}</mat-label>
+            <mat-date-range-input [formGroup]="entity.whole"
+                                  [min]="entity.startDate.min"
+                                  [rangePicker]="picker">
+              <input matStartDate
+                     [formControl]="entity.startDate.formControl"
+                     placeholder="Start date">
+              <input matEndDate
+                     [formControl]="entity.endDate.formControl"
+                     placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{translateRoute + 'FORM_OF_TRANSPORT' | translate}}</mat-label>
+            <mat-select [(ngModel)]="entity.formOfTransport">
+              <mat-option *ngFor="let fot of formOfTransports" [value]="fot.value">
+                {{fot.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <app-error [messages]="errors"></app-error>
+
+      <div class="row">
+        <app-button [disabled]="entity.whole.invalid || showSpinner"
+                    [configuration]="button"
+                    class="center-button">
+        </app-button>
+      </div>
+
+    </div>
+  </mat-card>
+</app-async-page>

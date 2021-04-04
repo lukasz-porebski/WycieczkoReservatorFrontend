@@ -11,6 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HomeComponent } from './modules/home/home.component';
 import { UserIdentityComponent } from './core/user-identity/component/user-identity.component';
 import { TokenInterceptor } from './core/user-identity/interceptors/token.interceptor';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -41,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
   ],
   bootstrap: [ AppComponent ],
 })

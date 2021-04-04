@@ -5,4 +5,5 @@ export abstract class AdminRouting {
   public static readonly root = AppRoutes.admin.path;
 
   public static readonly usersList = new RoutingPathModel(AppRoutes.admin.children.usersList, AdminRouting.root);
+  public static readonly tripCreator = new RoutingPathModel(AppRoutes.admin.children.tripCreator, AdminRouting.root);
 }

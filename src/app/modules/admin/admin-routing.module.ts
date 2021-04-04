@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersListComponent } from './pages/users-list/users-list.component';
 import { AdminRouting } from '../../core/configurations/routing/children/admin-routing';
+import { TripPersisterComponent } from './pages/trip-persister/trip-persister.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: AdminRouting.usersList.path,
     component: UsersListComponent
+  },
+  {
+    path: AdminRouting.tripCreator.path,
+    component: TripPersisterComponent
   }
 ];
 

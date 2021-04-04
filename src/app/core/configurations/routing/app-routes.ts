@@ -14,7 +14,8 @@ export const AppRoutes = {
   admin: {
     path: 'admin',
     children: {
-      usersList: 'users-list'
+      usersList: 'users-list',
+      tripCreator: 'trip-creator',
     }
   }
 };

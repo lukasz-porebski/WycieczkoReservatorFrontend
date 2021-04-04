@@ -8,3 +8,7 @@ interface String {
   toCamelCase(): string;
   toSnakeCase(): string;
 }
+
+interface Date {
+  addDays(days: number): Date;
+}

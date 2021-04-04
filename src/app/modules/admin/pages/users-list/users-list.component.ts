@@ -9,6 +9,8 @@ import { ModalService } from '../../../../shared/services/modal.service';
 import { UserRoleChangeModalComponent } from './modals/user-role-change-modal/user-role-change-modal.component';
 import { AppTableComponent } from '../../../../shared/components/wrappers/app-table/app-table.component';
 import { IUserListActionConfirmationModalData, UserListActionConfirmationModalComponent } from './modals/user-list-action-confirmation-modal/user-list-action-confirmation-modal.component';
+import { IAppTableColumnConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column.model';
+import { IAppTableColumnActionConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column-action.model';
 
 @Component({
   selector: 'app-users-list',
@@ -33,95 +35,111 @@ export class UsersListComponent implements OnInit {
       headerSticky: true,
       dataSource: this._adminApiService.getUsers(),
       filter: {},
-      columns: [
-        {
-          field: 'email',
-          type: AppTableColumnType.Text,
-        },
-        {
-          field: 'firstName',
-          type: AppTableColumnType.Text,
-        },
-        {
-          field: 'lastName',
-          type: AppTableColumnType.Text,
-        },
-        {
-          field: 'role',
-          type: AppTableColumnType.Number
-        }
-      ],
+      columns: this._getColumns(),
       actionsDefinition: {
-        actions: [
-          {
-            icon: AppIcon.Edit,
-            name: 'CHANGE_ROLE',
-            onClick: user => {
-              this._modalService.open(UserRoleChangeModalComponent, {
-                data: user,
-                afterClosed: (changedRole: boolean) => {
-                  if (changedRole) {
-                    this.tableComponent.refreshDataSource();
-                  }
-                }
-              });
-            }
-          },
-          {
-            icon: AppIcon.Lock,
-            name: 'BLOCK',
-            hide: user => user.isBlocked,
-            onClick: userr => {
-              const modalData: IUserListActionConfirmationModalData = {
-                actionText: 'ARE_YOU_SURE_YOU_WANT_TO_BLOCK_USER',
-                user: userr,
-                action: user => this._adminApiService.blockUser(user.id)
-              };
-              this._openUserListActionConfirmationModal(modalData);
-            }
-          },
-          {
-            icon: AppIcon.LockOpen,
-            name: 'UNBLOCK',
-            hide: user => !user.isBlocked,
-            onClick: userr => {
-              const modalData: IUserListActionConfirmationModalData = {
-                actionText: 'ARE_YOU_SURE_YOU_WANT_TO_UNBLOCK_USER',
-                user: userr,
-                action: user => this._adminApiService.unblockUser(user.id)
-              };
-              this._openUserListActionConfirmationModal(modalData);
-            }
-          },
-          {
-            icon: AppIcon.Password,
-            name: 'FORCE_PASSWORD_CHANGE',
-            hide: user => user.isForcedPasswordChange,
-            onClick: userr => {
-              const modalData: IUserListActionConfirmationModalData = {
-                actionText: 'ARE_YOU_SURE_YOU_WANT_TO_FORCE_PASSWORD_CHANGE',
-                user: userr,
-                action: user => this._adminApiService.forcePasswordChange(user.id)
-              };
-              this._openUserListActionConfirmationModal(modalData);
-            }
-          },
-          {
-            icon: AppIcon.Undo,
-            name: 'UNDO_FORCE_PASSWORD_CHANGE',
-            hide: user => !user.isForcedPasswordChange,
-            onClick: userr => {
-              const modalData: IUserListActionConfirmationModalData = {
-                actionText: 'ARE_YOU_SURE_YOU_WANT_TO_UNDO_FORCE_PASSWORD_CHANGE',
-                user: userr,
-                action: user => this._adminApiService.undoForcePasswordChange(user.id)
-              };
-              this._openUserListActionConfirmationModal(modalData);
-            }
-          }
-        ]
+        actions: this._getActions()
       }
     });
+  }
+
+  private _getColumns(): IAppTableColumnConfiguration<UserListModel>[] {
+    return [
+      {
+        field: 'email',
+        type: AppTableColumnType.Text,
+      },
+      {
+        field: 'firstName',
+        type: AppTableColumnType.Text,
+      },
+      {
+        field: 'lastName',
+        type: AppTableColumnType.Text,
+      },
+      {
+        field: 'role',
+        type: AppTableColumnType.Number
+      },
+      {
+        field: 'isBlocked',
+        type: AppTableColumnType.Boolean
+      },
+      {
+        field: 'isForcedPasswordChange',
+        type: AppTableColumnType.Boolean
+      }
+    ];
+  }
+
+  private _getActions(): IAppTableColumnActionConfiguration<UserListModel>[] {
+    return [
+      {
+        icon: AppIcon.Edit,
+        name: 'CHANGE_ROLE',
+        onClick: user => {
+          this._modalService.open(UserRoleChangeModalComponent, {
+            data: user,
+            afterClosed: (changedRole: boolean) => {
+              if (changedRole) {
+                this.tableComponent.refreshDataSource();
+              }
+            }
+          });
+        }
+      },
+      {
+        icon: AppIcon.Lock,
+        name: 'BLOCK',
+        hide: user => user.isBlocked,
+        onClick: userr => {
+          const modalData: IUserListActionConfirmationModalData = {
+            actionText: 'ARE_YOU_SURE_YOU_WANT_TO_BLOCK_USER',
+            user: userr,
+            action: user => this._adminApiService.blockUser(user.id)
+          };
+          this._openUserListActionConfirmationModal(modalData);
+        }
+      },
+      {
+        icon: AppIcon.LockOpen,
+        name: 'UNBLOCK',
+        hide: user => !user.isBlocked,
+        onClick: userr => {
+          const modalData: IUserListActionConfirmationModalData = {
+            actionText: 'ARE_YOU_SURE_YOU_WANT_TO_UNBLOCK_USER',
+            user: userr,
+            action: user => this._adminApiService.unblockUser(user.id)
+          };
+          this._openUserListActionConfirmationModal(modalData);
+        }
+      },
+      {
+        icon: AppIcon.Password,
+        name: 'FORCE_PASSWORD_CHANGE',
+        hide: user => user.isForcedPasswordChange,
+        onClick: userr => {
+          const modalData: IUserListActionConfirmationModalData = {
+            actionText: 'ARE_YOU_SURE_YOU_WANT_TO_FORCE_PASSWORD_CHANGE',
+            user: userr,
+            action: user => this._adminApiService.forcePasswordChange(user.id)
+          };
+          this._openUserListActionConfirmationModal(modalData);
+        }
+      },
+      {
+        icon: AppIcon.Undo,
+        name: 'UNDO_FORCE_PASSWORD_CHANGE',
+        hide: user => !user.isForcedPasswordChange,
+        onClick: userr => {
+          const modalData: IUserListActionConfirmationModalData = {
+            actionText: 'ARE_YOU_SURE_YOU_WANT_TO_UNDO_FORCE_PASSWORD_CHANGE',
+            user: userr,
+            action: user => this._adminApiService.undoForcePasswordChange(user.id)
+          };
+          this._openUserListActionConfirmationModal(modalData);
+        }
+      }
+    ];
   }
 
   private _openUserListActionConfirmationModal(modalData: IUserListActionConfirmationModalData): void {

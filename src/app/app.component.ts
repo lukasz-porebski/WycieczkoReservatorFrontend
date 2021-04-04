@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import '../app/shared/extensions/string.extensions';
+import '../app/shared/extensions/date.extensions';
 
 @Component({
   selector: 'app-root',

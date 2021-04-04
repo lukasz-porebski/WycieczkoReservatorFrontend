@@ -36,6 +36,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -62,6 +63,7 @@ const MATERIAL_MODULES = [
   MatSortModule,
   MatSelectModule,
   MatPaginatorModule,
+  MatNativeDateModule
 ];
 
 const APP_EXPORT_PARTS = [

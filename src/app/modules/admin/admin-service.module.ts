@@ -2,5 +2,5 @@ import { NgModule } from '@angular/core';
 
 
 @NgModule()
-export class AdminApiServiceModule {
+export class AdminServiceModule {
 }
