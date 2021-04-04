@@ -39,8 +39,10 @@ export class PasswordReminderUserAnswerComponent implements OnInit {
   public correctAnswer: string;
   public button: AppButtonModel;
 
-  private readonly _answer = new TextAttribute(
-    `${this.stepTranslateRoute}ATTRIBUTES.ANSWER.`, true);
+  private readonly _answer = new TextAttribute({
+    translateRoute: `${this.stepTranslateRoute}ATTRIBUTES.ANSWER.`,
+    isRequired: true
+  });
 
   constructor(private readonly _userApiService: UserApiService) {
   }

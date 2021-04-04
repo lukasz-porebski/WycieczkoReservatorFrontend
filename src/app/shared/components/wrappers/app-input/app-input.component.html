@@ -3,7 +3,6 @@
     matInput
     [readonly]="configuration.readonly"
     [type]="basicInput.type"
-    [disabled]="configuration.disabled"
     [formControl]="basicInput.formControl"
     [maxlength]="basicInput.maxLength"
     [mask]="basicInput.mask"
@@ -35,7 +34,6 @@
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             [readonly]="configuration.readonly"
-            [disabled]="configuration.disabled"
             [formControl]="textAreaInput.formControl"
             [cdkAutosizeMinRows]="textAreaInput.minRows"
             [cdkAutosizeMaxRows]="textAreaInput.maxRows">
@@ -58,7 +56,6 @@
   <mat-checkbox [class.app-checkbox-input-readonly]="configuration.readonly"
                 [labelPosition]="checkboxInput.labelPosition"
                 [disableRipple]="true"
-                [disabled]="configuration.disabled"
                 [formControl]="checkboxInput.formControl"
                 (click)="configuration.readonly ? $event.preventDefault() : null">
     {{ createLabel() | conditionalTranslation:configuration.label?.translate}}
@@ -81,7 +78,6 @@
                     [class.disabled-radio-checkbox-input]="configuration.disabled"
                     class="radio-button radio-button-rows"
                     [disableRipple]="configuration.readonly"
-                    [disabled]="configuration.disabled"
                     [value]="option"
                     (click)="configuration.readonly ? $event.preventDefault() : null">
     <span [className]="">

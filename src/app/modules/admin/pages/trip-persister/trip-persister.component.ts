@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserRouting } from '../../../../core/configurations/routing/children/user-routing';
 import { AppInputModel } from '../../../../shared/components/wrappers/app-input/models/app-input.model';
 import { AppButtonModel } from '../../../../shared/components/wrappers/app-button/models/app-button.model';
@@ -15,7 +15,7 @@ import { AppSelectModel } from '../../../../shared/components/wrappers/app-selec
   templateUrl: './trip-persister.component.html',
   styleUrls: [ './trip-persister.component.scss' ]
 })
-export class TripPersisterComponent implements OnInit {
+export class TripPersisterComponent implements OnInit, OnDestroy {
   public readonly entity = new TripPersisterEntity(this._formOfTransportFactory);
   public readonly translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.';
   public readonly userRouting = UserRouting;
@@ -153,6 +153,10 @@ export class TripPersisterComponent implements OnInit {
         text: this.translateRoute + 'CREATE_TRIP',
       },
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.entity.dispose();
   }
 
   public onSave(): void {

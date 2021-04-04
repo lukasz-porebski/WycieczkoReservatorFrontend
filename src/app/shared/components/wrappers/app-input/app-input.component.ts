@@ -15,6 +15,18 @@ export class AppInputComponent {
   @Input() configuration: AppInputModel;
   @Input() hintTemplate: TemplateRef<any>;
 
+  @Input()
+  public set disabled(value: boolean) {
+    if (this._disabled !== value) {
+      this._disabled = value;
+      this.onDisableChange(value);
+    }
+  }
+
+  public get disabled(): boolean {
+    return this._disabled;
+  }
+
   @ViewChild('generalInputField') generalInputField: TemplateRef<any>;
   @ViewChild('textAreaInputField') textAreaInputField: TemplateRef<any>;
 
@@ -42,6 +54,8 @@ export class AppInputComponent {
       : null;
   }
 
+  private _disabled = false;
+
   public createLabel(): string {
     return this.configuration.label?.translate
       ? this.configuration.label.text + (this.configuration.label.disableConvention ? '' : 'FIELD_NAME')
@@ -55,5 +69,13 @@ export class AppInputComponent {
 
   public getRadioButtonColorClass(color: AppInputColor): string {
     return 'app-radio-button-' + color;
+  }
+
+  public onDisableChange(value: boolean): void {
+    if (value || this.configuration.disabled) {
+      this.configuration.input.formControl.disable();
+    } else {
+      this.configuration.input.formControl.enable();
+    }
   }
 }

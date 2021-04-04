@@ -29,13 +29,31 @@ export class RegistrationEntity implements IEntity {
     this.email = new EmailAttribute();
     this.password = new PasswordAttribute();
     this.repeatedPassword = new RepeatedPasswordAttribute(this.password);
-    this.firstName = new TextAttribute(translateRoute + 'FIRST_NAME.', true);
-    this.lastName = new TextAttribute(translateRoute + 'LAST_NAME.', true);
-    this.city = new TextAttribute(translateRoute + 'CITY.', true);
+    this.firstName = new TextAttribute({
+      translateRoute: translateRoute + 'FIRST_NAME.',
+      isRequired: true
+    });
+    this.lastName = new TextAttribute({
+      translateRoute: translateRoute + 'LAST_NAME.',
+      isRequired: true
+    });
+    this.city = new TextAttribute({
+      translateRoute: translateRoute + 'CITY.',
+      isRequired: true
+    });
     this.zipCode = new ZipCodeAttribute();
-    this.streetAndNumber = new TextAttribute(translateRoute + 'STREET_AND_NUMBER.', true);
-    this.phoneNumber = new TextAttribute(translateRoute + 'PHONE_NUMBER.', true);
-    this.passwordHelpQuestionAnswer = new TextAttribute(translateRoute + 'PASSWORD_HELP_QUESTION_ANSWER.', true);
+    this.streetAndNumber = new TextAttribute({
+      translateRoute: translateRoute + 'STREET_AND_NUMBER.',
+      isRequired: true
+    });
+    this.phoneNumber = new TextAttribute({
+      translateRoute: translateRoute + 'PHONE_NUMBER.',
+      isRequired: true
+    });
+    this.passwordHelpQuestionAnswer = new TextAttribute({
+      translateRoute: translateRoute + 'PASSWORD_HELP_QUESTION_ANSWER.',
+      isRequired: true
+    });
     this.selectedPasswordHelpQuestion = defaultPasswordHelpQuestion;
 
     this.whole = new FormGroup({

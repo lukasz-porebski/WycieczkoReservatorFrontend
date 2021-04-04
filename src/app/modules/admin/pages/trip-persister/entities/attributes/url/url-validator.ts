@@ -1,6 +1,6 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { isNotDefined } from '../../../../../../shared/utils/utils';
-import { Validator } from '../../../../../../shared/utils/external';
+import { isNotDefined } from '../../../../../../../shared/utils/utils';
+import { Validator } from '../../../../../../../shared/utils/external';
 
 export abstract class UrlValidator {
   public static isUrl(): ValidatorFn {

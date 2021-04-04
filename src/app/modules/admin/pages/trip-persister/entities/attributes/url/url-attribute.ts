@@ -1,5 +1,5 @@
-import { IAttribute } from '../../../../../../shared/interfaces/attribute.interface';
-import { ErrorModel } from '../../../../../../shared/models/error.model';
+import { IAttribute } from '../../../../../../../shared/interfaces/attribute.interface';
+import { ErrorModel } from '../../../../../../../shared/models/error.model';
 import { FormControl, Validators } from '@angular/forms';
 import { UrlValidator } from './url-validator';
 

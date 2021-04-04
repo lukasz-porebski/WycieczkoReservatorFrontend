@@ -166,6 +166,8 @@
           "CREATOR_TITLE": "Tworzenie wycieczki",
           "EDITOR_TITLE": "Edycja wycieczki",
           "TRIP_RANGE_DATE": "Okres trwania",
+          "TRIP_START_DATE": "Początek",
+          "TRIP_END_DATE": "Koniec",
           "CREATE_TRIP": "Utwórz wycieczkę",
           "ATTRIBUTES": {
             "TITLE": {

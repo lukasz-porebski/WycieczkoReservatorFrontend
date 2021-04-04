@@ -2,7 +2,7 @@ import { IEntity } from '../../../../../shared/interfaces/entity.interface';
 import { FormGroup } from '@angular/forms';
 import { TextAttribute } from '../../../../../shared/attributes/text-attribute';
 import { FormOfTransport } from '../enums/form-of-transport.enum';
-import { UrlAttribute } from './attributes/url-attribute';
+import { UrlAttribute } from './attributes/url/url-attribute';
 import { DateAttribute } from '../../../../../shared/attributes/date-attribute';
 import { CheckboxAttribute } from '../../../../../shared/attributes/checkbox-attribute';
 import { NumberAttribute } from '../../../../../shared/attributes/number-attribute';
@@ -10,8 +10,10 @@ import { MultipleSelectAttribute } from '../../../../../shared/attributes/select
 import { SingleSelectAttribute } from '../../../../../shared/attributes/select/single-select-attribute';
 import { FormOfTransportFactory } from '../factories/form-of-transport-factory';
 import { FormOfTransportModel } from '../models/form-of-transport-model';
+import { PricePerSingleDayOfMealsAttribute } from './attributes/price-per-single-day-of-meals/price-per-single-day-of-meals-attribute';
+import { IDisposable } from '../../../../../shared/interfaces/disposable.interface';
 
-export class TripPersisterEntity implements IEntity {
+export class TripPersisterEntity implements IEntity, IDisposable {
   public readonly title: TextAttribute;
   public readonly description: TextAttribute;
 
@@ -22,7 +24,7 @@ export class TripPersisterEntity implements IEntity {
   public readonly pricePerSingleRoom: NumberAttribute;
 
   public readonly meal: CheckboxAttribute;
-  public readonly pricePerSingleDayOfMeals: NumberAttribute;
+  public readonly pricePerSingleDayOfMeals: PricePerSingleDayOfMealsAttribute;
 
   public readonly departureLocation: TextAttribute;
   public readonly tripLocation: TextAttribute;
@@ -42,8 +44,14 @@ export class TripPersisterEntity implements IEntity {
 
     const oneToTenNumbers = this._getOneToTenNumbers();
 
-    this.title = new TextAttribute(translateRoute + 'TITLE.', true);
-    this.description = new TextAttribute(translateRoute + 'DESCRIPTION.', true);
+    this.title = new TextAttribute({
+      translateRoute: translateRoute + 'TITLE.',
+      isRequired: true
+    });
+    this.description = new TextAttribute({
+      translateRoute: translateRoute + 'DESCRIPTION.',
+      isRequired: true
+    });
 
     this.participants = new MultipleSelectAttribute<number>({
       translateRoute: translateRoute + 'PARTICIPANS.',
@@ -68,18 +76,24 @@ export class TripPersisterEntity implements IEntity {
     this.meal = new CheckboxAttribute({
       translateRoute: translateRoute + 'MEAL.',
     });
-    this.pricePerSingleDayOfMeals = new NumberAttribute({
-      translateRoute: translateRoute + 'PRICE_PER_SINGLE_DAY_OF_MEALS.',
-      min: 1
-    });
+    this.pricePerSingleDayOfMeals = new PricePerSingleDayOfMealsAttribute(this.meal);
 
-    this.departureLocation = new TextAttribute(translateRoute + 'DEPERTURE_LOCATION.', true);
-    this.tripLocation = new TextAttribute(translateRoute + 'TRIP_LOCATION.', true);
+    this.departureLocation = new TextAttribute({
+      translateRoute: translateRoute + 'DEPERTURE_LOCATION.',
+      isRequired: true
+    });
+    this.tripLocation = new TextAttribute({
+      translateRoute: translateRoute + 'TRIP_LOCATION.',
+      isRequired: true
+    });
 
     this.startDate = new DateAttribute({
-      min: new Date().addDays(14)
+      min: new Date().addDays(14),
+      isRequired: true
     });
-    this.endDate = new DateAttribute();
+    this.endDate = new DateAttribute({
+      isRequired: true
+    });
 
     const formOfTransports = formOfTransportFactory.createFormOfTransports();
     this.formOfTransport = new SingleSelectAttribute<FormOfTransportModel, FormOfTransport>({
@@ -106,7 +120,7 @@ export class TripPersisterEntity implements IEntity {
   }
 
   public dispose(): void {
-    // this.repeatedPassword.dispose();
+    this.pricePerSingleDayOfMeals.dispose();
   }
 
   private _getOneToTenNumbers(): number[] {
