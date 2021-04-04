@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AppSelectModel } from './models/app-select-model';
+import { MultipleSelectAttribute } from '../../../attributes/select/multiple-select-attribute';
 
 @Component({
   selector: 'app-select',
@@ -8,4 +9,8 @@ import { AppSelectModel } from './models/app-select-model';
 })
 export class AppSelectComponent {
   @Input() configuration: AppSelectModel;
+
+  public get isMultiple(): boolean {
+    return this.configuration.attribute instanceof MultipleSelectAttribute;
+  }
 }

@@ -16,8 +16,7 @@ import { AppSelectModel } from '../../../../shared/components/wrappers/app-selec
   styleUrls: [ './trip-persister.component.scss' ]
 })
 export class TripPersisterComponent implements OnInit {
-  public readonly formOfTransports = this._formOfTransportFactory.createFormOfTransports();
-  public readonly entity = new TripPersisterEntity(this.formOfTransports[0].value);
+  public readonly entity = new TripPersisterEntity(this._formOfTransportFactory);
   public readonly translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.';
   public readonly userRouting = UserRouting;
 
@@ -35,6 +34,8 @@ export class TripPersisterComponent implements OnInit {
 
   public departureLocationInput: AppInputModel;
   public tripLocationInput: AppInputModel;
+
+  public formOfTransportInput: AppSelectModel;
 
   public button: AppButtonModel;
   public errors: string[] = [];
@@ -136,6 +137,14 @@ export class TripPersisterComponent implements OnInit {
         type: AppInputBasicType.text,
         attribute: this.entity.tripLocation,
       }),
+    });
+
+    this.formOfTransportInput = new AppSelectModel({
+      label: {
+        text: this.entity.formOfTransport.translateRoute
+      },
+      attribute: this.entity.formOfTransport,
+      maxWidth: true
     });
 
     this.button = new AppButtonModel({

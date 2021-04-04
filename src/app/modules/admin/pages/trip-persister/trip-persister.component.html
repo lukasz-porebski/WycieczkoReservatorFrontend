@@ -59,14 +59,7 @@
           </mat-form-field>
         </div>
         <div class="col-6">
-          <mat-form-field appearance="fill">
-            <mat-label>{{translateRoute + 'FORM_OF_TRANSPORT' | translate}}</mat-label>
-            <mat-select [(ngModel)]="entity.formOfTransport">
-              <mat-option *ngFor="let fot of formOfTransports" [value]="fot.value">
-                {{fot.text}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <app-select [configuration]="formOfTransportInput"></app-select>
         </div>
       </div>
 

@@ -166,7 +166,6 @@
           "CREATOR_TITLE": "Tworzenie wycieczki",
           "EDITOR_TITLE": "Edycja wycieczki",
           "TRIP_RANGE_DATE": "Okres trwania",
-          "FORM_OF_TRANSPORT": "Rodzaj transportu",
           "CREATE_TRIP": "Utwórz wycieczkę",
           "ATTRIBUTES": {
             "TITLE": {
@@ -198,6 +197,9 @@
             },
             "TRIP_LOCATION": {
               "FIELD_NAME": "Miejsce wycieczki"
+            },
+            "FORM_OF_TRANSPORT": {
+              "FIELD_NAME": "Rodzaj transportu"
             }
           }
         }

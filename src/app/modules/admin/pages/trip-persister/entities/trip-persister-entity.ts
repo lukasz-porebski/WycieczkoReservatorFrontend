@@ -6,7 +6,10 @@ import { UrlAttribute } from './attributes/url-attribute';
 import { DateAttribute } from '../../../../../shared/attributes/date-attribute';
 import { CheckboxAttribute } from '../../../../../shared/attributes/checkbox-attribute';
 import { NumberAttribute } from '../../../../../shared/attributes/number-attribute';
-import { MultipleSelectAttribute } from '../../../../../shared/attributes/multiple-select-attribute';
+import { MultipleSelectAttribute } from '../../../../../shared/attributes/select/multiple-select-attribute';
+import { SingleSelectAttribute } from '../../../../../shared/attributes/select/single-select-attribute';
+import { FormOfTransportFactory } from '../factories/form-of-transport-factory';
+import { FormOfTransportModel } from '../models/form-of-transport-model';
 
 export class TripPersisterEntity implements IEntity {
   public readonly title: TextAttribute;
@@ -27,14 +30,14 @@ export class TripPersisterEntity implements IEntity {
   public readonly startDate: DateAttribute;
   public readonly endDate: DateAttribute;
 
+  public readonly formOfTransport: SingleSelectAttribute<FormOfTransportModel, FormOfTransport>;
+
   public readonly mainImageUrl: UrlAttribute;
   public readonly imageUrls: string[];
 
   public readonly whole: FormGroup;
 
-  public formOfTransport: FormOfTransport;
-
-  constructor(defaultFormOfTransport: FormOfTransport) {
+  constructor(formOfTransportFactory: FormOfTransportFactory) {
     const translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.ATTRIBUTES.';
 
     const oneToTenNumbers = this._getOneToTenNumbers();
@@ -44,7 +47,7 @@ export class TripPersisterEntity implements IEntity {
 
     this.participants = new MultipleSelectAttribute<number>({
       translateRoute: translateRoute + 'PARTICIPANS.',
-      allValues: oneToTenNumbers,
+      dataSource: oneToTenNumbers,
       required: true
     });
     this.pricePerSingleParticipant = new NumberAttribute({
@@ -54,7 +57,7 @@ export class TripPersisterEntity implements IEntity {
 
     this.roomSizes = new MultipleSelectAttribute<number>({
       translateRoute: translateRoute + 'ROOM_SIZES.',
-      allValues: oneToTenNumbers,
+      dataSource: oneToTenNumbers,
       required: true
     });
     this.pricePerSingleRoom = new NumberAttribute({
@@ -78,6 +81,16 @@ export class TripPersisterEntity implements IEntity {
     });
     this.endDate = new DateAttribute();
 
+    const formOfTransports = formOfTransportFactory.createFormOfTransports();
+    this.formOfTransport = new SingleSelectAttribute<FormOfTransportModel, FormOfTransport>({
+      translateRoute: translateRoute + 'FORM_OF_TRANSPORT.',
+      dataSource: formOfTransports,
+      defaultValue: formOfTransports[0].value,
+      valueSelector: data => data.value,
+      optionTextSelector: data => data.text,
+      required: true
+    });
+
     this.whole = new FormGroup({
       title: this.title.formControl,
       description: this.description.formControl,
@@ -88,9 +101,8 @@ export class TripPersisterEntity implements IEntity {
       startDate: this.startDate.formControl,
       endDate: this.endDate.formControl,
       meal: this.meal.formControl,
+      formOfTransport: this.formOfTransport.formControl
     });
-
-    this.formOfTransport = defaultFormOfTransport;
   }
 
   public dispose(): void {

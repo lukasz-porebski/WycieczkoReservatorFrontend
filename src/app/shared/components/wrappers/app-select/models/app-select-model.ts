@@ -1,4 +1,4 @@
-import { SelectAttribute } from '../../../../attributes/base/select-attribute';
+import { SelectAttribute } from '../../../../attributes/select/base/select-attribute';
 import { AppSelectLabelModel, IAppSelectLabelConfiguration } from './app-select-label-model';
 import { isDefined } from '../../../../utils/utils';
 

@@ -1,10 +1,11 @@
 <mat-form-field appearance="fill"
                 [class.max-width]="configuration.maxWidth">
   <mat-label>{{configuration.label.text + 'FIELD_NAME' | translate}}</mat-label>
-  <mat-select [formControl]="configuration.attribute.formControl" multiple>
-    <mat-option *ngFor="let participant of configuration.attribute.allValues"
-                [value]="participant">
-      {{participant}}
+  <mat-select [formControl]="configuration.attribute.formControl"
+              [multiple]="isMultiple">
+    <mat-option *ngFor="let participant of configuration.attribute.dataSource"
+                [value]="configuration.attribute.valueSelector(participant)">
+      {{configuration.attribute.optionTextSelector(participant)}}
     </mat-option>
   </mat-select>
 
