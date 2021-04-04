@@ -22,7 +22,12 @@ export class AppInputBasicModel {
   }
 
   public get type(): AppInputBasicType {
-    return this._type;
+    switch (this._type) {
+      case AppInputBasicType.price:
+        return AppInputBasicType.text;
+      default:
+        return this._type;
+    }
   }
 
   public readonly mask: string;
@@ -52,6 +57,13 @@ export class AppInputBasicModel {
   }
 
   private _getMask(type: AppInputBasicType): string {
-    return type === AppInputBasicType.zipCode ? '00-000' : null;
+    switch (type) {
+      case AppInputBasicType.zipCode:
+        return '00-000';
+      case AppInputBasicType.price:
+        return '0*,00';
+      default:
+        return null;
+    }
   }
 }

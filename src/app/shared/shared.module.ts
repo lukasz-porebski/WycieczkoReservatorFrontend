@@ -37,6 +37,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AppSelectComponent } from './components/wrappers/app-select/app-select.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -76,12 +77,14 @@ const APP_EXPORT_PARTS = [
   TimeSpanPipe,
   AppAsyncPageComponent,
   AppListComponent,
+  AppSelectComponent
 ];
 
 @NgModule({
   declarations: [
     ...APP_EXPORT_PARTS,
-    ConditionalTranslationPipe
+    ConditionalTranslationPipe,
+    AppSelectComponent
   ],
   exports: [
     TranslateModule,

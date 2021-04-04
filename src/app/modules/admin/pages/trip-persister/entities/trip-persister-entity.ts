@@ -44,25 +44,30 @@ export class TripPersisterEntity implements IEntity {
 
     this.participants = new MultipleSelectAttribute<number>({
       translateRoute: translateRoute + 'PARTICIPANS.',
-      allValues: oneToTenNumbers
+      allValues: oneToTenNumbers,
+      required: true
     });
     this.pricePerSingleParticipant = new NumberAttribute({
-      translateRoute: translateRoute + 'PRICE_PER_SINGLE_PARTICIPANT.'
+      translateRoute: translateRoute + 'PRICE_PER_SINGLE_PARTICIPANT.',
+      min: 1
     });
 
     this.roomSizes = new MultipleSelectAttribute<number>({
       translateRoute: translateRoute + 'ROOM_SIZES.',
-      allValues: oneToTenNumbers
+      allValues: oneToTenNumbers,
+      required: true
     });
     this.pricePerSingleRoom = new NumberAttribute({
-      translateRoute: translateRoute + 'PRICE_PER_SINGLE_ROOM.'
+      translateRoute: translateRoute + 'PRICE_PER_SINGLE_ROOM.',
+      min: 1
     });
 
     this.meal = new CheckboxAttribute({
-      translateRoute: translateRoute + 'MEAL.'
+      translateRoute: translateRoute + 'MEAL.',
     });
     this.pricePerSingleDayOfMeals = new NumberAttribute({
-      translateRoute: translateRoute + 'PRICE_PER_SINGLE_DAY_OF_MEALS.'
+      translateRoute: translateRoute + 'PRICE_PER_SINGLE_DAY_OF_MEALS.',
+      min: 1
     });
 
     this.departureLocation = new TextAttribute(translateRoute + 'DEPERTURE_LOCATION.', true);

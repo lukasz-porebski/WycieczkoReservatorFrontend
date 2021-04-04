@@ -8,6 +8,7 @@ import { FormOfTransportFactory } from './factories/form-of-transport-factory';
 import { TripPersisterEntity } from './entities/trip-persister-entity';
 import { AppInputTextAreaModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-text-area.model';
 import { AppInputCheckboxModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-checkbox.model';
+import { AppSelectModel } from '../../../../shared/components/wrappers/app-select/models/app-select-model';
 
 @Component({
   selector: 'app-trip-persister',
@@ -23,8 +24,10 @@ export class TripPersisterComponent implements OnInit {
   public titleInput: AppInputModel;
   public descriptionInput: AppInputModel;
 
+  public participantsInput: AppSelectModel;
   public pricePerSingleParticipantInput: AppInputModel;
 
+  public roomSizesInput: AppSelectModel;
   public pricePerSingleRoomInput: AppInputModel;
 
   public mealInput: AppInputModel;
@@ -60,14 +63,30 @@ export class TripPersisterComponent implements OnInit {
       }),
     });
 
+    this.participantsInput = new AppSelectModel({
+      label: {
+        text: this.entity.participants.translateRoute
+      },
+      attribute: this.entity.participants,
+      maxWidth: true
+    });
+
     this.pricePerSingleParticipantInput = new AppInputModel({
       label: {
         text: this.entity.pricePerSingleParticipant.translateRoute,
       },
       input: new AppInputBasicModel({
-        type: AppInputBasicType.number,
+        type: AppInputBasicType.price,
         attribute: this.entity.pricePerSingleParticipant,
       }),
+    });
+
+    this.roomSizesInput = new AppSelectModel({
+      label: {
+        text: this.entity.roomSizes.translateRoute
+      },
+      attribute: this.entity.roomSizes,
+      maxWidth: true
     });
 
     this.pricePerSingleRoomInput = new AppInputModel({
@@ -75,7 +94,7 @@ export class TripPersisterComponent implements OnInit {
         text: this.entity.pricePerSingleRoom.translateRoute,
       },
       input: new AppInputBasicModel({
-        type: AppInputBasicType.number,
+        type: AppInputBasicType.price,
         attribute: this.entity.pricePerSingleRoom,
       }),
     });

@@ -3,5 +3,6 @@ export enum AppInputBasicType {
   number = 'number',
   password = 'password',
   email = 'email',
-  zipCode = 'zip-code'
+  zipCode = 'zip-code',
+  price = 'price'
 }

@@ -9,10 +9,16 @@ export class ErrorModel {
     return this._message;
   }
 
-  private _message = '';
+  public get params(): any {
+    return this._params;
+  }
 
-  public setMessage(message: string): this {
+  private _message = '';
+  private _params: any;
+
+  public setMessage(message: string, params?: any): this {
     this._message = message;
+    this._params = params;
     return this;
   }
 }

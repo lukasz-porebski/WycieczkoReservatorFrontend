@@ -219,7 +219,9 @@
         }
       },
       "ERRORS": {
-        "REQUIRED": "To pole jest wymagane"
+        "REQUIRED": "To pole jest wymagane",
+        "MIN": "Minimalna wartość to {{minValue}}",
+        "MAX": "Maksymalna wartość to {{maxValue}}"
       }
     },
     "COMPONENTS": {

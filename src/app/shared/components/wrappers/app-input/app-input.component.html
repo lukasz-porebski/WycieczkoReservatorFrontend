@@ -21,7 +21,7 @@
   </mat-hint>
 
   <mat-error *ngIf="basicInput.attribute?.error?.isAny">
-    {{basicInput.attribute?.error?.message | translate}}
+    {{basicInput.attribute?.error?.message | translate: basicInput.attribute?.error?.params}}
   </mat-error>
 </mat-form-field>
 
@@ -46,7 +46,7 @@
   </mat-hint>
 
   <mat-error *ngIf="textAreaInput.attribute?.error?.isAny">
-    {{textAreaInput.attribute?.error?.message | translate}}
+    {{textAreaInput.attribute?.error?.message | translate: textAreaInput.attribute?.error?.params}}
   </mat-error>
 
 </mat-form-field>
