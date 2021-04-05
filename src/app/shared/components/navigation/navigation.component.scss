@@ -7,6 +7,10 @@
     height: 100%;
   }
 
+  mat-sidenav-content {
+    overflow: hidden;
+  }
+
   ::ng-deep .mat-expansion-panel {
     margin: 1px;
     border-radius: 0 !important;

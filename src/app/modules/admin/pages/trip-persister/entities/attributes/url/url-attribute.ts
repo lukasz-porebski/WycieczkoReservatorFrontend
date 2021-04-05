@@ -1,7 +1,12 @@
 import { IAttribute } from '../../../../../../../shared/interfaces/attribute.interface';
 import { ErrorModel } from '../../../../../../../shared/models/error.model';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { UrlValidator } from './url-validator';
+
+export interface IUrlAttributeConfiguration {
+  translateRoute: string;
+  required?: boolean;
+}
 
 export class UrlAttribute implements IAttribute {
   public get value(): string {
@@ -19,19 +24,28 @@ export class UrlAttribute implements IAttribute {
       return this._error.setMessage('SHARED.ATTRIBUTES.ERRORS.REQUIRED');
     }
 
-    if (this.formControl.errors?.isUrl) {
-      return this._error.setMessage(this.translateRoute + 'ERRORS.LENGTH');
+    if (this.formControl.errors?.isValidUrl) {
+      return this._error.setMessage('MODULES.ADMIN.PAGES.TRIP_PERSISTER.ATTRIBUTES.URL.ERRORS.INVALID_FORMAT');
     }
 
     return this._error;
   }
 
-  public readonly translateRoute = 'MODULES.USER.PAGES.REGISTRATION.ATTRIBUTES.ZIP_CODE.';
+  public readonly translateRoute;
   public readonly length = 5;
-  public readonly formControl = new FormControl(null, [
-    Validators.required,
-    UrlValidator.isUrl,
-  ]);
+  public readonly formControl: FormControl;
 
   private readonly _error = new ErrorModel();
+  private readonly _validators: ValidatorFn[] = [];
+
+  constructor(configuration: IUrlAttributeConfiguration) {
+    this.translateRoute = configuration.translateRoute;
+
+    this._validators.push(UrlValidator.isValidUrl);
+    if (configuration.required) {
+      this._validators.push(Validators.required);
+    }
+
+    this.formControl = new FormControl(null, this._validators);
+  }
 }

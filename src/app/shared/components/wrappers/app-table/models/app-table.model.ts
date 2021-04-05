@@ -16,6 +16,7 @@ export interface IAppTableConfiguration<TDataSource> {
   headerSticky?: boolean;
   paginator?: IAppTablePaginatorConfiguration;
   filter?: IAppTableFilterConfiguration;
+  showSpinnerOnInit?: boolean;
 }
 
 export class AppTableModel<TDataSource> {
@@ -28,6 +29,7 @@ export class AppTableModel<TDataSource> {
   public readonly headerSticky: boolean;
   public readonly paginator: AppTablePaginatorModel;
   public readonly filter: AppTableFilterModel;
+  public readonly showSpinnerOnInit: boolean;
 
   constructor(configuration: IAppTableConfiguration<TDataSource>) {
     this.translateRout = configuration.translateRout;
@@ -51,6 +53,9 @@ export class AppTableModel<TDataSource> {
     this.filter = isDefined(configuration.filter)
       ? new AppTableFilterModel(configuration.filter)
       : null;
+    this.showSpinnerOnInit = isDefined(configuration.showSpinnerOnInit)
+      ? configuration.showSpinnerOnInit
+      : true;
   }
 
   public getColumnName(

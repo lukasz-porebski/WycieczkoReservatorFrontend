@@ -169,6 +169,10 @@
           "TRIP_START_DATE": "Początek",
           "TRIP_END_DATE": "Koniec",
           "CREATE_TRIP": "Utwórz wycieczkę",
+          "ADD_IMAGE": "Dodaj zdjęcie",
+          "COLUMNS": {
+            "URL": "Inne zdjęcja"
+          },
           "ATTRIBUTES": {
             "TITLE": {
               "FIELD_NAME": "Tytuł"
@@ -202,6 +206,17 @@
             },
             "FORM_OF_TRANSPORT": {
               "FIELD_NAME": "Rodzaj transportu"
+            },
+            "MAIN_IMAGE_URL": {
+              "FIELD_NAME": "Link głównego zdjęcia"
+            },
+            "OTHER_IMAGE_URL": {
+              "FIELD_NAME": "Link innego zdjęcia"
+            },
+            "URL": {
+              "ERRORS": {
+                "INVALID_FORMAT": "Link nie jest poprawny"
+              }
             }
           }
         }
@@ -236,8 +251,11 @@
         "TRIPS": {
           "MENU_NAME": "Wycieczki"
         },
-        "ADMIN": {
+        "USERS": {
           "MENU_NAME": "Użytkownicy"
+        },
+        "TRIP_CREATOR": {
+          "MENU_NAME": "Dodaj wycieczkę"
         }
       },
       "APP_TABLE": {

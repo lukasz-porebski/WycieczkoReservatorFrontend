@@ -5,7 +5,6 @@ import { PricePerSingleDayOfMealsValidator } from './price-per-single-day-of-mea
 import { CheckboxAttribute } from '../../../../../../../shared/attributes/checkbox-attribute';
 import { IDisposable } from '../../../../../../../shared/interfaces/disposable.interface';
 import { Subscription } from 'rxjs';
-import { isDefined } from '../../../../../../../shared/utils/utils';
 
 export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposable {
   public get value(): number {

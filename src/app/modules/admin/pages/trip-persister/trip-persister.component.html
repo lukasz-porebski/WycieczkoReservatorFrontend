@@ -69,11 +69,34 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-10">
+          <app-input [configuration]="mainImageUrlInput"></app-input>
+        </div>
+        <div class="col-2">
+          <img class="main-image" [src]="showMainImage ? entity.mainImageUrl.value : ''">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-10">
+          <app-input [configuration]="otherImageUrlInput"></app-input>
+        </div>
+        <div class="col-2">
+          <app-button [disabled]="entity.otherImageUrl.formControl.invalid || !entity.otherImageUrl.value"
+                      [configuration]="addOtherImageUrlButton">
+          </app-button>
+        </div>
+      </div>
+
+      <app-table [configuration]="tableConfig"></app-table>
+
       <app-error [messages]="errors"></app-error>
 
       <div class="row">
-        <app-button [disabled]="entity.whole.invalid || showSpinner"
-                    [configuration]="button"
+        <app-button [disabled]="disablePersistButton"
+                    [configuration]="persistButton"
                     class="center-button">
         </app-button>
       </div>

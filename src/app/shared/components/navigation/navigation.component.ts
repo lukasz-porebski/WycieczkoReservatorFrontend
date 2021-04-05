@@ -33,7 +33,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.menu.push(this._tripMenu());
-    this.menu.push(this._adminMenu());
+    this.menu.push(this._usersMenu());
+    this.menu.push(this._tripCreatorMenu());
 
     this._setActiveMenuElements(this._router.url);
 
@@ -77,13 +78,24 @@ export class NavigationComponent implements OnInit, OnDestroy {
     );
   }
 
-  private _adminMenu(): MenuFirstLevelModel {
-    const appTranslateRoute = this.translateRoute + 'MENU.ADMIN.';
+  private _usersMenu(): MenuFirstLevelModel {
+    const appTranslateRoute = this.translateRoute + 'MENU.USERS.';
 
     return new MenuFirstLevelModel(
       appTranslateRoute + 'MENU_NAME',
-      AppRouting.admin.root,
+      AppRouting.admin.usersList.absolutePath,
       AppIcon.List,
+      [],
+    );
+  }
+
+  private _tripCreatorMenu(): MenuFirstLevelModel {
+    const appTranslateRoute = this.translateRoute + 'MENU.TRIP_CREATOR.';
+
+    return new MenuFirstLevelModel(
+      appTranslateRoute + 'MENU_NAME',
+      AppRouting.admin.tripCreator.absolutePath,
+      AppIcon.Add,
       [],
     );
   }

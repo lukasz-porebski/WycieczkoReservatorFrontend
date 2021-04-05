@@ -13,3 +13,8 @@
 .container {
   padding: 10px;
 }
+
+.scrollable-container {
+  max-height: 90% !important;
+  overflow: auto !important;
+}

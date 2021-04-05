@@ -12,8 +12,15 @@ import { FormOfTransportFactory } from '../factories/form-of-transport-factory';
 import { FormOfTransportModel } from '../models/form-of-transport-model';
 import { PricePerSingleDayOfMealsAttribute } from './attributes/price-per-single-day-of-meals/price-per-single-day-of-meals-attribute';
 import { IDisposable } from '../../../../../shared/interfaces/disposable.interface';
+import { ImagesListModel } from '../models/images-list-model';
+import { Observable } from 'rxjs/internal/Observable';
+import { Subject } from 'rxjs';
 
 export class TripPersisterEntity implements IEntity, IDisposable {
+  public get otherImagesSubject(): Observable<ImagesListModel[]> {
+    return this._otherImagesSubject.asObservable();
+  }
+
   public readonly title: TextAttribute;
   public readonly description: TextAttribute;
 
@@ -35,13 +42,16 @@ export class TripPersisterEntity implements IEntity, IDisposable {
   public readonly formOfTransport: SingleSelectAttribute<FormOfTransportModel, FormOfTransport>;
 
   public readonly mainImageUrl: UrlAttribute;
-  public readonly imageUrls: string[];
+  public readonly otherImageUrl: UrlAttribute;
 
   public readonly whole: FormGroup;
 
+  public otherImages: ImagesListModel[];
+
+  private readonly _otherImagesSubject = new Subject<ImagesListModel[]>();
+
   constructor(formOfTransportFactory: FormOfTransportFactory) {
     const translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.ATTRIBUTES.';
-
     const oneToTenNumbers = this._getOneToTenNumbers();
 
     this.title = new TextAttribute({
@@ -105,6 +115,17 @@ export class TripPersisterEntity implements IEntity, IDisposable {
       required: true
     });
 
+    this.mainImageUrl = new UrlAttribute({
+      translateRoute: translateRoute + 'MAIN_IMAGE_URL.',
+      required: true
+    });
+
+    this.otherImageUrl = new UrlAttribute({
+      translateRoute: translateRoute + 'OTHER_IMAGE_URL.',
+    });
+
+    this.otherImages = [];
+
     this.whole = new FormGroup({
       title: this.title.formControl,
       description: this.description.formControl,
@@ -119,8 +140,20 @@ export class TripPersisterEntity implements IEntity, IDisposable {
     });
   }
 
+  public addOtherImage(): void {
+    this.otherImages.push(new ImagesListModel(this.otherImageUrl.value));
+    this.otherImageUrl.formControl.reset();
+    this._otherImagesSubject.next(this.otherImages);
+  }
+
+  public removeOtherImage(url: string): void {
+    this.otherImages = this.otherImages.filter(i => i.url !== url);
+    this._otherImagesSubject.next(this.otherImages);
+  }
+
   public dispose(): void {
     this.pricePerSingleDayOfMeals.dispose();
+    this._otherImagesSubject.complete();
   }
 
   private _getOneToTenNumbers(): number[] {
