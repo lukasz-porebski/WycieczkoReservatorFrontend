@@ -23,6 +23,8 @@ export class TripPersisterEntity implements IEntity, IDisposable {
     return this._otherImagesSubject.asObservable();
   }
 
+  public readonly tripId?: number;
+
   public readonly title: TextAttribute;
   public readonly description: TextAttribute;
 
@@ -56,6 +58,8 @@ export class TripPersisterEntity implements IEntity, IDisposable {
               apiModel?: TripApiModel) {
     const translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.ATTRIBUTES.';
     const oneToTenNumbers = this._getOneToTenNumbers();
+
+    this.tripId = apiModel?.id;
 
     this.title = new TextAttribute({
       translateRoute: translateRoute + 'TITLE.',

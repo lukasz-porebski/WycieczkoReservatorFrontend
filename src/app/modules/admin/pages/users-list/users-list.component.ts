@@ -3,7 +3,7 @@ import { AppTableColumnType } from '../../../../shared/components/wrappers/app-t
 import { AppTableModel } from '../../../../shared/components/wrappers/app-table/models/app-table.model';
 import { UserListModel } from './models/user-list-model';
 import { Router } from '@angular/router';
-import { AdminApiService } from '../../services/admin-api.service';
+import { UsersListApiService } from './services/users-list-api.service';
 import { AppIcon } from '../../../../shared/enums/app-icon.enum';
 import { ModalService } from '../../../../shared/services/modal.service';
 import { UserRoleChangeModalComponent } from './modals/user-role-change-modal/user-role-change-modal.component';
@@ -25,7 +25,7 @@ export class UsersListComponent implements OnInit {
 
   public tableConfig: AppTableModel<UserListModel>;
 
-  constructor(private readonly _adminApiService: AdminApiService,
+  constructor(private readonly _adminApiService: UsersListApiService,
               private readonly _router: Router,
               private readonly _modalService: ModalService) {
   }

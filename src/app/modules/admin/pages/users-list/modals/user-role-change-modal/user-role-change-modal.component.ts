@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserListModel } from '../../models/user-list-model';
 import { UserRoleFactory } from '../../../../../../core/user-identity/factories/user-role-factory';
 import { UserRoleModel } from '../../../../../../core/user-identity/models/user-role-model';
-import { AdminApiService } from '../../../../services/admin-api.service';
+import { UsersListApiService } from '../../services/users-list-api.service';
 import { ChangeUserRoleRequestModel } from './models/requests/change-user-role-request-model';
 import { AppModalModel } from '../../../../../../shared/components/wrappers/app-modal/models/app-modal.model';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
@@ -30,7 +30,7 @@ export class UserRoleChangeModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: UserListModel,
               private readonly _matDialogRef: MatDialogRef<UserRoleChangeModalComponent>,
               private readonly _userRoleFactory: UserRoleFactory,
-              private readonly _adminApiService: AdminApiService) {
+              private readonly _adminApiService: UsersListApiService) {
   }
 
   public ngOnInit(): void {

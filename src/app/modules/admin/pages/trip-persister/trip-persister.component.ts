@@ -14,8 +14,9 @@ import { TripPersisterButtonFactory } from './factories/trip-persister-button-fa
 import { TripPersisterMode } from './enums/trip-persister-mode.enum';
 import { TripPersisterTableFactory } from './factories/trip-persister-table-factory';
 import { ActivatedRoute } from '@angular/router';
-import { AdminApiService } from '../../services/admin-api.service';
 import { TripPersisterEntityFactory } from './factories/trip-persister-entity-factory';
+import { TripPersisterRequestFactory } from './factories/trip-persister-request-factory';
+import { TripPersisterApiService } from './services/trip-persister-api.service';
 
 @Component({
   selector: 'app-trip-persister',
@@ -76,15 +77,16 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
               private readonly _selectFactory: TripPersisterSelectFactory,
               private readonly _buttonFactory: TripPersisterButtonFactory,
               private readonly _tableFactory: TripPersisterTableFactory,
+              private readonly _requestFactory: TripPersisterRequestFactory,
               private readonly _route: ActivatedRoute,
-              private readonly _adminApiService: AdminApiService) {
+              private readonly _apiService: TripPersisterApiService) {
   }
 
   public ngOnInit(): void {
     const id = this._route.snapshot.paramMap.get('id');
 
     if (isDefined(id)) {
-      this._adminApiService.getTrip(toNumber(id))
+      this._apiService.getTrip(toNumber(id))
         .subscribe(value => {
           const entity = this._entityFactory.createByApiModel(value);
           this._initialize(entity, TripPersisterMode.Editor);
@@ -126,12 +128,13 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
 
     this.otherImagesTableConfig = this._tableFactory.createOtherImages(entity, this.translateRoute);
 
-    const onPersist = mode === TripPersisterMode.Creator ? this.createTrip : this.editTrip;
+    const onPersist = mode === TripPersisterMode.Creator ? this._createTrip : this._editTrip;
     this.persistButton = this._buttonFactory.createPersist(entity, this.translateRoute, onPersist, mode);
   }
 
-  public createTrip(): void {
+  private _createTrip(): void {
     this.entity.whole.disable();
+    const request = this._requestFactory.createTripCreate(this.entity);
 
     // this._userApiService.register()
     //   .pipe(
@@ -148,7 +151,8 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
     //   .subscribe(() => this.goToNextStep.emit());
   }
 
-  public editTrip(): void {
+  private _editTrip(): void {
     this.entity.whole.disable();
+    const request = this._requestFactory.createTripEdit(this.entity);
   }
 }
