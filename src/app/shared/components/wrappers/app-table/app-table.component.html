@@ -28,7 +28,7 @@
           {{column.getData(data)}}
         </ng-template>
         <ng-template [ngSwitchCase]="AppTableColumnType.Number">
-          <span class="number-column-type">{{column.getData(data)}}</span>
+          <span>{{column.getData(data)}}</span>
         </ng-template>
         <ng-template [ngSwitchCase]="AppTableColumnType.Date">
           {{column.getData(data) | date: DateFormat.Date}}
@@ -52,6 +52,9 @@
         </ng-template>
         <ng-template [ngSwitchCase]="AppTableColumnType.Percent">
           {{getPercent(column.getData(data))}}
+        </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Price">
+          {{getPrice(column.getData(data))}}
         </ng-template>
       </mat-cell>
     </ng-container>
@@ -102,7 +105,7 @@
 
     <mat-header-row *matHeaderRowDef="configuration.columnNames; sticky: configuration.headerSticky"></mat-header-row>
     <mat-row *matRowDef="let row; columns: configuration.columnNames;"
-              [class.mark-row]="configuration.markRowCondition(row)">
+             [class.mark-row]="configuration.markRowCondition(row)">
     </mat-row>
     <mat-footer-row *matFooterRowDef="['tableIsEmptyColumn']"
                     class="empty-table"

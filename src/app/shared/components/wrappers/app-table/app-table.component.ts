@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AppTableModel } from './models/app-table.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { getPercent, isDefined, isNotEmpty } from '../../../utils/utils';
+import { toPercent, isDefined, isNotEmpty, toPrice } from '../../../utils/utils';
 import { AppTableColumnType } from './enums/app-table-column-type.enum';
 import { DateFormat } from '../../../enums/date-format.enum';
 import { MatSort } from '@angular/material/sort';
@@ -75,7 +75,11 @@ export class AppTableComponent implements OnInit, OnDestroy {
   }
 
   public getPercent(value: number): string {
-    return getPercent(value);
+    return toPercent(value);
+  }
+
+  public getPrice(value: number): string {
+    return toPrice(value);
   }
 
   public applyFilter(event: Event): void {

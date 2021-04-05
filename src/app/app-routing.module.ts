@@ -35,8 +35,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    canActivate: [ NotAuthenticatedGuard ],
-    component: TripsListComponent
+    redirectTo: AppRouting.trip.tripsList.absolutePath
   }
 ];
 

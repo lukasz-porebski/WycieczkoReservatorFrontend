@@ -42,7 +42,7 @@ export function createRandomString(length: number): string {
   return result;
 }
 
-export function getPercent(value: number, hideZeros: boolean = true): string {
+export function toPercent(value: number, hideZeros: boolean = true): string {
   const result = value.toFixed(2);
   if (!hideZeros) {
     return result + '%';
@@ -65,4 +65,23 @@ export function toDurationData(durationMs: number): Date {
   const date = new Date();
   date.setTime(durationMs);
   return date;
+}
+
+export function toPrice(value: number, hideZeros: boolean = true): string {
+  const result = value.toFixed(2);
+  if (!hideZeros) {
+    return result + ' zł';
+  }
+
+  let resultWithoutZeros = result;
+
+  if (result.endsWith('.00')) {
+    resultWithoutZeros = result.substring(0, result.length - 3);
+  }
+
+  if (result.endsWith('.0')) {
+    resultWithoutZeros = result.substring(0, result.length - 2);
+  }
+
+  return resultWithoutZeros + ' zł';
 }

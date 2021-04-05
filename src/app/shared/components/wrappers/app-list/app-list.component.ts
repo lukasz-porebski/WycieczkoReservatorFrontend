@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { isDefined, getPercent, isEmpty } from '../../../utils/utils';
+import { isDefined, toPercent, isEmpty } from '../../../utils/utils';
 import { Subscription } from 'rxjs';
 import { AppListRowElementType } from './enums/app-list-row-element-type.enum';
 import { DateFormat } from '../../../enums/date-format.enum';
@@ -63,6 +63,6 @@ export class AppListComponent implements OnInit, OnDestroy {
   }
 
   public getPercent(value: number): string {
-    return getPercent(value);
+    return toPercent(value);
   }
 }

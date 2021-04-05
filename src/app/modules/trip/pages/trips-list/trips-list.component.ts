@@ -47,6 +47,10 @@ export class TripsListComponent implements OnInit {
         field: 'title',
         imgPatch: data => data.mainImageUrl,
         type: AppTableColumnType.Text,
+      },
+      {
+        field: 'minPrice',
+        type: AppTableColumnType.Price,
       }
     ];
   }

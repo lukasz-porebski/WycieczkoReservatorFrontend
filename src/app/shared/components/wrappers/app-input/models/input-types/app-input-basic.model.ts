@@ -31,6 +31,7 @@ export class AppInputBasicModel {
   }
 
   public readonly mask: string;
+  public readonly suffix: string;
 
   public attribute?: IAttribute;
   public hint?: AppInputHintModel;
@@ -49,6 +50,7 @@ export class AppInputBasicModel {
     this.maxLength = configuration.maxLength;
     this.passwordShowButton = configuration.passwordShowButton;
     this.mask = this._getMask(this._type);
+    this.suffix = this._getSuffix(this._type);
   }
 
   public changePasswordHideState(): void {
@@ -62,6 +64,15 @@ export class AppInputBasicModel {
         return '00-000';
       case AppInputBasicType.price:
         return '0*,00';
+      default:
+        return null;
+    }
+  }
+
+  private _getSuffix(type: AppInputBasicType): string {
+    switch (type) {
+      case AppInputBasicType.price:
+        return ' zł';
       default:
         return null;
     }

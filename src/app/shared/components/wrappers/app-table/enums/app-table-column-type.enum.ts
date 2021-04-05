@@ -6,5 +6,6 @@ export enum AppTableColumnType {
   Boolean,
   Percent,
   Hours,
-  Minutes
+  Minutes,
+  Price
 }

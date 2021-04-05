@@ -233,7 +233,8 @@
         "TRIPS_LIST": {
           "TITLE": "Wycieczki",
           "COLUMNS": {
-            "TITLE": "Tytuł",
+            "TITLE": "Wycieczka",
+            "MIN_PRICE": "Cena od",
             "MAIN_IMAGE_URL": "Zdjęcie",
             "CANCEL_TRIP": "Anuluj"
           },
