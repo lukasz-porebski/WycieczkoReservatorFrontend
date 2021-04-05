@@ -11,7 +11,7 @@
 
       <div class="row">
         <div class="col-6">
-          <app-select [configuration]="participantsInput"></app-select>
+          <app-select [configuration]="participantsSelect"></app-select>
         </div>
         <div class="col-6">
           <app-input [configuration]="pricePerSingleParticipantInput"></app-input>
@@ -20,7 +20,7 @@
 
       <div class="row">
         <div class="col-6">
-          <app-select [configuration]="roomSizesInput"></app-select>
+          <app-select [configuration]="roomSizesSelect"></app-select>
         </div>
         <div class="col-6">
           <app-input [configuration]="pricePerSingleRoomInput"></app-input>
@@ -65,7 +65,7 @@
           </mat-form-field>
         </div>
         <div class="col-6">
-          <app-select [configuration]="formOfTransportInput"></app-select>
+          <app-select [configuration]="formOfTransportSelect"></app-select>
         </div>
       </div>
 
@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <app-table [configuration]="tableConfig"></app-table>
+      <app-table [configuration]="otherImagesTableConfig"></app-table>
 
       <app-error [messages]="errors"></app-error>
 

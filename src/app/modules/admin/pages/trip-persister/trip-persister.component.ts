@@ -2,12 +2,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UserRouting } from '../../../../core/configurations/routing/children/user-routing';
 import { AppInputModel } from '../../../../shared/components/wrappers/app-input/models/app-input.model';
 import { AppButtonModel } from '../../../../shared/components/wrappers/app-button/models/app-button.model';
-import { AppInputBasicModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-basic.model';
-import { AppInputBasicType } from '../../../../shared/components/wrappers/app-input/enums/app-input-basic-type.enum';
 import { FormOfTransportFactory } from './factories/form-of-transport-factory';
 import { TripPersisterEntity } from './entities/trip-persister-entity';
-import { AppInputTextAreaModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-text-area.model';
-import { AppInputCheckboxModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-checkbox.model';
 import { AppSelectModel } from '../../../../shared/components/wrappers/app-select/models/app-select-model';
 import { AppTableModel } from '../../../../shared/components/wrappers/app-table/models/app-table.model';
 import { ImagesListModel } from './models/images-list-model';
@@ -15,6 +11,11 @@ import { AppTableColumnType } from '../../../../shared/components/wrappers/app-t
 import { AppIcon } from '../../../../shared/enums/app-icon.enum';
 import { AppTableComponent } from '../../../../shared/components/wrappers/app-table/app-table.component';
 import { isNotEmpty } from '../../../../shared/utils/utils';
+import { TripPersisterInputFactory } from './factories/trip-persister-input-factory';
+import { TripPersisterSelectFactory } from './factories/trip-persister-select-factory';
+import { TripPersisterButtonFactory } from './factories/trip-persister-button-factory';
+import { TripPersisterMode } from './enums/trip-persister-mode.enum';
+import { TripPersisterTableFactory } from './factories/trip-persister-table-factory';
 
 @Component({
   selector: 'app-trip-persister',
@@ -43,10 +44,10 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
   public titleInput: AppInputModel;
   public descriptionInput: AppInputModel;
 
-  public participantsInput: AppSelectModel;
+  public participantsSelect: AppSelectModel;
   public pricePerSingleParticipantInput: AppInputModel;
 
-  public roomSizesInput: AppSelectModel;
+  public roomSizesSelect: AppSelectModel;
   public pricePerSingleRoomInput: AppInputModel;
 
   public mealInput: AppInputModel;
@@ -55,7 +56,7 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
   public departureLocationInput: AppInputModel;
   public tripLocationInput: AppInputModel;
 
-  public formOfTransportInput: AppSelectModel;
+  public formOfTransportSelect: AppSelectModel;
 
   public mainImageUrlInput: AppInputModel;
   public otherImageUrlInput: AppInputModel;
@@ -64,166 +65,42 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
   public persistButton: AppButtonModel;
   public errors: string[] = [];
 
-  public tableConfig: AppTableModel<ImagesListModel>;
+  public otherImagesTableConfig: AppTableModel<ImagesListModel>;
 
-  constructor(private readonly _formOfTransportFactory: FormOfTransportFactory) {
+  constructor(private readonly _formOfTransportFactory: FormOfTransportFactory,
+              private readonly _inputFactory: TripPersisterInputFactory,
+              private readonly _selectFactory: TripPersisterSelectFactory,
+              private readonly _buttonFactory: TripPersisterButtonFactory,
+              private readonly _tableFactory: TripPersisterTableFactory) {
   }
 
   public ngOnInit(): void {
-    this.titleInput = new AppInputModel({
-      label: {
-        text: this.entity.title.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.text,
-        attribute: this.entity.title,
-      }),
-    });
+    this.titleInput = this._inputFactory.createTitle(this.entity);
+    this.descriptionInput = this._inputFactory.createDescription(this.entity);
 
-    this.descriptionInput = new AppInputModel({
-      label: {
-        text: this.entity.description.translateRoute,
-      },
-      input: new AppInputTextAreaModel({
-        attribute: this.entity.description,
-      }),
-    });
+    this.participantsSelect = this._selectFactory.createParticipants(this.entity);
+    this.pricePerSingleParticipantInput = this._inputFactory.createPricePerSingleParticipant(this.entity);
 
-    this.participantsInput = new AppSelectModel({
-      label: {
-        text: this.entity.participants.translateRoute
-      },
-      attribute: this.entity.participants,
-      maxWidth: true
-    });
+    this.roomSizesSelect = this._selectFactory.createRoomSizes(this.entity);
+    this.pricePerSingleRoomInput = this._inputFactory.createPricePerSingleRoom(this.entity);
 
-    this.pricePerSingleParticipantInput = new AppInputModel({
-      label: {
-        text: this.entity.pricePerSingleParticipant.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.price,
-        attribute: this.entity.pricePerSingleParticipant,
-      }),
-    });
+    this.mealInput = this._inputFactory.createMeal(this.entity);
+    this.pricePerSingleDayOfMealsInput = this._inputFactory.createPricePerSingleDayOfMeals(this.entity);
 
-    this.roomSizesInput = new AppSelectModel({
-      label: {
-        text: this.entity.roomSizes.translateRoute
-      },
-      attribute: this.entity.roomSizes,
-      maxWidth: true
-    });
+    this.departureLocationInput = this._inputFactory.createDepartureLocation(this.entity);
+    this.tripLocationInput = this._inputFactory.createTripLocation(this.entity);
 
-    this.pricePerSingleRoomInput = new AppInputModel({
-      label: {
-        text: this.entity.pricePerSingleRoom.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.price,
-        attribute: this.entity.pricePerSingleRoom,
-      }),
-    });
+    this.formOfTransportSelect = this._selectFactory.createFormOfTransport(this.entity);
 
-    this.mealInput = new AppInputModel({
-      label: {
-        text: this.entity.meal.translateRoute,
-      },
-      input: new AppInputCheckboxModel({
-        attribute: this.entity.meal,
-      }),
-    });
+    this.mainImageUrlInput = this._inputFactory.createMainImageUrl(this.entity);
+    this.otherImageUrlInput = this._inputFactory.createOtherImageUrl(this.entity);
 
-    this.pricePerSingleDayOfMealsInput = new AppInputModel({
-      label: {
-        text: this.entity.pricePerSingleDayOfMeals.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.number,
-        attribute: this.entity.pricePerSingleDayOfMeals,
-      }),
-    });
+    this.addOtherImageUrlButton = this._buttonFactory.createAddOtherImage(this.entity, this.translateRoute);
 
-    this.departureLocationInput = new AppInputModel({
-      label: {
-        text: this.entity.departureLocation.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.text,
-        attribute: this.entity.departureLocation,
-      }),
-    });
+    this.otherImagesTableConfig = this._tableFactory.createOtherImages(this.entity, this.translateRoute);
 
-    this.tripLocationInput = new AppInputModel({
-      label: {
-        text: this.entity.tripLocation.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.text,
-        attribute: this.entity.tripLocation,
-      }),
-    });
-
-    this.formOfTransportInput = new AppSelectModel({
-      label: {
-        text: this.entity.formOfTransport.translateRoute
-      },
-      attribute: this.entity.formOfTransport,
-      maxWidth: true
-    });
-
-    this.mainImageUrlInput = new AppInputModel({
-      label: {
-        text: this.entity.mainImageUrl.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.text,
-        attribute: this.entity.mainImageUrl,
-      }),
-    });
-
-    this.otherImageUrlInput = new AppInputModel({
-      label: {
-        text: this.entity.otherImageUrl.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.text,
-        attribute: this.entity.otherImageUrl,
-      }),
-    });
-
-    this.addOtherImageUrlButton = new AppButtonModel({
-      onClick: () => this.entity.addOtherImage(),
-      label: {
-        text: this.translateRoute + 'ADD_IMAGE',
-      },
-    });
-
-    this.tableConfig = new AppTableModel<ImagesListModel>({
-      translateRout: this.translateRoute + 'COLUMNS',
-      headerSticky: true,
-      dataSource: this.entity.otherImagesSubject,
-      showSpinnerOnInit: false,
-      columns: [
-        {
-          field: 'url',
-          type: AppTableColumnType.Text,
-          imgPatch: data => data.url
-        },
-      ],
-      columnsWithIcon: [
-        {
-          icon: AppIcon.Delete,
-          onClick: data => this.entity.removeOtherImage(data.url)
-        }
-      ]
-    });
-    this.persistButton = new AppButtonModel({
-      onClick: () => this.onSave(),
-      label: {
-        text: this.translateRoute + 'CREATE_TRIP',
-      },
-    });
+    this.persistButton = this._buttonFactory.createPersist(
+      this.entity, this.translateRoute, this.onSave, TripPersisterMode.Creator);
   }
 
   public ngOnDestroy(): void {
