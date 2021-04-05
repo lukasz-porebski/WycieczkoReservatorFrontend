@@ -17,6 +17,7 @@ export class AppTableColumnModel<TDataSource> {
   public type: AppTableColumnType;
   public minWidth: string;
   public imgPatch: (data: TDataSource) => string;
+  public markRow: boolean;
 
   constructor(configuration: IAppTableColumnConfiguration<TDataSource>) {
     this.field = configuration.field;

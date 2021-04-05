@@ -11,6 +11,7 @@ import { AppTableComponent } from '../../../../shared/components/wrappers/app-ta
 import { IUserListActionConfirmationModalData, UserListActionConfirmationModalComponent } from './modals/user-list-action-confirmation-modal/user-list-action-confirmation-modal.component';
 import { IAppTableColumnConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column.model';
 import { IAppTableColumnActionConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column-action.model';
+import { UserRole } from '../../../../core/user-identity/enums/user-role.enum';
 
 @Component({
   selector: 'app-users-list',
@@ -35,6 +36,7 @@ export class UsersListComponent implements OnInit {
       headerSticky: true,
       dataSource: this._adminApiService.getUsers(),
       filter: {},
+      markRowCondition: row => row.role === UserRole.Guide,
       columns: this._getColumns(),
       actionsDefinition: {
         actions: this._getActions()

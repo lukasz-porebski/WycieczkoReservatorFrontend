@@ -17,6 +17,7 @@ export interface IAppTableConfiguration<TDataSource> {
   paginator?: IAppTablePaginatorConfiguration;
   filter?: IAppTableFilterConfiguration;
   showSpinnerOnInit?: boolean;
+  markRowCondition?: (row: TDataSource) => boolean;
 }
 
 export class AppTableModel<TDataSource> {
@@ -30,6 +31,7 @@ export class AppTableModel<TDataSource> {
   public readonly paginator: AppTablePaginatorModel;
   public readonly filter: AppTableFilterModel;
   public readonly showSpinnerOnInit: boolean;
+  public readonly markRowCondition: (row: TDataSource) => boolean;
 
   constructor(configuration: IAppTableConfiguration<TDataSource>) {
     this.translateRout = configuration.translateRout;
@@ -56,6 +58,9 @@ export class AppTableModel<TDataSource> {
     this.showSpinnerOnInit = isDefined(configuration.showSpinnerOnInit)
       ? configuration.showSpinnerOnInit
       : true;
+    this.markRowCondition = isDefined(configuration.markRowCondition)
+      ? configuration.markRowCondition
+      : () => false;
   }
 
   public getColumnName(

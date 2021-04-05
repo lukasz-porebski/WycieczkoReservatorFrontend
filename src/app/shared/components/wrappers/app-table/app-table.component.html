@@ -101,7 +101,9 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="configuration.columnNames; sticky: configuration.headerSticky"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: configuration.columnNames;"></mat-row>
+    <mat-row *matRowDef="let row; columns: configuration.columnNames;"
+              [class.mark-row]="configuration.markRowCondition(row)">
+    </mat-row>
     <mat-footer-row *matFooterRowDef="['tableIsEmptyColumn']"
                     class="empty-table"
                     [hidden]="isTableEmpty">
