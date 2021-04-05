@@ -132,7 +132,7 @@
     "ADMIN": {
       "PAGES": {
         "USERS_LIST": {
-          "TITLE": "Lista użytkowników",
+          "TITLE": "Użytkownicy",
           "COLUMNS": {
             "EMAIL": "Email",
             "FIRST_NAME": "Imię",
@@ -225,6 +225,25 @@
         "FORM_OF_TRANSPORT": {
           "BUS": "Autokar",
           "PLANE": "Samolot"
+        }
+      }
+    },
+    "TRIP": {
+      "PAGES": {
+        "TRIPS_LIST": {
+          "TITLE": "Wycieczki",
+          "COLUMNS": {
+            "TITLE": "Tytuł",
+            "MAIN_IMAGE_URL": "Zdjęcie",
+            "CANCEL_TRIP": "Anuluj"
+          },
+          "MODALS": {
+            "TRIPS_LIST_ACTION": {
+              "ARE_YOU_SURE_YOU_WANT_TO_CANCEL_TRIP": "Czy na pewno anulować wycieczkę",
+              "YES": "Tak",
+              "NO": "Nie"
+            }
+          }
         }
       }
     }

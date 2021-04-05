@@ -17,5 +17,11 @@ export const AppRoutes = {
       usersList: 'users-list',
       tripCreator: 'trip-creator',
     }
+  },
+  trip: {
+    path: 'trip',
+    children: {
+      tripsList: 'tripss-list'
+    }
   }
 };

@@ -2,26 +2,26 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AppModalModel } from '../../../../../../shared/components/wrappers/app-modal/models/app-modal.model';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserListModel } from '../../models/user-list-model';
 import { Observable } from 'rxjs/internal/Observable';
+import { TripListModel } from '../../models/trip-list-model';
 
-export interface IUserListActionConfirmationModalData {
+export interface ITripsListActionConfirmationModalData {
   actionText: string;
-  user: UserListModel;
-  action: (user: UserListModel) => Observable<any>;
+  trip: TripListModel;
+  action: (trip: TripListModel) => Observable<any>;
 }
 
 @Component({
-  selector: 'app-user-list-action-confirmation-modal',
-  templateUrl: './user-list-action-confirmation-modal.component.html',
-  styleUrls: [ './user-list-action-confirmation-modal.component.scss' ]
+  selector: 'app-trips-list-action-confirmation-modal',
+  templateUrl: './trips-list-action-confirmation-modal.component.html',
+  styleUrls: [ './trips-list-action-confirmation-modal.component.scss' ]
 })
-export class UserListActionConfirmationModalComponent implements OnInit {
+export class TripsListActionConfirmationModalComponent implements OnInit {
   public get showSpinner(): boolean {
     return this._showSpinner;
   }
 
-  public readonly translateRoute = 'MODULES.ADMIN.PAGES.USERS_LIST.MODALS.USER_LIST_ACTION.';
+  public readonly translateRoute = 'MODULES.TRIP.PAGES.TRIPS_LIST.MODALS.TRIPS_LIST_ACTION.';
 
   public modalConfig: AppModalModel;
   public yesButton: AppButtonModel;
@@ -29,8 +29,8 @@ export class UserListActionConfirmationModalComponent implements OnInit {
 
   private _showSpinner = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: IUserListActionConfirmationModalData,
-              private readonly _matDialogRef: MatDialogRef<UserListActionConfirmationModalComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: ITripsListActionConfirmationModalData,
+              private readonly _matDialogRef: MatDialogRef<TripsListActionConfirmationModalComponent>) {
   }
 
   public ngOnInit(): void {
@@ -39,7 +39,7 @@ export class UserListActionConfirmationModalComponent implements OnInit {
     this.yesButton = new AppButtonModel({
       onClick: () => {
         this._showSpinner = true;
-        this.data.action(this.data.user).subscribe(
+        this.data.action(this.data.trip).subscribe(
           () => this._matDialogRef.close(true)
         );
       },

@@ -11,5 +11,8 @@ export enum AppIcon {
   Lock = 'lock',
   Password = 'password',
   Undo = 'undo',
-  LockOpen = 'lock_open',
+  Unlock = 'lock_open',
+  Cancel = 'highlight_off',
+  Users = 'people',
+  Trips = 'hiking',
 }

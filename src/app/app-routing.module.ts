@@ -2,17 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppRouting } from './core/configurations/routing/app-routing';
 import { NotAuthenticatedGuard } from './core/user-identity/guards/not-authenticated.guard';
-import { HomeComponent } from './modules/home/home.component';
 import { UserComponent } from './modules/user/user.component';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
+import { TripsListComponent } from './modules/trip/pages/trips-list/trips-list.component';
 
 
 const routes: Routes = [
-  {
-    path: AppRouting.home.root,
-    component: HomeComponent,
-    // canActivate: [ NotAuthenticatedGuard ]
-  },
   {
     path: AppRouting.user.root,
     canActivate: [ NotAuthenticatedGuard ],
@@ -25,6 +20,12 @@ const routes: Routes = [
     component: NavigationComponent,
     loadChildren: () => import('./modules/admin/admin.module').then(mod => mod.AdminModule)
   },
+  {
+    path: AppRouting.trip.root,
+    // canActivate: [ NotAuthenticatedGuard ],
+    component: NavigationComponent,
+    loadChildren: () => import('./modules/trip/trip.module').then(mod => mod.TripModule)
+  },
   // {
   //   path: AppRouting.home.root,
   //   component: NavigationComponent,
@@ -35,7 +36,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     canActivate: [ NotAuthenticatedGuard ],
-    component: HomeComponent
+    component: TripsListComponent
   }
 ];
 

@@ -32,9 +32,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.menu.push(this._tripMenu());
-    this.menu.push(this._usersMenu());
+    this.menu.push(this._tripsMenu());
     this.menu.push(this._tripCreatorMenu());
+    this.menu.push(this._usersMenu());
 
     this._setActiveMenuElements(this._router.url);
 
@@ -67,24 +67,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._router.navigateByUrl('/');
   }
 
-  private _tripMenu(): MenuFirstLevelModel {
+  private _tripsMenu(): MenuFirstLevelModel {
     const appTranslateRoute = this.translateRoute + 'MENU.TRIPS.';
 
     return new MenuFirstLevelModel(
       appTranslateRoute + 'MENU_NAME',
-      HomeRouting.root,
-      AppIcon.List,
-      [],
-    );
-  }
-
-  private _usersMenu(): MenuFirstLevelModel {
-    const appTranslateRoute = this.translateRoute + 'MENU.USERS.';
-
-    return new MenuFirstLevelModel(
-      appTranslateRoute + 'MENU_NAME',
-      AppRouting.admin.usersList.absolutePath,
-      AppIcon.List,
+      AppRouting.trip.tripsList.absolutePath,
+      AppIcon.Trips,
       [],
     );
   }
@@ -96,6 +85,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
       appTranslateRoute + 'MENU_NAME',
       AppRouting.admin.tripCreator.absolutePath,
       AppIcon.Add,
+      [],
+    );
+  }
+
+  private _usersMenu(): MenuFirstLevelModel {
+    const appTranslateRoute = this.translateRoute + 'MENU.USERS.';
+
+    return new MenuFirstLevelModel(
+      appTranslateRoute + 'MENU_NAME',
+      AppRouting.admin.usersList.absolutePath,
+      AppIcon.Users,
       [],
     );
   }

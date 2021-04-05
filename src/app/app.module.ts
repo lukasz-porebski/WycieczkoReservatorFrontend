@@ -8,7 +8,6 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { SharedModule } from './shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HomeComponent } from './modules/home/home.component';
 import { UserIdentityComponent } from './core/user-identity/component/user-identity.component';
 import { TokenInterceptor } from './core/user-identity/interceptors/token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -21,7 +20,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     UserIdentityComponent
   ],
   imports: [

@@ -103,7 +103,7 @@ export class UsersListComponent implements OnInit {
         }
       },
       {
-        icon: AppIcon.LockOpen,
+        icon: AppIcon.Unlock,
         name: 'UNBLOCK',
         hide: user => !user.isBlocked,
         onClick: userr => {
