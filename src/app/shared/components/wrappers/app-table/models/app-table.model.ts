@@ -16,7 +16,6 @@ export interface IAppTableConfiguration<TDataSource> {
   headerSticky?: boolean;
   paginator?: IAppTablePaginatorConfiguration;
   filter?: IAppTableFilterConfiguration;
-  showSpinnerOnInit?: boolean;
   markRowCondition?: (row: TDataSource) => boolean;
 }
 
@@ -30,7 +29,6 @@ export class AppTableModel<TDataSource> {
   public readonly headerSticky: boolean;
   public readonly paginator: AppTablePaginatorModel;
   public readonly filter: AppTableFilterModel;
-  public readonly showSpinnerOnInit: boolean;
   public readonly markRowCondition: (row: TDataSource) => boolean;
 
   constructor(configuration: IAppTableConfiguration<TDataSource>) {
@@ -55,9 +53,6 @@ export class AppTableModel<TDataSource> {
     this.filter = isDefined(configuration.filter)
       ? new AppTableFilterModel(configuration.filter)
       : null;
-    this.showSpinnerOnInit = isDefined(configuration.showSpinnerOnInit)
-      ? configuration.showSpinnerOnInit
-      : true;
     this.markRowCondition = isDefined(configuration.markRowCondition)
       ? configuration.markRowCondition
       : () => false;

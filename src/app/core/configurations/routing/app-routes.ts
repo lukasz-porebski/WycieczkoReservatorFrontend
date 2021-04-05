@@ -16,12 +16,13 @@ export const AppRoutes = {
     children: {
       usersList: 'users-list',
       tripCreator: 'trip-creator',
+      tripEditor: 'trip-editor',
     }
   },
   trip: {
     path: 'trip',
     children: {
-      tripsList: 'tripss-list'
+      tripsList: 'trips-list'
     }
   }
 };

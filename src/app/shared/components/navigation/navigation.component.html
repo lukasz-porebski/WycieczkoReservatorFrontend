@@ -2,7 +2,13 @@
   <mat-sidenav-container>
     <mat-sidenav #snav [mode]="'side'" [opened]="true" [fixedInViewport]="true">
       <div class="logo" (click)="navigateToHome()">
-        <img src="assets/images/Logo.png">
+        <div>
+          <img src="assets/images/Logo.png">
+        </div>
+        <div class="logo-text">
+          <p class="h4">Wycieczko</p>
+          <p class="h4">Reservator</p>
+        </div>
       </div>
 
       <mat-accordion displayMode="flat" multi>

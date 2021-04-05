@@ -5,6 +5,8 @@ import { UserListModel } from '../pages/users-list/models/user-list-model';
 import { UserRole } from '../../../core/user-identity/enums/user-role.enum';
 import { AdminServiceModule } from '../admin-service.module';
 import { ChangeUserRoleRequestModel } from '../pages/users-list/modals/user-role-change-modal/models/requests/change-user-role-request-model';
+import { TripApiModel } from '../pages/trip-persister/models/api/trip-api-model';
+import { FormOfTransport } from '../pages/trip-persister/enums/form-of-transport.enum';
 
 @Injectable({
   providedIn: AdminServiceModule
@@ -70,5 +72,32 @@ export class AdminApiService {
 
   public undoForcePasswordChange(userId: number): Observable<boolean> {
     return of(true);
+  }
+
+  public getTrip(tripId: number): Observable<TripApiModel> {
+    console.log('getTrip', tripId);
+    const trip = new TripApiModel({
+      id: 1,
+      title: 'Wycieczka do Kazimierza',
+      description: 'Długi opis',
+      participants: [ 1, 2, 4 ],
+      pricePerSingleParticipant: 45.8,
+      roomSizes: [ 2, 4 ],
+      pricePerSingleRoom: 12.4,
+      meal: true,
+      pricePerSingleDayOfMeals: 3,
+      departureLocation: 'Katowice - Spodek',
+      tripLocation: 'Kazimierz Dolny',
+      formOfTransport: FormOfTransport.Plane,
+      mainImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Widok_Kazimierz_Dolny.jpg',
+      otherImageUrls: [
+        'https://w10inspiracjidookolaswiata.pl/wp-content/uploads/2020/07/Kazimierz-Dolny-najwieksze-atrakcje.jpg',
+        'https://i.nocimg.pl/nocadv/artykuly/f-d/2018/6/1/5/28020-1.jpg',
+      ],
+      startDate: new Date(2021, 10, 15),
+      endDate: new Date(2021, 10, 21),
+    });
+
+    return of(trip);
   }
 }

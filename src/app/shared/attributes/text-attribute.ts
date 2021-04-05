@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 export interface ITextAttributeConfiguration {
   translateRoute: string;
+  defaultValue?: string;
   isRequired?: boolean;
 }
 
@@ -34,7 +35,7 @@ export class TextAttribute implements IAttribute {
   public constructor(configuration: ITextAttributeConfiguration) {
     this.translateRoute = configuration.translateRoute;
     const validators = configuration.isRequired ? [ Validators.required ] : [];
-    this.formControl = new FormControl(null, validators);
+    this.formControl = new FormControl(configuration.defaultValue, validators);
   }
 }
 

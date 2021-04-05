@@ -169,6 +169,7 @@
           "TRIP_START_DATE": "Początek",
           "TRIP_END_DATE": "Koniec",
           "CREATE_TRIP": "Utwórz wycieczkę",
+          "EDIT_TRIP": "Edytuj wycieczkę",
           "ADD_IMAGE": "Dodaj zdjęcie",
           "COLUMNS": {
             "URL": "Inne zdjęcja"
@@ -236,7 +237,8 @@
             "TITLE": "Wycieczka",
             "MIN_PRICE": "Cena od",
             "MAIN_IMAGE_URL": "Zdjęcie",
-            "CANCEL_TRIP": "Anuluj"
+            "CANCEL_TRIP": "Anuluj",
+            "EDIT_TRIP": "Edytuj"
           },
           "MODALS": {
             "TRIPS_LIST_ACTION": {

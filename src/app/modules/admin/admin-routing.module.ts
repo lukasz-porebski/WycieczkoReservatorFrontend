@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: AdminRouting.tripCreator.path,
     component: TripPersisterComponent
+  },
+  {
+    path: `${AdminRouting.tripEditor.path}/:id`,
+    component: TripPersisterComponent
   }
 ];
 

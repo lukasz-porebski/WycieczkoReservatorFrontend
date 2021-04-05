@@ -1,5 +1,5 @@
 <app-async-page [showSpinner]="showSpinner">
-  <mat-card>
+  <mat-card *ngIf="initialized">
     <div class="container">
       <mat-card-title>
         {{translateRoute + 'CREATOR_TITLE' | translate }}
@@ -70,20 +70,20 @@
       </div>
 
       <div class="row">
-        <div class="col-10">
+        <div class="col-lg-10 col-md-9 col-sm-12">
           <app-input [configuration]="mainImageUrlInput"></app-input>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-3 col-sm-12">
           <img class="main-image" [src]="showMainImage ? entity.mainImageUrl.value : ''">
         </div>
       </div>
 
 
       <div class="row">
-        <div class="col-10">
+        <div class="col-lg-10 col-md-9 col-sm-12">
           <app-input [configuration]="otherImageUrlInput"></app-input>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-3 col-sm-12">
           <app-button [disabled]="entity.otherImageUrl.formControl.invalid || !entity.otherImageUrl.value"
                       [configuration]="addOtherImageUrlButton">
           </app-button>

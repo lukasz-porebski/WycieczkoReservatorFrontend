@@ -10,6 +10,7 @@ import { AppIcon } from '../../../../shared/enums/app-icon.enum';
 import { TripListModel } from './models/trip-list-model';
 import { TripApiService } from '../../services/trip-api.service';
 import { ITripsListActionConfirmationModalData, TripsListActionConfirmationModalComponent } from './modals/trips-list-action-confirmation-modal/trips-list-action-confirmation-modal.component';
+import { AppRouting } from '../../../../core/configurations/routing/app-routing';
 
 @Component({
   selector: 'app-trips-list',
@@ -67,6 +68,13 @@ export class TripsListComponent implements OnInit {
             action: trip => this._tripApiService.cancelTrip(trip.id)
           };
           this._openTripsListActionConfirmationModal(modalData);
+        }
+      },
+      {
+        icon: AppIcon.Edit,
+        name: 'EDIT_TRIP',
+        onClick: trip => {
+          this._router.navigateByUrl(`${AppRouting.admin.tripEditor.absolutePath}/${trip.id}`);
         }
       }
     ];

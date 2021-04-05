@@ -24,7 +24,7 @@ export class TripPersisterButtonFactory {
     return new AppButtonModel({
       onClick: onPersist,
       label: {
-        text: translateRoute + (mode === TripPersisterMode.Creator ? 'CREATE_TRIP' : ''),
+        text: translateRoute + (mode === TripPersisterMode.Creator ? 'CREATE_TRIP' : 'EDIT_TRIP'),
       },
     });
   }

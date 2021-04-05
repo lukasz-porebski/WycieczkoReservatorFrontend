@@ -43,15 +43,15 @@ export class AppTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshDataSource(this.configuration.showSpinnerOnInit);
+    this.refreshDataSource();
   }
 
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
 
-  public refreshDataSource(spinner: boolean = true): void {
-    this._spinner = spinner;
+  public refreshDataSource(): void {
+    this._spinner = true;
 
     const sub = this.configuration
       .dataSource

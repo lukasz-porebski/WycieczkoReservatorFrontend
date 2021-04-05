@@ -14,7 +14,7 @@ export abstract class PricePerSingleDayOfMealsValidator {
 
   public static greaterOrEqualToMinPrice(meal: AbstractControl, minPrice: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (isNotDefined(control.value) ||
+      if (isNotDefined(control.value) &&
         !PricePerSingleDayOfMealsValidator._isGreaterOrEqualToMinPrice(meal.value, control.value, minPrice)) {
         return { greaterOrEqualToMinPrice: true };
       }

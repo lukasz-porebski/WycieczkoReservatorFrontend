@@ -87,8 +87,19 @@ mat-expansion-panel {
   padding: 10px;
   cursor: pointer;
 
-  > img {
+  > div > img {
     height: 70px;
+    margin-right: 5px;
+  }
+
+  > .logo-text {
+    margin: auto 0;
+
+    > p {
+      color: $app-white-smoke;
+      margin: 0;
+      padding: 0;
+    }
   }
 }
 

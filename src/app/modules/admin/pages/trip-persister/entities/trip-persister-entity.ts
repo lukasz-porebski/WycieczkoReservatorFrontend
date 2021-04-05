@@ -14,7 +14,9 @@ import { PricePerSingleDayOfMealsAttribute } from './attributes/price-per-single
 import { IDisposable } from '../../../../../shared/interfaces/disposable.interface';
 import { ImagesListModel } from '../models/images-list-model';
 import { Observable } from 'rxjs/internal/Observable';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { TripApiModel } from '../models/api/trip-api-model';
+import { isDefined } from '../../../../../shared/utils/utils';
 
 export class TripPersisterEntity implements IEntity, IDisposable {
   public get otherImagesSubject(): Observable<ImagesListModel[]> {
@@ -48,68 +50,83 @@ export class TripPersisterEntity implements IEntity, IDisposable {
 
   public otherImages: ImagesListModel[];
 
-  private readonly _otherImagesSubject = new Subject<ImagesListModel[]>();
+  private readonly _otherImagesSubject: BehaviorSubject<ImagesListModel[]>;
 
-  constructor(formOfTransportFactory: FormOfTransportFactory) {
+  constructor(formOfTransportFactory: FormOfTransportFactory,
+              apiModel?: TripApiModel) {
     const translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.ATTRIBUTES.';
     const oneToTenNumbers = this._getOneToTenNumbers();
 
     this.title = new TextAttribute({
       translateRoute: translateRoute + 'TITLE.',
-      isRequired: true
+      isRequired: true,
+      defaultValue: apiModel?.title
     });
     this.description = new TextAttribute({
       translateRoute: translateRoute + 'DESCRIPTION.',
-      isRequired: true
+      isRequired: true,
+      defaultValue: apiModel?.description
     });
 
     this.participants = new MultipleSelectAttribute<number>({
       translateRoute: translateRoute + 'PARTICIPANS.',
       dataSource: oneToTenNumbers,
-      required: true
+      required: true,
+      defaultValue: apiModel?.participants
     });
     this.pricePerSingleParticipant = new NumberAttribute({
       translateRoute: translateRoute + 'PRICE_PER_SINGLE_PARTICIPANT.',
-      min: 1
+      min: 1,
+      defaultValue: apiModel?.pricePerSingleParticipant
     });
 
     this.roomSizes = new MultipleSelectAttribute<number>({
       translateRoute: translateRoute + 'ROOM_SIZES.',
       dataSource: oneToTenNumbers,
-      required: true
+      required: true,
+      defaultValue: apiModel?.roomSizes
     });
     this.pricePerSingleRoom = new NumberAttribute({
       translateRoute: translateRoute + 'PRICE_PER_SINGLE_ROOM.',
-      min: 1
+      min: 1,
+      defaultValue: apiModel?.pricePerSingleRoom
     });
 
     this.meal = new CheckboxAttribute({
       translateRoute: translateRoute + 'MEAL.',
+      defaultValue: apiModel?.meal
     });
-    this.pricePerSingleDayOfMeals = new PricePerSingleDayOfMealsAttribute(this.meal);
+    this.pricePerSingleDayOfMeals = new PricePerSingleDayOfMealsAttribute({
+      meal: this.meal,
+      defaultValue: apiModel?.pricePerSingleDayOfMeals
+    });
 
     this.departureLocation = new TextAttribute({
       translateRoute: translateRoute + 'DEPERTURE_LOCATION.',
-      isRequired: true
+      isRequired: true,
+      defaultValue: apiModel?.departureLocation
     });
     this.tripLocation = new TextAttribute({
       translateRoute: translateRoute + 'TRIP_LOCATION.',
-      isRequired: true
+      isRequired: true,
+      defaultValue: apiModel?.tripLocation
     });
 
     this.startDate = new DateAttribute({
       min: new Date().addDays(14),
-      isRequired: true
+      isRequired: true,
+      defaultValue: apiModel?.startDate
     });
     this.endDate = new DateAttribute({
-      isRequired: true
+      isRequired: true,
+      defaultValue: apiModel?.endDate
     });
 
     const formOfTransports = formOfTransportFactory.createFormOfTransports();
     this.formOfTransport = new SingleSelectAttribute<FormOfTransportModel, FormOfTransport>({
       translateRoute: translateRoute + 'FORM_OF_TRANSPORT.',
       dataSource: formOfTransports,
-      defaultValue: formOfTransports[0].value,
+      defaultValue: isDefined(apiModel) ? apiModel?.formOfTransport : formOfTransports[0].value,
       valueSelector: data => data.value,
       optionTextSelector: data => data.text,
       required: true
@@ -117,14 +134,19 @@ export class TripPersisterEntity implements IEntity, IDisposable {
 
     this.mainImageUrl = new UrlAttribute({
       translateRoute: translateRoute + 'MAIN_IMAGE_URL.',
-      required: true
+      required: true,
+      defaultValue: apiModel?.mainImageUrl
     });
 
     this.otherImageUrl = new UrlAttribute({
       translateRoute: translateRoute + 'OTHER_IMAGE_URL.',
     });
 
-    this.otherImages = [];
+    this.otherImages = isDefined(apiModel)
+      ? apiModel.otherImageUrls.map(i => new ImagesListModel(i))
+      : [];
+
+    this._otherImagesSubject = new BehaviorSubject<ImagesListModel[]>(this.otherImages);
 
     this.whole = new FormGroup({
       title: this.title.formControl,

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AdminServiceModule } from '../../../admin-service.module';
 import { TripPersisterEntity } from '../entities/trip-persister-entity';
-import { AppButtonModel } from '../../../../../shared/components/wrappers/app-button/models/app-button.model';
-import { TripPersisterMode } from '../enums/trip-persister-mode.enum';
 import { AppTableModel } from '../../../../../shared/components/wrappers/app-table/models/app-table.model';
 import { ImagesListModel } from '../models/images-list-model';
 import { AppTableColumnType } from '../../../../../shared/components/wrappers/app-table/enums/app-table-column-type.enum';
@@ -17,7 +15,6 @@ export class TripPersisterTableFactory {
       translateRout: translateRoute + 'COLUMNS',
       headerSticky: true,
       dataSource: entity.otherImagesSubject,
-      showSpinnerOnInit: false,
       columns: [
         {
           field: 'url',

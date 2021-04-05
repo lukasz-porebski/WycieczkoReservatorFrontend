@@ -6,6 +6,11 @@ import { CheckboxAttribute } from '../../../../../../../shared/attributes/checkb
 import { IDisposable } from '../../../../../../../shared/interfaces/disposable.interface';
 import { Subscription } from 'rxjs';
 
+export interface IPricePerSingleDayOfMealsAttributeConfiguration {
+  meal: CheckboxAttribute;
+  defaultValue?: number;
+}
+
 export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposable {
   public get value(): number {
     return this.formControl.value;
@@ -40,8 +45,8 @@ export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposabl
   private readonly _minPrice = 1;
   private readonly _meal: CheckboxAttribute;
 
-  constructor(meal: CheckboxAttribute) {
-    this._meal = meal;
+  constructor(configuration: IPricePerSingleDayOfMealsAttributeConfiguration) {
+    this._meal = configuration.meal;
     const sub = this._meal.formControl.valueChanges.subscribe((isMeal: boolean) => {
       if (!isMeal) {
         this.value = null;
@@ -51,7 +56,7 @@ export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposabl
 
     this._subscription.add(sub);
 
-    this.formControl = new FormControl(null, [
+    this.formControl = new FormControl(configuration.defaultValue, [
       PricePerSingleDayOfMealsValidator.requiredPrice(this._meal.formControl),
       PricePerSingleDayOfMealsValidator.greaterOrEqualToMinPrice(this._meal.formControl, this._minPrice)
     ]);

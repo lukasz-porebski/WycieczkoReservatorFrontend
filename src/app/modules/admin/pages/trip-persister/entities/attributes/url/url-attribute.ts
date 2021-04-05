@@ -6,6 +6,7 @@ import { UrlValidator } from './url-validator';
 export interface IUrlAttributeConfiguration {
   translateRoute: string;
   required?: boolean;
+  defaultValue?: string;
 }
 
 export class UrlAttribute implements IAttribute {
@@ -46,6 +47,6 @@ export class UrlAttribute implements IAttribute {
       this._validators.push(Validators.required);
     }
 
-    this.formControl = new FormControl(null, this._validators);
+    this.formControl = new FormControl(configuration.defaultValue, this._validators);
   }
 }
