@@ -8,9 +8,10 @@ import { AppTableColumnType } from '../../../../shared/components/wrappers/app-t
 import { IAppTableColumnActionConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column-action.model';
 import { AppIcon } from '../../../../shared/enums/app-icon.enum';
 import { TripListModel } from './models/trip-list-model';
-import { TripApiService } from '../../services/trip-api.service';
+import { TripsListApiService } from './services/trips-list-api.service';
 import { ITripsListActionConfirmationModalData, TripsListActionConfirmationModalComponent } from './modals/trips-list-action-confirmation-modal/trips-list-action-confirmation-modal.component';
 import { AppRouting } from '../../../../core/configurations/routing/app-routing';
+import { GuideToTripAssignerModalComponent } from './modals/guide-to-trip-assigner-modal/guide-to-trip-assigner-modal.component';
 
 @Component({
   selector: 'app-trips-list',
@@ -24,7 +25,7 @@ export class TripsListComponent implements OnInit {
 
   public tableConfig: AppTableModel<TripListModel>;
 
-  constructor(private readonly _tripApiService: TripApiService,
+  constructor(private readonly _apiService: TripsListApiService,
               private readonly _router: Router,
               private readonly _modalService: ModalService) {
   }
@@ -33,7 +34,7 @@ export class TripsListComponent implements OnInit {
     this.tableConfig = new AppTableModel<TripListModel>({
       translateRout: this.translateRoute + 'COLUMNS',
       headerSticky: true,
-      dataSource: this._tripApiService.getTrips(),
+      dataSource: this._apiService.getTrips(),
       filter: {},
       columns: this._getColumns(),
       actionsDefinition: {
@@ -65,7 +66,7 @@ export class TripsListComponent implements OnInit {
           const modalData: ITripsListActionConfirmationModalData = {
             actionText: 'ARE_YOU_SURE_YOU_WANT_TO_CANCEL_TRIP',
             trip: tripp,
-            action: trip => this._tripApiService.cancelTrip(trip.id)
+            action: trip => this._apiService.cancelTrip(trip.id)
           };
           this._openTripsListActionConfirmationModal(modalData);
         }
@@ -76,7 +77,22 @@ export class TripsListComponent implements OnInit {
         onClick: trip => {
           this._router.navigateByUrl(`${AppRouting.admin.tripEditor.absolutePath}/${trip.id}`);
         }
-      }
+      },
+      {
+        icon: AppIcon.AssignUser,
+        name: 'ASSIGNE_GUID',
+        onClick: trip => {
+          this._modalService.open(GuideToTripAssignerModalComponent, {
+            data: trip,
+            afterClosed: (result: boolean) => {
+              console.log('Action result', result);
+              if (result) {
+                this.tableComponent.refreshDataSource();
+              }
+            }
+          });
+        }
+      },
     ];
   }
 

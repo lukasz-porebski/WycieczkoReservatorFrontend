@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { TripServiceModule } from '../trip-service.module';
-import { HttpService } from '../../../core/services/http.service';
+import { TripServiceModule } from '../../../trip-service.module';
+import { HttpService } from '../../../../../core/services/http.service';
 import { Observable, of } from 'rxjs';
-import { TripListModel } from '../pages/trips-list/models/trip-list-model';
+import { TripListModel } from '../models/trip-list-model';
+import { UserListModel } from '../../../../admin/pages/users-list/models/user-list-model';
+import { UserRole } from '../../../../../core/user-identity/enums/user-role.enum';
 
 @Injectable({
   providedIn: TripServiceModule
 })
-export class TripApiService {
+export class TripsListApiService {
 
   private readonly _baseUrl = `${this._http.baseUrl}/trip/`;
 
@@ -43,5 +45,41 @@ export class TripApiService {
 
   public cancelTrip(tripId: number): Observable<boolean> {
     return of(true);
+  }
+
+  public getGuidesToTripAssigne(): Observable<UserListModel[]> {
+    const users: UserListModel[] = [];
+
+    users.push({
+      id: 1,
+      email: 'test1@email.com',
+      firstName: 'Adam',
+      lastName: 'Małysz',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+
+    users.push({
+      id: 2,
+      email: 'test2@email.com',
+      firstName: 'Ewa',
+      lastName: 'Ewart',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: false
+    });
+
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+
+    return of(users);
   }
 }

@@ -6,6 +6,7 @@ import { AppTableColumnActionModel, IAppTableColumnActionConfiguration } from '.
 import { IAppTableColumnWithIcon, AppTableColumnWithIconModel } from './app-table-column-with-icon.model';
 import { AppTablePaginatorModel, IAppTablePaginatorConfiguration } from './app-table-paginator.model';
 import { AppTableFilterModel, IAppTableFilterConfiguration } from './app-table-filter.model';
+import { AppTableRowSelectionModel, IAppTableRowSelectionConfiguration } from './app-table-row-selection-model';
 
 export interface IAppTableConfiguration<TDataSource> {
   translateRout: string;
@@ -17,6 +18,7 @@ export interface IAppTableConfiguration<TDataSource> {
   paginator?: IAppTablePaginatorConfiguration;
   filter?: IAppTableFilterConfiguration;
   markRowCondition?: (row: TDataSource) => boolean;
+  selection?: IAppTableRowSelectionConfiguration<TDataSource>;
 }
 
 export class AppTableModel<TDataSource> {
@@ -30,6 +32,7 @@ export class AppTableModel<TDataSource> {
   public readonly paginator: AppTablePaginatorModel;
   public readonly filter: AppTableFilterModel;
   public readonly markRowCondition: (row: TDataSource) => boolean;
+  public readonly selection?: AppTableRowSelectionModel<TDataSource>;
 
   constructor(configuration: IAppTableConfiguration<TDataSource>) {
     this.translateRout = configuration.translateRout;
@@ -56,6 +59,9 @@ export class AppTableModel<TDataSource> {
     this.markRowCondition = isDefined(configuration.markRowCondition)
       ? configuration.markRowCondition
       : () => false;
+    this.selection = isDefined(configuration.selection)
+      ? new AppTableRowSelectionModel<TDataSource>(configuration.selection)
+      : null;
   }
 
   public getColumnName(

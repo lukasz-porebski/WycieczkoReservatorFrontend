@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
 import { AppTableColumnActionModel } from './models/app-table-column-action.model';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-table',
@@ -29,9 +30,14 @@ export class AppTableComponent implements OnInit, OnDestroy {
     return isDefined(this.dataSource) && isNotEmpty(this.dataSource.data);
   }
 
+  public get isSelectionEnable(): boolean {
+    return isDefined(this.configuration.selection);
+  }
+
   public readonly translateRoute = 'SHARED.COMPONENTS.APP_TABLE.';
   public readonly AppTableColumnType = AppTableColumnType;
   public readonly DateFormat = DateFormat;
+  public readonly selection = new SelectionModel<any>(false, []);
 
   public dataSource: MatTableDataSource<any>;
 
@@ -94,5 +100,24 @@ export class AppTableComponent implements OnInit, OnDestroy {
   public applyBooleanOrCallableColumnValue<T>(value: boolean | ((rowValue: Readonly<T>) => boolean),
                                               data: T): boolean {
     return typeof value === 'boolean' ? value : value(data);
+  }
+
+  public onRowClick(row: any): void {
+    if (this.isSelectionEnable) {
+      this.configuration.selection.onRowSelect(row);
+      this.selection.toggle(row);
+    }
+  }
+
+  public onMouseOver(row: any): void {
+    if (this.isSelectionEnable) {
+      row.hovered = true;
+    }
+  }
+
+  public onMouseOut(row: any): void {
+    if (this.isSelectionEnable) {
+      row.hovered = false;
+    }
   }
 }

@@ -80,3 +80,11 @@
 .mark-row {
   background-color: $app-lavender;
 }
+
+.mat-row.hovered {
+  background: $app-hovered;
+}
+
+.mat-row.highlighted {
+  background: $app-highlighted;
+}

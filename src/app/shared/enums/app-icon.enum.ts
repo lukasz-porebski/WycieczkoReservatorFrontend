@@ -15,4 +15,5 @@ export enum AppIcon {
   Cancel = 'highlight_off',
   Users = 'people',
   Trips = 'hiking',
+  AssignUser = 'person_add',
 }

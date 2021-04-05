@@ -238,13 +238,25 @@
             "MIN_PRICE": "Cena od",
             "MAIN_IMAGE_URL": "Zdjęcie",
             "CANCEL_TRIP": "Anuluj",
-            "EDIT_TRIP": "Edytuj"
+            "EDIT_TRIP": "Edytuj",
+            "ASSIGNE_GUID": "Przypisz przewodnika"
           },
           "MODALS": {
             "TRIPS_LIST_ACTION": {
               "ARE_YOU_SURE_YOU_WANT_TO_CANCEL_TRIP": "Czy na pewno anulować wycieczkę",
               "YES": "Tak",
               "NO": "Nie"
+            },
+            "GUIDE_TO_TRIP_ASSIGNER": {
+              "TITLE": "Przypisanie przewodnika do wycieczki",
+              "TRIP_TITLE": "Wycieczka",
+              "SELECT_GUIDE": "Wybierz przewodnika",
+              "ASSIGNE_GUID": "Przypisz przewodnika",
+              "COLUMNS": {
+                "EMAIL": "Email",
+                "FIRST_NAME": "Imię",
+                "LAST_NAME": "Nazwisko"
+              }
             }
           }
         }

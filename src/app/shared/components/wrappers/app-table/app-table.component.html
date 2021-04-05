@@ -105,7 +105,12 @@
 
     <mat-header-row *matHeaderRowDef="configuration.columnNames; sticky: configuration.headerSticky"></mat-header-row>
     <mat-row *matRowDef="let row; columns: configuration.columnNames;"
-             [class.mark-row]="configuration.markRowCondition(row)">
+             [class.mark-row]="configuration.markRowCondition(row)"
+             [class.hovered]="row.hovered"
+             [class.highlighted]="selection.isSelected(row)"
+             (click)="onRowClick(row)"
+             (mouseover)="onMouseOver(row)"
+             (mouseout)="onMouseOut(row)">
     </mat-row>
     <mat-footer-row *matFooterRowDef="['tableIsEmptyColumn']"
                     class="empty-table"

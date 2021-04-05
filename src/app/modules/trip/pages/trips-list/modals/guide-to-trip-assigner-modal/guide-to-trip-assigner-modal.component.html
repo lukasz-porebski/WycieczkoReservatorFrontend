@@ -1,0 +1,19 @@
+<app-modal [configuration]="modalConfig">
+  <app-async-page [showSpinner]="showSpinner">
+    <p>
+      {{translateRoute + 'TRIP_TITLE' | translate}}
+      :
+      <strong>{{data.title}}</strong>
+    </p>
+
+    <p class="select-guide">{{translateRoute + 'SELECT_GUIDE' | translate}}</p>
+    <app-table [configuration]="tableConfig"></app-table>
+
+    <div class="button-container">
+      <app-button class="center-button"
+                  [disabled]="showSpinner || !isGuideSelected"
+                  [configuration]="button">
+      </app-button>
+    </div>
+  </app-async-page>
+</app-modal>
