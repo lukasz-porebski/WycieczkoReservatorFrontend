@@ -1,27 +1,16 @@
 # WycieczkoReservatorFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
+## Przygotowanie lokalnego środowiska do uruchomienia aplikacji
+1. Sklonowanie repozytorium z projektem aplikacji `https://github.com/lukasz-porebski/WycieczkoReservatorFrontend.git`
+1. Zainstalowanie [Node.js](https://nodejs.org/en/) (wersja LTS). Powinien się też przy okazji zainstalować `npm package manager`
+2. Uruchomienie terminala (np. CMD)
+3. Zainstalowanie Angulara przy pomocy komendy `npm install -g @angular/cli`
+4. Przejście terminalem do folderu z projektem aplikacji (folder `WycieczkoReservatorFrontend`)
+5. Zainstalowanie paczek wchodzących w skład projektu aplikacji przy pomocy komendy `npm-install`
 
-## Development server
+## Uruchomienie aplikacji
+Aplikację uruchamia się przy pomocy komendy `ng serve`.
+Można również skorzystać z opcji `--o`, która od razu uruchomi aplikację w oknie przeglądarki. Cała komenda ma wtedy taką postać : `ng serve --o`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+###[Więcej szczegółów znajduje się tutaj](https://angular.io/guide/setup-local)
