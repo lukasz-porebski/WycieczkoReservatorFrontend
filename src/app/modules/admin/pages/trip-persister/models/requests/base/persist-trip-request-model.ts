@@ -14,6 +14,7 @@ export abstract class PersistTripRequestModel {
   public startDate: Date;
   public endDate: Date;
   public formOfTransport: FormOfTransport;
+  public guideId: number;
   public mainImageUrl: string;
   public otherImageUrls: string[];
 }

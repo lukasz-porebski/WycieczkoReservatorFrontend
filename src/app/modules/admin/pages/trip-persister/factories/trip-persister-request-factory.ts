@@ -36,6 +36,7 @@ export class TripPersisterRequestFactory {
     request.startDate = entity.startDate.value;
     request.endDate = entity.endDate.value;
     request.formOfTransport = entity.formOfTransport.value;
+    request.guideId = entity.guideId.value;
     request.mainImageUrl = entity.mainImageUrl.value;
     request.otherImageUrls = entity.otherImages.map(i => i.url);
   }

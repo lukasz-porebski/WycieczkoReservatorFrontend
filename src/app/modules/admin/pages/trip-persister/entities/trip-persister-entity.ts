@@ -45,6 +45,8 @@ export class TripPersisterEntity implements IEntity, IDisposable {
 
   public readonly formOfTransport: SingleSelectAttribute<ValueTextPairModel<FormOfTransport>, FormOfTransport>;
 
+  public readonly guideId: NumberAttribute;
+
   public readonly mainImageUrl: UrlAttribute;
   public readonly otherImageUrl: UrlAttribute;
 
@@ -136,6 +138,12 @@ export class TripPersisterEntity implements IEntity, IDisposable {
       required: true
     });
 
+    this.guideId = new NumberAttribute({
+      defaultValue: apiModel?.guideId,
+      required: true,
+      translateRoute: ''
+    });
+
     this.mainImageUrl = new UrlAttribute({
       translateRoute: translateRoute + 'MAIN_IMAGE_URL.',
       required: true,
@@ -162,7 +170,9 @@ export class TripPersisterEntity implements IEntity, IDisposable {
       startDate: this.startDate.formControl,
       endDate: this.endDate.formControl,
       meal: this.meal.formControl,
-      formOfTransport: this.formOfTransport.formControl
+      formOfTransport: this.formOfTransport.formControl,
+      mainImageUrl: this.mainImageUrl.formControl,
+      guidId: this.guideId.formControl
     });
   }
 

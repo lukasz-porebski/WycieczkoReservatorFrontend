@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AppTableModel } from './models/app-table.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   templateUrl: './app-table.component.html',
   styleUrls: [ './app-table.component.scss' ]
 })
-export class AppTableComponent implements OnInit, OnDestroy {
+export class AppTableComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) matPaginator: MatPaginator;
   @ViewChild(MatSort) matSort: MatSort;
 
@@ -48,11 +48,11 @@ export class AppTableComponent implements OnInit, OnDestroy {
   constructor(private readonly _translateService: TranslateService) {
   }
 
-  ngOnInit(): void {
-    this.refreshDataSource();
+  public ngAfterViewInit(): void {
+    Promise.resolve().then(() => this.refreshDataSource());
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
 

@@ -40,11 +40,13 @@ export class GuideToTripAssignerModalComponent implements OnInit {
 
     this.tableConfig = new AppTableModel<UserListModel>({
       translateRout: this.translateRoute + 'COLUMNS',
-      headerSticky: true,
       selection: {
         onRowSelect: row => this.selectedGuide = row
       },
-      dataSource: this._apiService.getGuidesToTripAssigne(),
+      dataSource: this._apiService.getGuidesToTripAssigne(this.data.id),
+      paginator: {
+        defaultPageSize: 5
+      },
       columns: [
         {
           field: 'email',

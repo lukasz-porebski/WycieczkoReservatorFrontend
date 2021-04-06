@@ -6,6 +6,8 @@ import { TripApiModel } from '../models/api/trip-api-model';
 import { FormOfTransport } from '../../../../_domain-common/enums/form-of-transport.enum';
 import { CreateTripRequestModel } from '../models/requests/create-trip-request-model';
 import { EditTripRequestModel } from '../models/requests/edit-trip-request-model';
+import { UserListModel } from '../../users-list/models/user-list-model';
+import { UserRole } from '../../../../../core/user-identity/enums/user-role.enum';
 
 @Injectable({
   providedIn: AdminServiceModule
@@ -32,6 +34,7 @@ export class TripPersisterApiService {
       departureLocation: 'Katowice - Spodek',
       tripLocation: 'Kazimierz Dolny',
       formOfTransport: FormOfTransport.Plane,
+      guideId: 2,
       mainImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Widok_Kazimierz_Dolny.jpg',
       otherImageUrls: [
         'https://w10inspiracjidookolaswiata.pl/wp-content/uploads/2020/07/Kazimierz-Dolny-najwieksze-atrakcje.jpg',
@@ -50,5 +53,266 @@ export class TripPersisterApiService {
 
   public editTrip(request: EditTripRequestModel): Observable<boolean> {
     return of(true);
+  }
+
+  public getGuidesToTripAssigne(): Observable<UserListModel[]> {
+    const users: UserListModel[] = [];
+
+    users.push({
+      id: 1,
+      email: 'test1@email.com',
+      firstName: 'Adam',
+      lastName: 'Małysz',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+
+    users.push({
+      id: 2,
+      email: 'test2@email.com',
+      firstName: 'Ewa',
+      lastName: 'Ewart',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: false
+    });
+
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+    users.push({
+      id: 3,
+      email: 'test3@email.com',
+      firstName: 'Krystyna',
+      lastName: 'Zbieg',
+      role: UserRole.Guide,
+      isBlocked: false,
+      isForcedPasswordChange: true
+    });
+
+    return of(users);
   }
 }

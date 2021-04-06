@@ -15,6 +15,7 @@ export class TripApiModel {
   public startDate: Date;
   public endDate: Date;
   public formOfTransport: FormOfTransport;
+  public guideId: number;
   public mainImageUrl: string;
   public otherImageUrls: string[];
 
@@ -33,6 +34,7 @@ export class TripApiModel {
     this.startDate = new Date(response.startDate);
     this.endDate = new Date(response.endDate);
     this.formOfTransport = response.formOfTransport;
+    this.guideId = response.guideId;
     this.mainImageUrl = response.mainImageUrl;
     this.otherImageUrls = [ ...response.otherImageUrls ];
   }

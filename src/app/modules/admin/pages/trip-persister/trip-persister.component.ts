@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TripPersisterEntityFactory } from './factories/trip-persister-entity-factory';
 import { TripPersisterRequestFactory } from './factories/trip-persister-request-factory';
 import { TripPersisterApiService } from './services/trip-persister-api.service';
+import { UserListModel } from '../users-list/models/user-list-model';
 
 @Component({
   selector: 'app-trip-persister',
@@ -63,6 +64,8 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
   public tripLocationInput: AppInputModel;
 
   public formOfTransportSelect: AppSelectModel;
+
+  public guidesTableConfig: AppTableModel<UserListModel>;
 
   public mainImageUrlInput: AppInputModel;
   public otherImageUrlInput: AppInputModel;
@@ -120,6 +123,8 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
     this.tripLocationInput = this._inputFactory.createTripLocation(entity);
 
     this.formOfTransportSelect = this._selectFactory.createFormOfTransport(entity);
+
+    this.guidesTableConfig = this._tableFactory.createGuides(entity, this.translateRoute);
 
     this.mainImageUrlInput = this._inputFactory.createMainImageUrl(entity);
     this.otherImageUrlInput = this._inputFactory.createOtherImageUrl(entity);

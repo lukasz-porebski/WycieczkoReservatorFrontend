@@ -69,6 +69,9 @@
         </div>
       </div>
 
+      <p class="select-guide">{{translateRoute + 'SELECT_GUIDE' | translate}}</p>
+      <app-table [configuration]="guidesTableConfig"></app-table>
+
       <div class="row">
         <div class="col-lg-10 col-md-9 col-sm-12">
           <app-input [configuration]="mainImageUrlInput"></app-input>

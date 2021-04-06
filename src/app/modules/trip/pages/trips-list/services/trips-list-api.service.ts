@@ -47,7 +47,7 @@ export class TripsListApiService {
     return of(true);
   }
 
-  public getGuidesToTripAssigne(): Observable<UserListModel[]> {
+  public getGuidesToTripAssigne(tripId: number): Observable<UserListModel[]> {
     const users: UserListModel[] = [];
 
     users.push({

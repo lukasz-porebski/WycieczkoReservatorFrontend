@@ -171,8 +171,14 @@
           "CREATE_TRIP": "Utwórz wycieczkę",
           "EDIT_TRIP": "Edytuj wycieczkę",
           "ADD_IMAGE": "Dodaj zdjęcie",
-          "COLUMNS": {
+          "OTHER_IMAGES_COLUMNS": {
             "URL": "Inne zdjęcja"
+          },
+          "SELECT_GUIDE": "Wybierz przewodnika",
+          "GUIDES_COLUMNS": {
+            "EMAIL": "Email",
+            "FIRST_NAME": "Imię",
+            "LAST_NAME": "Nazwisko"
           },
           "ATTRIBUTES": {
             "TITLE": {

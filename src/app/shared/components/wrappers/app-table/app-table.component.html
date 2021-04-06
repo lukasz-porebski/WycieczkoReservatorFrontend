@@ -3,8 +3,8 @@
   <input matInput (keyup)="applyFilter($event)" [placeholder]="configuration.filter.placeholder">
 </mat-form-field>
 
-<div class="table-margin">
-  <mat-table class="mat-elevation-z8"
+<div class="table-margin mat-elevation-z8">
+  <mat-table
              [class.disable-table]="shouldShowSpinner"
              [dataSource]="dataSource"
              matSort>
