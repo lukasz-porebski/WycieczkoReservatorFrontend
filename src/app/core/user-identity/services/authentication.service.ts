@@ -9,6 +9,7 @@ import { environment } from '../../../../environments/environment';
 import { AccessTokenApiModel } from '../models/apis/access-token-api.model';
 import { TokenModel } from '../models/token.model';
 import { AppRouting } from '../../configurations/routing/app-routing';
+import { LogInRequestModel } from '../models/requests/log-in-request-model';
 
 @Injectable({
   providedIn: 'root',
@@ -42,8 +43,9 @@ export class AuthenticationService {
     return this._http.get<string>(`${this._baseUrl}generate-url-for-code`, httpOptions);
   }
 
-  public logIn(login: string, password: string): Observable<TokenModel> {
-    return this._generateAccessToken(null)
+  public logIn(email: string, password: string): Observable<TokenModel> {
+    const request = new LogInRequestModel(email, password);
+    return this._generateAccessToken(request)
       .pipe(map(res => {
         const token = new TokenModel(res.accessToken, res.expiresIn);
         this._setToken(token);
@@ -56,12 +58,12 @@ export class AuthenticationService {
     return of(null);
   }
 
-  private _generateAccessToken(refreshToken: string): Observable<AccessTokenApiModel> {
+  private _generateAccessToken(request: LogInRequestModel): Observable<AccessTokenApiModel> {
     const httpOptions = new HttpOptions();
-    httpOptions.params = httpOptions.params.append('refreshToken', refreshToken);
+    // httpOptions.params = httpOptions.params.append('refreshToken', refreshToken);
     httpOptions.responseType = 'text' as 'json';
 
-    return this._http.post<AccessTokenApiModel>(`${this._baseUrl}generate-access-token`, null, httpOptions)
+    return this._http.post<AccessTokenApiModel>(`${this._baseUrl}generate-access-token`, request, httpOptions)
       .pipe(map(value => new AccessTokenApiModel(value)));
   }
 

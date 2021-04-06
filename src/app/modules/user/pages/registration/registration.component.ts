@@ -8,6 +8,7 @@ import { UserApiService } from '../../services/user-api.service';
 import { AppInputHintAlign } from '../../../../shared/components/wrappers/app-input/enums/app-input-hint-align.enum';
 import { RegistrationEntity } from './entities/registration-entity';
 import { PasswordHelpQuestionsFactory } from './factories/password-help-questions-factory';
+import { RegistrationRequestFactory } from './factories/registration-request-factory';
 
 @Component({
   selector: 'app-registration',
@@ -36,7 +37,8 @@ export class RegistrationComponent implements OnInit {
   public showSpinner = false;
 
   constructor(private readonly _userApiService: UserApiService,
-              private readonly _passwordHelpQuestionsFactory: PasswordHelpQuestionsFactory) {
+              private readonly _passwordHelpQuestionsFactory: PasswordHelpQuestionsFactory,
+              private readonly _requestFactory: RegistrationRequestFactory) {
   }
 
   public ngOnInit(): void {
@@ -154,6 +156,7 @@ export class RegistrationComponent implements OnInit {
   public onSave(): void {
     this.entity.whole.disable();
     this.showSpinner = true;
+    const request = this._requestFactory.createRegister(this.entity);
 
     // this._userApiService.register()
     //   .pipe(

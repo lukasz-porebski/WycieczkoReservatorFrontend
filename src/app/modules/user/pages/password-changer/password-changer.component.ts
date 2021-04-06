@@ -7,6 +7,7 @@ import { AppInputBasicModel } from '../../../../shared/components/wrappers/app-i
 import { AppInputBasicType } from '../../../../shared/components/wrappers/app-input/enums/app-input-basic-type.enum';
 import { AppInputHintAlign } from '../../../../shared/components/wrappers/app-input/enums/app-input-hint-align.enum';
 import { PasswordChangerEntity } from './entities/password-changer-entity';
+import { ChangePasswordRequestModel } from './models/requests/change-password-request-model';
 
 @Component({
   selector: 'app-password-changer',
@@ -96,6 +97,8 @@ export class PasswordChangerComponent implements OnInit {
 
   public onSave(): void {
     this.entity.whole.disable();
+    const request = new ChangePasswordRequestModel(
+      this.entity.email.value, this.entity.oldPassword.value, this.entity.newPassword.value);
 
     // this._userApiService.register()
     //   .pipe(

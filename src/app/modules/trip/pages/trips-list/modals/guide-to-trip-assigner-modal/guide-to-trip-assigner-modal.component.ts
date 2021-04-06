@@ -8,6 +8,7 @@ import { isDefined } from '../../../../../../shared/utils/utils';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TripListModel } from '../../models/trip-list-model';
+import { AssigneGuideToTripRequestModel } from './models/requests/assigne-guide-to-trip-request-model';
 
 @Component({
   selector: 'app-guide-to-trip-assigner-modal',
@@ -16,7 +17,7 @@ import { TripListModel } from '../../models/trip-list-model';
 })
 export class GuideToTripAssignerModalComponent implements OnInit {
   public get isGuideSelected(): boolean {
-    return isDefined(this.selectedGuid);
+    return isDefined(this.selectedGuide);
   }
 
   public readonly translateRoute = 'MODULES.TRIP.PAGES.TRIPS_LIST.MODALS.GUIDE_TO_TRIP_ASSIGNER.';
@@ -24,7 +25,7 @@ export class GuideToTripAssignerModalComponent implements OnInit {
   public showSpinner: boolean;
   public modalConfig: AppModalModel;
   public tableConfig: AppTableModel<UserListModel>;
-  public selectedGuid: UserListModel;
+  public selectedGuide: UserListModel;
   public button: AppButtonModel;
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: TripListModel,
@@ -41,7 +42,7 @@ export class GuideToTripAssignerModalComponent implements OnInit {
       translateRout: this.translateRoute + 'COLUMNS',
       headerSticky: true,
       selection: {
-        onRowSelect: row => this.selectedGuid = row
+        onRowSelect: row => this.selectedGuide = row
       },
       dataSource: this._apiService.getGuidesToTripAssigne(),
       columns: [
@@ -61,7 +62,10 @@ export class GuideToTripAssignerModalComponent implements OnInit {
     });
 
     this.button = new AppButtonModel({
-      onClick: () => this._matDialogRef.close(true),
+      onClick: () => {
+        const request = new AssigneGuideToTripRequestModel(this.data.id, this.selectedGuide.id);
+        this._matDialogRef.close(true);
+      },
       label: {
         text: this.translateRoute + 'ASSIGNE_GUID',
       },
