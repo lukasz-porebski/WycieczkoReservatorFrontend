@@ -56,6 +56,9 @@
         <ng-template [ngSwitchCase]="AppTableColumnType.Price">
           {{getPrice(column.getData(data))}}
         </ng-template>
+        <ng-template [ngSwitchCase]="AppTableColumnType.Enum">
+          {{column.getEnumText(column.getData(data))}}
+        </ng-template>
       </mat-cell>
     </ng-container>
 

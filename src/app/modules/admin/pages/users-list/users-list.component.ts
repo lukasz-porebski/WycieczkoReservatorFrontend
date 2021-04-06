@@ -12,6 +12,7 @@ import { IUserListActionConfirmationModalData, UserListActionConfirmationModalCo
 import { IAppTableColumnConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column.model';
 import { IAppTableColumnActionConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column-action.model';
 import { UserRole } from '../../../../core/user-identity/enums/user-role.enum';
+import { UserRoleFactory } from '../../../../core/user-identity/factories/user-role-factory';
 
 @Component({
   selector: 'app-users-list',
@@ -27,7 +28,8 @@ export class UsersListComponent implements OnInit {
 
   constructor(private readonly _adminApiService: UsersListApiService,
               private readonly _router: Router,
-              private readonly _modalService: ModalService) {
+              private readonly _modalService: ModalService,
+              private readonly _userRoleFactory: UserRoleFactory) {
   }
 
   public ngOnInit(): void {
@@ -60,7 +62,8 @@ export class UsersListComponent implements OnInit {
       },
       {
         field: 'role',
-        type: AppTableColumnType.Number
+        type: AppTableColumnType.Enum,
+        enumDefinition: this._userRoleFactory.createUserRoles()
       },
       {
         field: 'isBlocked',

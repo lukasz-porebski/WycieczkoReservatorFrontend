@@ -7,5 +7,6 @@ export enum AppTableColumnType {
   Percent,
   Hours,
   Minutes,
-  Price
+  Price,
+  Enum
 }

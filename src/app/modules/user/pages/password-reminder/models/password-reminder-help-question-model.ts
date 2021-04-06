@@ -1,7 +1,8 @@
-import { PasswordHelpQuestionModel } from '../../registration/models/password-help-question-model';
+import { ValueTextPairModel } from '../../../../../shared/models/value-text-pair-model';
+import { PasswordHelpQuestion } from '../../registration/enums/password-help-question.enum';
 
 export class PasswordReminderHelpQuestionModel {
   constructor(public readonly email: string,
-              public readonly question: PasswordHelpQuestionModel) {
+              public readonly question: ValueTextPairModel<PasswordHelpQuestion>) {
   }
 }
