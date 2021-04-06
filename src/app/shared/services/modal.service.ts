@@ -26,7 +26,6 @@ export class ModalService implements OnDestroy {
   public open<T>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
                  configuration?: IModalConfiguration): void {
 
-
     const dialogRef = this._dialog.open(componentOrTemplateRef, this._getConfig(configuration));
 
     if (isDefined(configuration?.afterClosed)) {

@@ -8,7 +8,6 @@ import { AppRouting } from '../../configurations/routing/app-routing';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   private readonly _anonymousUrls: string[] = [
-    AppRouting.home.root,
     AppRouting.user.root,
   ];
 

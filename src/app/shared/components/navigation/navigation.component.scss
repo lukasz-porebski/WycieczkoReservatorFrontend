@@ -43,29 +43,13 @@ mat-expansion-panel {
   padding-left: 10px;
 }
 
-.active-menu-element {
-  color: $app-secondary-dark;
-}
-
 .active-final-menu-element {
   color: $app-secondary-light !important;
 }
 
-.active-first-level {
+.active-menu-option {
   mat-expansion-panel-header {
     background: rgba(0, 0, 0, .02) !important;
-  }
-}
-
-.active-second-level {
-  mat-expansion-panel-header {
-    background: rgba(0, 0, 0, .06) !important;
-  }
-}
-
-.active-third-level {
-  mat-expansion-panel-header {
-    background: rgba(0, 0, 0, .1) !important;
   }
 }
 

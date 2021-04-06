@@ -1,15 +1,14 @@
 import { IEntity } from '../../../../../shared/interfaces/entity.interface';
 import { FormGroup } from '@angular/forms';
 import { TextAttribute } from '../../../../../shared/attributes/text-attribute';
-import { FormOfTransport } from '../enums/form-of-transport.enum';
+import { FormOfTransport } from '../../../../_domain-common/enums/form-of-transport.enum';
 import { UrlAttribute } from './attributes/url/url-attribute';
 import { DateAttribute } from '../../../../../shared/attributes/date-attribute';
 import { CheckboxAttribute } from '../../../../../shared/attributes/checkbox-attribute';
 import { NumberAttribute } from '../../../../../shared/attributes/number-attribute';
 import { MultipleSelectAttribute } from '../../../../../shared/attributes/select/multiple-select-attribute';
 import { SingleSelectAttribute } from '../../../../../shared/attributes/select/single-select-attribute';
-import { FormOfTransportFactory } from '../factories/form-of-transport-factory';
-import { FormOfTransportModel } from '../models/form-of-transport-model';
+import { FormOfTransportFactory } from '../../../../_domain-common/factories/form-of-transport-factory';
 import { PricePerSingleDayOfMealsAttribute } from './attributes/price-per-single-day-of-meals/price-per-single-day-of-meals-attribute';
 import { IDisposable } from '../../../../../shared/interfaces/disposable.interface';
 import { ImagesListModel } from '../models/images-list-model';
@@ -17,6 +16,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs';
 import { TripApiModel } from '../models/api/trip-api-model';
 import { isDefined } from '../../../../../shared/utils/utils';
+import { ValueTextPairModel } from '../../../../../shared/models/value-text-pair-model';
 
 export class TripPersisterEntity implements IEntity, IDisposable {
   public get otherImagesSubject(): Observable<ImagesListModel[]> {
@@ -43,7 +43,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
   public readonly startDate: DateAttribute;
   public readonly endDate: DateAttribute;
 
-  public readonly formOfTransport: SingleSelectAttribute<FormOfTransportModel, FormOfTransport>;
+  public readonly formOfTransport: SingleSelectAttribute<ValueTextPairModel<FormOfTransport>, FormOfTransport>;
 
   public readonly mainImageUrl: UrlAttribute;
   public readonly otherImageUrl: UrlAttribute;
@@ -127,7 +127,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
     });
 
     const formOfTransports = formOfTransportFactory.createFormOfTransports();
-    this.formOfTransport = new SingleSelectAttribute<FormOfTransportModel, FormOfTransport>({
+    this.formOfTransport = new SingleSelectAttribute<ValueTextPairModel<FormOfTransport>, FormOfTransport>({
       translateRoute: translateRoute + 'FORM_OF_TRANSPORT.',
       dataSource: formOfTransports,
       defaultValue: isDefined(apiModel) ? apiModel?.formOfTransport : formOfTransports[0].value,

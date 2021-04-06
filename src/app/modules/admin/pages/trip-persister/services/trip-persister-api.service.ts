@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpService } from '../../../../../core/services/http.service';
 import { AdminServiceModule } from '../../../admin-service.module';
 import { TripApiModel } from '../models/api/trip-api-model';
-import { FormOfTransport } from '../enums/form-of-transport.enum';
+import { FormOfTransport } from '../../../../_domain-common/enums/form-of-transport.enum';
 import { CreateTripRequestModel } from '../models/requests/create-trip-request-model';
 import { EditTripRequestModel } from '../models/requests/edit-trip-request-model';
 

@@ -74,7 +74,7 @@ export class LogInComponent implements OnInit {
     this._authenticationService
       .logIn(this.entity.email.value, this.entity.password.value)
       .subscribe(
-        () => this._router.navigate([AppRouting.home.root]),
+        () => this._router.navigate([AppRouting.trip.root]),
         (error: string[]) => {
           this.errors = replaceIfNotDefined(error, [])
             .map(e => ErrorTranslator.getErrorTranslateRoute(e));

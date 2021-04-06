@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { LogInComponent } from './pages/log-in/log-in.component';
-import { SharedModule } from '../../shared/shared.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserRoutingModule } from './user-routing.module';
 import { UserApiServiceModule } from './user-api-service.module';
@@ -10,13 +9,14 @@ import { PasswordReminderComponent } from './pages/password-reminder/password-re
 import { PasswordReminderUserRecognitionComponent } from './pages/password-reminder/components/password-reminder-user-recognition/password-reminder-user-recognition.component';
 import { PasswordReminderUserAnswerComponent } from './pages/password-reminder/components/password-reminder-user-answer/password-reminder-user-answer.component';
 import { PasswordChangerComponent } from './pages/password-changer/password-changer.component';
+import { DomainCommonModule } from '../_domain-common/domain-common.module';
 
 @NgModule({
   imports: [
     UserRoutingModule,
     MatProgressSpinnerModule,
     UserApiServiceModule,
-    SharedModule
+    DomainCommonModule
   ],
   declarations: [
     UserComponent,

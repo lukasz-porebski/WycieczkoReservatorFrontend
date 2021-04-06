@@ -12,58 +12,22 @@
       </div>
 
       <mat-accordion displayMode="flat" multi>
-        <div *ngFor="let firstLevel of menu"
-             class="first-level"
-             [class.active-first-level]="firstLevel.isActive">
+        <div *ngFor="let menuOption of menu"
+             class="menu-option"
+             [class.active-menu-option]="menuOption.isActive">
           <mat-expansion-panel
-            [hideToggle]="!firstLevel.isSecondLevel()"
-            [expanded]="firstLevel.isActive">
+            [hideToggle]="true"
+            [expanded]="menuOption.isActive">
             <mat-expansion-panel-header
-              #fLevel
-              (click)="onClickNotLastLevel(fLevel, firstLevel)"
+              #moHeader
+              (click)="onMenuOptionClick(moHeader, menuOption)"
               [expandedHeight]="expandedHeight">
-              <mat-panel-title [class.active-menu-element]="firstLevel.isActive"
-                               [class.active-final-menu-element]="firstLevel.isFianlActive">
-                <mat-icon *ngIf="firstLevel.icon">{{firstLevel.icon}}</mat-icon>
-                <span class="menu-title menu-title-first">{{firstLevel.translateRoute | translate}}</span>
+              <mat-panel-title [class.active-menu-element]="menuOption.isActive"
+                               [class.active-final-menu-element]="menuOption.isFianlActive">
+                <mat-icon *ngIf="menuOption.icon">{{menuOption.icon}}</mat-icon>
+                <span class="menu-title menu-title-first">{{menuOption.translateRoute | translate}}</span>
               </mat-panel-title>
             </mat-expansion-panel-header>
-
-            <div *ngFor="let secondLevel of firstLevel.nextLevels"
-                 [class.active-menu-element]="secondLevel.isActive"
-                 [class.active-second-level]="secondLevel.isActive">
-              <mat-expansion-panel
-                [hideToggle]="!secondLevel.isThirdLevel()"
-                [expanded]="secondLevel.isActive">
-                <mat-expansion-panel-header
-                  #sLevel
-                  (click)="onClickNotLastLevel(sLevel, secondLevel)"
-                  [expandedHeight]="expandedHeight">
-                  <mat-panel-title [class.active-menu-element]="secondLevel.isActive"
-                                   [class.active-final-menu-element]="secondLevel.isFianlActive">
-                    <mat-icon *ngIf="secondLevel.icon">{{secondLevel.icon}}</mat-icon>
-                    <span class="menu-title">{{secondLevel.translateRoute | translate}}</span>
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <div *ngFor="let thirdLevel of secondLevel.nextLevels"
-                     [class.active-menu-element]="thirdLevel.isActive"
-                     [class.active-third-level]="thirdLevel.isActive">
-                  <mat-expansion-panel [hideToggle]="true">
-                    <mat-expansion-panel-header
-                      #tLevel
-                      (click)="onClickLastLevel(tLevel, thirdLevel)"
-                      [expandedHeight]="expandedHeight">
-                      <mat-panel-title [class.active-menu-element]="thirdLevel.isActive"
-                                       [class.active-final-menu-element]="thirdLevel.isFianlActive">
-                        <mat-icon *ngIf="thirdLevel.icon">{{thirdLevel.icon}}</mat-icon>
-                        <span class="menu-title">{{thirdLevel.translateRoute | translate}}</span>
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                  </mat-expansion-panel>
-                </div>
-              </mat-expansion-panel>
-            </div>
           </mat-expansion-panel>
         </div>
       </mat-accordion>

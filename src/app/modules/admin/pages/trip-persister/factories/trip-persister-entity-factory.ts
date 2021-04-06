@@ -5,7 +5,7 @@ import { AppTableModel } from '../../../../../shared/components/wrappers/app-tab
 import { ImagesListModel } from '../models/images-list-model';
 import { AppTableColumnType } from '../../../../../shared/components/wrappers/app-table/enums/app-table-column-type.enum';
 import { AppIcon } from '../../../../../shared/enums/app-icon.enum';
-import { FormOfTransportFactory } from './form-of-transport-factory';
+import { FormOfTransportFactory } from '../../../../_domain-common/factories/form-of-transport-factory';
 import { TripApiModel } from '../models/api/trip-api-model';
 
 @Injectable({

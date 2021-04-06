@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/trip/trip.module').then(mod => mod.TripModule)
   },
   // {
-  //   path: AppRouting.home.root,
+  //   path: AppRouting.trip.root,
   //   component: NavigationComponent,
   //   canActivate: [ AuthenticationGuard ],
   //   loadChildren: () => import('./modules/xxx/xxx.module').then(mod => mod.PlaylistModule)

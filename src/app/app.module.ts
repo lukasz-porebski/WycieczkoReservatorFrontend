@@ -8,9 +8,9 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { SharedModule } from './shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { UserIdentityComponent } from './core/user-identity/component/user-identity.component';
 import { TokenInterceptor } from './core/user-identity/interceptors/token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { DomainCommonModule } from './modules/_domain-common/domain-common.module';
 
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -19,8 +19,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserIdentityComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +33,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [ HttpClient ],
       },
     }),
-    SharedModule
+    SharedModule,
+    DomainCommonModule
   ],
   providers: [
     // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

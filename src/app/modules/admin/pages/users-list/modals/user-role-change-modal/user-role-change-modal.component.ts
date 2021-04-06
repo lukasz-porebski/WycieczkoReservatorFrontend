@@ -2,11 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserListModel } from '../../models/user-list-model';
 import { UserRoleFactory } from '../../../../../../core/user-identity/factories/user-role-factory';
-import { UserRoleModel } from '../../../../../../core/user-identity/models/user-role-model';
 import { UsersListApiService } from '../../services/users-list-api.service';
 import { ChangeUserRoleRequestModel } from './models/requests/change-user-role-request-model';
 import { AppModalModel } from '../../../../../../shared/components/wrappers/app-modal/models/app-modal.model';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
+import { ValueTextPairModel } from '../../../../../../shared/models/value-text-pair-model';
+import { UserRole } from '../../../../../../core/user-identity/enums/user-role.enum';
 
 @Component({
   selector: 'app-user-role-change-modal',
@@ -20,8 +21,8 @@ export class UserRoleChangeModalComponent implements OnInit {
 
   public readonly translateRoute = 'MODULES.ADMIN.PAGES.USERS_LIST.MODALS.USER_ROLE_CHANGE.';
 
-  public selectedRole: UserRoleModel;
-  public otherRoles: UserRoleModel[] = [];
+  public selectedRole: ValueTextPairModel<UserRole>;
+  public otherRoles: ValueTextPairModel<UserRole>[] = [];
   public modalConfig: AppModalModel;
   public button: AppButtonModel;
 

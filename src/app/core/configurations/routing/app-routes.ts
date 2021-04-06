@@ -8,9 +8,6 @@ export const AppRoutes = {
       passwordChanger: 'password-changer'
     }
   },
-  home: {
-    path: 'home',
-  },
   admin: {
     path: 'admin',
     children: {

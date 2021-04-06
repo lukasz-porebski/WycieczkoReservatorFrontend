@@ -1,15 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MenuFirstLevelModel } from './models/menu-first-level.model';
-import { MenuSecondLevelModel } from './models/menu-second-level.model';
 import { MatExpansionPanelHeader } from '@angular/material/expansion';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { isEmpty } from '../../utils/utils';
-import { MenuThirdLevelModel } from './models/menu-third-level.model';
 import { AppIcon } from '../../enums/app-icon.enum';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../core/user-identity/services/authentication.service';
-import { HomeRouting } from '../../../core/configurations/routing/children/home-routing';
 import { AppRouting } from '../../../core/configurations/routing/app-routing';
 
 @Component({
@@ -51,14 +48,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._subscription.unsubscribe();
   }
 
-  public onClickNotLastLevel(tLevel: MatExpansionPanelHeader, menuLevel: MenuFirstLevelModel | MenuSecondLevelModel): void {
-    if (isEmpty(menuLevel.nextLevels)) {
-      tLevel._toggle();
-      this._router.navigateByUrl(menuLevel.navigateUrl);
-    }
-  }
-
-  public onClickLastLevel(tLevel: MatExpansionPanelHeader, menuLevel: MenuThirdLevelModel): void {
+  public onMenuOptionClick(tLevel: MatExpansionPanelHeader, menuLevel: MenuFirstLevelModel): void {
     tLevel._toggle();
     this._router.navigateByUrl(menuLevel.navigateUrl);
   }
@@ -74,7 +64,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
       appTranslateRoute + 'MENU_NAME',
       AppRouting.trip.tripsList.absolutePath,
       AppIcon.Trips,
-      [],
     );
   }
 
@@ -85,7 +74,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
       appTranslateRoute + 'MENU_NAME',
       AppRouting.admin.tripCreator.absolutePath,
       AppIcon.Add,
-      [],
     );
   }
 
@@ -96,7 +84,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
       appTranslateRoute + 'MENU_NAME',
       AppRouting.admin.usersList.absolutePath,
       AppIcon.Users,
-      [],
     );
   }
 
@@ -104,17 +91,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
     if (isEmpty(url)) {
       return;
     }
-
-    this.menu.forEach(m => {
-      m.isActive = url.contains(m.navigateUrl);
-
-      m.nextLevels.forEach(nl => {
-        nl.isActive = url.contains(nl.navigateUrl);
-
-        nl.nextLevels.forEach(ll => {
-          ll.isActive = url.contains(ll.navigateUrl);
-        });
-      });
-    });
+    this.menu.forEach(m => m.isActive = url.contains(m.navigateUrl));
   }
 }

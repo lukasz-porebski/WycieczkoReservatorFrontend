@@ -20,7 +20,7 @@ export class NotAuthenticatedGuard implements CanActivate {
       return true;
     }
 
-    this._router.navigateByUrl(AppRouting.home.root);
+    this._router.navigateByUrl(AppRouting.trip.root);
     return false;
   }
 

@@ -1,4 +1,4 @@
-import { FormOfTransport } from '../../../enums/form-of-transport.enum';
+import { FormOfTransport } from '../../../../../../_domain-common/enums/form-of-transport.enum';
 
 export abstract class PersistTripRequestModel {
   public title: string;
