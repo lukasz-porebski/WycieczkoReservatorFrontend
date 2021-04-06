@@ -13,4 +13,4 @@ Aplikację uruchamia się przy pomocy komendy `ng serve`.
 Można również skorzystać z opcji `--o`, która od razu uruchomi aplikację w oknie przeglądarki. Cała komenda ma wtedy taką postać : `ng serve --o`
 
 
-###[Więcej szczegółów znajduje się tutaj](https://angular.io/guide/setup-local)
+[Więcej szczegółów znajduje się tutaj](https://angular.io/guide/setup-local)
