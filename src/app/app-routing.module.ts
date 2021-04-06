@@ -4,7 +4,7 @@ import { AppRouting } from './core/configurations/routing/app-routing';
 import { NotAuthenticatedGuard } from './core/user-identity/guards/not-authenticated.guard';
 import { UserComponent } from './modules/user/user.component';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
-import { TripsListComponent } from './modules/trip/pages/trips-list/trips-list.component';
+import { AuthenticationGuard } from './core/user-identity/guards/authentication.guard';
 
 
 const routes: Routes = [
@@ -16,22 +16,16 @@ const routes: Routes = [
   },
   {
     path: AppRouting.admin.root,
-    // canActivate: [ NotAuthenticatedGuard ],
+    canActivate: [ AuthenticationGuard ],
     component: NavigationComponent,
     loadChildren: () => import('./modules/admin/admin.module').then(mod => mod.AdminModule)
   },
   {
     path: AppRouting.trip.root,
-    // canActivate: [ NotAuthenticatedGuard ],
+    canActivate: [ AuthenticationGuard ],
     component: NavigationComponent,
     loadChildren: () => import('./modules/trip/trip.module').then(mod => mod.TripModule)
   },
-  // {
-  //   path: AppRouting.trip.root,
-  //   component: NavigationComponent,
-  //   canActivate: [ AuthenticationGuard ],
-  //   loadChildren: () => import('./modules/xxx/xxx.module').then(mod => mod.PlaylistModule)
-  // },
   {
     path: '',
     pathMatch: 'full',

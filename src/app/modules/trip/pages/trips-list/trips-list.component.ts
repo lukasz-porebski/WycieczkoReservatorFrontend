@@ -12,6 +12,9 @@ import { TripsListApiService } from './services/trips-list-api.service';
 import { ITripsListActionConfirmationModalData, TripsListActionConfirmationModalComponent } from './modals/trips-list-action-confirmation-modal/trips-list-action-confirmation-modal.component';
 import { AppRouting } from '../../../../core/configurations/routing/app-routing';
 import { GuideToTripAssignerModalComponent } from './modals/guide-to-trip-assigner-modal/guide-to-trip-assigner-modal.component';
+import { AuthenticationService } from '../../../../core/user-identity/services/authentication.service';
+import { UserRole } from '../../../../core/user-identity/enums/user-role.enum';
+import { IAppTableColumnActionsConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column-actions.model';
 
 @Component({
   selector: 'app-trips-list',
@@ -27,7 +30,8 @@ export class TripsListComponent implements OnInit {
 
   constructor(private readonly _apiService: TripsListApiService,
               private readonly _router: Router,
-              private readonly _modalService: ModalService) {
+              private readonly _modalService: ModalService,
+              private readonly _authenticationService: AuthenticationService) {
   }
 
   public ngOnInit(): void {
@@ -37,9 +41,7 @@ export class TripsListComponent implements OnInit {
       dataSource: this._apiService.getTrips(),
       filter: {},
       columns: this._getColumns(),
-      actionsDefinition: {
-        actions: this._getActions()
-      }
+      actionsDefinition: this._getActionsDefinition()
     });
   }
 
@@ -57,7 +59,33 @@ export class TripsListComponent implements OnInit {
     ];
   }
 
-  private _getActions(): IAppTableColumnActionConfiguration<TripListModel>[] {
+  private _getActionsDefinition(): IAppTableColumnActionsConfiguration<TripListModel> {
+    let result: IAppTableColumnActionsConfiguration<TripListModel> = {
+      actions: []
+    };
+
+    const userRole = this._authenticationService.token?.userRole;
+
+    switch (userRole) {
+      case UserRole.User:
+        result = null;
+        break;
+      case UserRole.Guide:
+        result = null;
+        break;
+      case UserRole.Admin:
+        result.actions = this._getAdminActions();
+        break;
+      default:
+        result.actions = [
+          ...this._getAdminActions()
+        ];
+    }
+
+    return result;
+  }
+
+  private _getAdminActions(): IAppTableColumnActionConfiguration<TripListModel>[] {
     return [
       {
         icon: AppIcon.Cancel,

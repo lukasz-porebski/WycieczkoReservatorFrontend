@@ -19,11 +19,11 @@ export class JwtInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
-    if (isNotDefined(this._authenticationService.currentTokenValue)) {
+    if (isNotDefined(this._authenticationService.token)) {
       return next.handle(request);
     }
 
-    if (this._authenticationService.currentTokenValue.isAccessTokenActive) {
+    if (this._authenticationService.token.isAccessTokenActive) {
       return next.handle(this._injectToken(request));
     } else {
       this._authenticationService.logout();
@@ -34,7 +34,7 @@ export class JwtInterceptor implements HttpInterceptor {
   private _injectToken(request: HttpRequest<any>): HttpRequest<any> {
     return request.clone({
       setHeaders: {
-        Authorization: this._authenticationService.currentTokenValue.accessToken,
+        Authorization: this._authenticationService.token.accessToken,
       },
     });
   }

@@ -1,53 +1,68 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
 import { LocalStorageKey } from '../enums/local-storage-key.enum';
-import { of, Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { isDefined, isEmpty } from '../../../shared/utils/utils';
-import { HttpOptions } from '../../configurations/http-options';
-import { environment } from '../../../../environments/environment';
 import { AccessTokenApiModel } from '../models/apis/access-token-api.model';
 import { TokenModel } from '../models/token.model';
 import { AppRouting } from '../../configurations/routing/app-routing';
 import { LogInRequestModel } from '../models/requests/log-in-request-model';
+import { Router } from '@angular/router';
+import { UserRole } from '../enums/user-role.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   public get isUserLogIn(): boolean {
-    return isDefined(this.currentTokenValue) && this.currentTokenValue.isAccessTokenActive;
+    return isDefined(this.token) && this.token.isAccessTokenActive;
   }
 
-  public get currentTokenValue(): TokenModel {
-    return this._currentTokenSubject.value;
+  public get token(): TokenModel {
+    return this._tokenSubject.value;
   }
 
-  public readonly currentToken: Observable<TokenModel>;
+  public readonly tokenObservable: Observable<TokenModel>;
 
-  private readonly _currentTokenSubject: BehaviorSubject<TokenModel>;
+  private readonly _tokenSubject: BehaviorSubject<TokenModel>;
   private readonly _baseUrl = `${this._http.baseUrl}/authorization/`;
-  private readonly _redirectUrl = `${environment.appUrl}/${AppRouting.user.root}`;
 
-  constructor(private readonly _http: HttpService) {
-    this._currentTokenSubject = new BehaviorSubject<TokenModel>(this._getTokenFromLocalStorage());
-    this.currentToken = this._currentTokenSubject.asObservable();
-  }
-
-  public generateUrlForCode(): Observable<string> {
-    const httpOptions = new HttpOptions();
-    httpOptions.params = httpOptions.params
-      .append('redirectUrl', this._redirectUrl);
-    httpOptions.responseType = 'text' as 'json';
-
-    return this._http.get<string>(`${this._baseUrl}generate-url-for-code`, httpOptions);
+  constructor(private readonly _http: HttpService,
+              private readonly _router: Router) {
+    this._tokenSubject = new BehaviorSubject<TokenModel>(this._getTokenFromLocalStorage());
+    this.tokenObservable = this._tokenSubject.asObservable();
   }
 
   public logIn(email: string, password: string): Observable<TokenModel> {
     const request = new LogInRequestModel(email, password);
-    return this._generateAccessToken(request)
-      .pipe(map(res => {
-        const token = new TokenModel(res.accessToken, res.expiresIn);
+    return this._logIn(request)
+      .pipe(map(accessTokenModel => {
+        const token = new TokenModel(accessTokenModel);
+        this._setToken(token);
+        return token;
+      }));
+  }
+
+  public logInAndRedirectToTripsList(email: string, password: string): Observable<void> {
+    return this.logIn(email, password).pipe(
+      switchMap(() => {
+        this._router.navigateByUrl(AppRouting.trip.tripsList.absolutePath);
+        return of(null);
+      })
+    );
+  }
+
+  public fakeLogIn(userRole: UserRole): Observable<TokenModel> {
+    const accessTokenApiModel = new AccessTokenApiModel({
+      accessToken: TokenModel.fakeAccessToken,
+      expireDate: new Date(2030, 1, 1),
+      userRole: userRole
+    });
+
+    return of(accessTokenApiModel)
+      .pipe(map(accessTokenModel => {
+        const token = new TokenModel(accessTokenModel);
         this._setToken(token);
         return token;
       }));
@@ -58,23 +73,19 @@ export class AuthenticationService {
     return of(null);
   }
 
-  private _generateAccessToken(request: LogInRequestModel): Observable<AccessTokenApiModel> {
-    const httpOptions = new HttpOptions();
-    // httpOptions.params = httpOptions.params.append('refreshToken', refreshToken);
-    httpOptions.responseType = 'text' as 'json';
-
-    return this._http.post<AccessTokenApiModel>(`${this._baseUrl}generate-access-token`, request, httpOptions)
+  private _logIn(request: LogInRequestModel): Observable<AccessTokenApiModel> {
+    return this._http.post<AccessTokenApiModel>(`${this._baseUrl}log-in`, request)
       .pipe(map(value => new AccessTokenApiModel(value)));
   }
 
   private _setToken(token: TokenModel): void {
     localStorage.setItem(LocalStorageKey.Token, JSON.stringify(token));
-    this._currentTokenSubject.next(token);
+    this._tokenSubject.next(token);
   }
 
   private _clearToken(): void {
     localStorage.removeItem(LocalStorageKey.Token);
-    this._currentTokenSubject.next(null);
+    this._tokenSubject.next(null);
   }
 
   private _getTokenFromLocalStorage(): TokenModel {

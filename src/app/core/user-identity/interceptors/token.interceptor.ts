@@ -17,8 +17,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (isDefined(this._authenticationService.currentTokenValue)) {
-      request = this._injectToken(request, this._authenticationService.currentTokenValue.accessToken);
+    if (isDefined(this._authenticationService.token)) {
+      request = this._injectToken(request, this._authenticationService.token.accessToken);
     }
 
     return next.handle(request).pipe(catchError(error => {

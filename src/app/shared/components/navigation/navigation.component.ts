@@ -8,6 +8,9 @@ import { AppIcon } from '../../enums/app-icon.enum';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../core/user-identity/services/authentication.service';
 import { AppRouting } from '../../../core/configurations/routing/app-routing';
+import { UserRole } from '../../../core/user-identity/enums/user-role.enum';
+import { environment } from '../../../../environments/environment';
+import { DevelopmentEnvironmentMode } from '../../../../environments/development-environment-mode.enum';
 
 @Component({
   selector: 'app-nav-bar',
@@ -29,9 +32,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.menu.push(this._tripsMenu());
-    this.menu.push(this._tripCreatorMenu());
-    this.menu.push(this._usersMenu());
+    this._addTripsMenu();
+    this._tryAddTripCreatorMenu();
+    this._tryAddUsersMenu();
 
     this._setActiveMenuElements(this._router.url);
 
@@ -57,34 +60,42 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._router.navigateByUrl('/');
   }
 
-  private _tripsMenu(): MenuFirstLevelModel {
+  private _addTripsMenu(): void {
     const appTranslateRoute = this.translateRoute + 'MENU.TRIPS.';
-
-    return new MenuFirstLevelModel(
+    const menu = new MenuFirstLevelModel(
       appTranslateRoute + 'MENU_NAME',
       AppRouting.trip.tripsList.absolutePath,
       AppIcon.Trips,
     );
+    this.menu.push(menu);
   }
 
-  private _tripCreatorMenu(): MenuFirstLevelModel {
-    const appTranslateRoute = this.translateRoute + 'MENU.TRIP_CREATOR.';
+  private _tryAddTripCreatorMenu(): void {
+    if (!this._showMenuForAdmin()) {
+      return;
+    }
 
-    return new MenuFirstLevelModel(
+    const appTranslateRoute = this.translateRoute + 'MENU.TRIP_CREATOR.';
+    const menu = new MenuFirstLevelModel(
       appTranslateRoute + 'MENU_NAME',
       AppRouting.admin.tripCreator.absolutePath,
       AppIcon.Add,
     );
+    this.menu.push(menu);
   }
 
-  private _usersMenu(): MenuFirstLevelModel {
-    const appTranslateRoute = this.translateRoute + 'MENU.USERS.';
+  private _tryAddUsersMenu(): void {
+    if (!this._showMenuForAdmin()) {
+      return;
+    }
 
-    return new MenuFirstLevelModel(
+    const appTranslateRoute = this.translateRoute + 'MENU.USERS.';
+    const menu = new MenuFirstLevelModel(
       appTranslateRoute + 'MENU_NAME',
       AppRouting.admin.usersList.absolutePath,
       AppIcon.Users,
     );
+    this.menu.push(menu);
   }
 
   private _setActiveMenuElements(url: string): void {
@@ -92,5 +103,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
       return;
     }
     this.menu.forEach(m => m.isActive = url.contains(m.navigateUrl));
+  }
+
+  private _showMenuForAdmin(): boolean {
+    if (this.authenticationService.token?.userRole === UserRole.Admin) {
+      return true;
+    }
+
+    if (environment.mode === DevelopmentEnvironmentMode.FullAccess) {
+      return true;
+    }
+
+    return false;
   }
 }

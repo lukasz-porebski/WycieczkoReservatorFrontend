@@ -18,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next
       .handle(request)
       .pipe(catchError((err: HttpErrorResponse) => {
-        if (err.status === 401 && isNotDefined(this._authenticationService.currentTokenValue)) {
+        if (err.status === 401 && isNotDefined(this._authenticationService.token)) {
           this._router.navigateByUrl(AppRouting.trip.root);
         }
 

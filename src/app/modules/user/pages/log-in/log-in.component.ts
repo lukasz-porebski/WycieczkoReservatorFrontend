@@ -14,7 +14,7 @@ import { UserRouting } from '../../../../core/configurations/routing/children/us
 @Component({
   selector: 'app-login',
   templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.scss']
+  styleUrls: [ './log-in.component.scss' ]
 })
 export class LogInComponent implements OnInit {
   public get showSpinner(): boolean {
@@ -72,9 +72,10 @@ export class LogInComponent implements OnInit {
   public onLogIn(): void {
     this.entity.whole.disable();
     this._authenticationService
-      .logIn(this.entity.email.value, this.entity.password.value)
+      .logInAndRedirectToTripsList(this.entity.email.value, this.entity.password.value)
       .subscribe(
-        () => this._router.navigate([AppRouting.trip.root]),
+        () => {
+        },
         (error: string[]) => {
           this.errors = replaceIfNotDefined(error, [])
             .map(e => ErrorTranslator.getErrorTranslateRoute(e));
