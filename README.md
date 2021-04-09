@@ -19,3 +19,5 @@ Można również skorzystać z opcji `--o`, która od razu uruchomi aplikację w
 Routy aplikacji są w pliku `app-routes.ts`. Jego lokalizacja to: `WycieczkoReservatorFrontend\src\app\core\configurations\routing`. Przykładowy route to: `http://localhost:4200/user/log-in`. Resztę routów można poskładać w podobny sposób. 
 
 
+## Tryb uruchomiania aplikacji
+W pliku `environment.ts` (lokalizacja: `WycieczkoReservatorFrontend\src\environments`) można ustawić w jakim trybie uruchomi się aplikacja. Wystarczy zmienić wartość stałej mode na inną wartość enuma. Domyślna wartość to `const mode = DevelopmentEnvironmentMode.FullAccess;`. Daje pełny dostęp do aplikacji. Inne tryby ograniczają w różny sposób dostęp do jej obszarów. 
