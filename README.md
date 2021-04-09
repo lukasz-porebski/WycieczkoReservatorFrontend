@@ -14,3 +14,8 @@ Można również skorzystać z opcji `--o`, która od razu uruchomi aplikację w
 
 
 [Więcej szczegółów znajduje się tutaj](https://angular.io/guide/setup-local)
+
+## Routy
+Routy aplikacji są w pliku `app-routes.ts`. Jego lokalizacja to: `WycieczkoReservatorFrontend\src\app\core\configurations\routing`. Przykładowy route to: `http://localhost:4200/user/log-in`. Resztę routów można poskładać w podobny sposób. 
+
+
