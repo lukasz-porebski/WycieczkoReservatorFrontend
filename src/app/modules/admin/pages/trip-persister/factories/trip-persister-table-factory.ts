@@ -40,7 +40,8 @@ export class TripPersisterTableFactory {
     return new AppTableModel<UserListModel>({
       translateRout: translateRoute + 'GUIDES_COLUMNS',
       selection: {
-        onRowSelect: row => entity.guideId.value = row?.id
+        onRowSelect: row => entity.guideId.value = row?.id,
+        initialSelection: data => data.find(d => d.id === entity.guideId.value)
       },
       dataSource: this._apiService.getGuidesToTripAssigne(),
       paginator: {

@@ -42,7 +42,7 @@
           <a mat-button
              *ngIf="authenticationService.isUserLogIn"
              [routerLink]="'../'"
-             (click)="authenticationService.logout()">
+             (click)="onLogout()">
             <mat-icon class="navigation-icon-padding">exit_to_app</mat-icon>
             <span class="nav-caption">{{translateRoute + 'NAV_TOP_BAR.LOG_OUT' | translate}}</span>
           </a>

@@ -16,7 +16,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   templateUrl: './app-table.component.html',
   styleUrls: [ './app-table.component.scss' ]
 })
-export class AppTableComponent implements AfterViewInit, OnDestroy {
+export class AppTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) matPaginator: MatPaginator;
   @ViewChild(MatSort) matSort: MatSort;
 
@@ -37,8 +37,8 @@ export class AppTableComponent implements AfterViewInit, OnDestroy {
   public readonly translateRoute = 'SHARED.COMPONENTS.APP_TABLE.';
   public readonly AppTableColumnType = AppTableColumnType;
   public readonly DateFormat = DateFormat;
-  public readonly selection = new SelectionModel<any>(false, []);
 
+  public selection: SelectionModel<any>;
   public dataSource: MatTableDataSource<any>;
 
   private readonly _subscription = new Subscription();
@@ -46,6 +46,10 @@ export class AppTableComponent implements AfterViewInit, OnDestroy {
   private _spinner = false;
 
   constructor(private readonly _translateService: TranslateService) {
+  }
+
+  public ngOnInit(): void {
+
   }
 
   public ngAfterViewInit(): void {
@@ -70,6 +74,9 @@ export class AppTableComponent implements AfterViewInit, OnDestroy {
         if (isDefined(this.matPaginator)) {
           this.matPaginator._intl.itemsPerPageLabel = itemsPerPageLabel;
         }
+        this.selection = new SelectionModel<any>(false, [
+          this.configuration?.selection?.initialSelection(d)
+        ]);
         this._spinner = false;
       });
 

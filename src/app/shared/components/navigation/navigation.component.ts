@@ -60,6 +60,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._router.navigateByUrl('/');
   }
 
+  public onLogout(): void {
+    this.authenticationService.logout().subscribe(() =>
+      this._router.navigateByUrl(AppRouting.user.logIn.absolutePath));
+  }
+
   private _addTripsMenu(): void {
     const appTranslateRoute = this.translateRoute + 'MENU.TRIPS.';
     const menu = new MenuFirstLevelModel(
