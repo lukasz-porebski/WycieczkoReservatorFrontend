@@ -49,9 +49,9 @@ export class PasswordAttribute implements IAttribute {
   constructor(additionalValidators?: ValidatorFn[]) {
     this.formControl = new FormControl(null, [
       Validators.required,
-      PasswordValidator.format,
+      // PasswordValidator.format, //TODO: Dodać potem
       PasswordValidator.containsWhiteSpace,
-      PasswordValidator.properLength(this.minLength, this.maxLength),
+      // PasswordValidator.properLength(this.minLength, this.maxLength), //TODO: Dodać potem
       ...replaceIfNotDefined(additionalValidators, [])
     ]);
   }

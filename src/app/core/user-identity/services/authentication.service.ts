@@ -4,7 +4,7 @@ import { HttpService } from '../../services/http.service';
 import { LocalStorageKey } from '../enums/local-storage-key.enum';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { isDefined, isEmpty } from '../../../shared/utils/utils';
-import { AccessTokenApiModel } from '../models/apis/access-token-api.model';
+import { AccessTokenApiModel, AccessTokenApiResponse } from '../models/apis/access-token-api.model';
 import { TokenModel } from '../models/token.model';
 import { AppRouting } from '../../configurations/routing/app-routing';
 import { LogInRequestModel } from '../models/requests/log-in-request-model';
@@ -26,7 +26,7 @@ export class AuthenticationService {
   public readonly tokenObservable: Observable<TokenModel>;
 
   private readonly _tokenSubject: BehaviorSubject<TokenModel>;
-  private readonly _baseUrl = `${this._http.baseUrl}/authorization/`;
+  private readonly _baseUrl = `${this._http.baseUrl}/`;
 
   constructor(private readonly _http: HttpService,
               private readonly _router: Router) {
@@ -55,9 +55,8 @@ export class AuthenticationService {
 
   public fakeLogIn(userRole: UserRole): Observable<TokenModel> {
     const accessTokenApiModel = new AccessTokenApiModel({
-      accessToken: TokenModel.fakeAccessToken,
-      expireDate: new Date(2030, 1, 1),
-      userRole: userRole
+      token: TokenModel.fakeAccessToken,
+      role: this._parseRole(userRole)
     });
 
     return of(accessTokenApiModel)
@@ -74,7 +73,7 @@ export class AuthenticationService {
   }
 
   private _logIn(request: LogInRequestModel): Observable<AccessTokenApiModel> {
-    return this._http.post<AccessTokenApiModel>(`${this._baseUrl}log-in`, request)
+    return this._http.post<AccessTokenApiResponse>(`${this._baseUrl}login`, request)
       .pipe(map(value => new AccessTokenApiModel(value)));
   }
 
@@ -94,5 +93,16 @@ export class AuthenticationService {
       return null;
     }
     return TokenModel.FromJson(json);
+  }
+
+  private _parseRole(role: UserRole): string {
+    switch (role) {
+      case UserRole.User:
+        return 'ROLE_USER';
+      case UserRole.Guide:
+        return 'ROLE_GUIDE';
+      case UserRole.Admin:
+        return 'ROLE_ADMIN';
+    }
   }
 }

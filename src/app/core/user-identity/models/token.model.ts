@@ -3,7 +3,7 @@ import { UserRole } from '../enums/user-role.enum';
 
 export class TokenModel {
   public get isAccessTokenActive(): boolean {
-    return this.expireDate > new Date();
+    return true; // TODO: może usunąc w przyszłości
   }
 
   public get isFake(): boolean {
@@ -13,13 +13,16 @@ export class TokenModel {
   public static readonly fakeAccessToken = 'fake-access-token';
 
   public readonly accessToken: string;
-  public readonly expireDate: Date;
   public readonly userRole: UserRole;
 
-  constructor(model: AccessTokenApiModel) {
-    this.accessToken = model.accessToken;
-    this.expireDate = model.expireDate;
-    this.userRole = model.userRole;
+  constructor(model: TokenModel | AccessTokenApiModel) {
+    if (model instanceof TokenModel) {
+      this.accessToken = model.accessToken;
+      this.userRole = model.userRole;
+    } else {
+      this.accessToken = model.token;
+      this.userRole = model.role;
+    }
   }
 
   public static FromJson(json: string): TokenModel {

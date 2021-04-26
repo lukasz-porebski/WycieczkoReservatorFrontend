@@ -164,7 +164,7 @@ export class RegistrationComponent implements OnInit {
     //       this.service.userEntity.email.value, this.service.userEntity.password.value)),
     //     catchError((error: string[]) => {
     //       this.errors = replaceIfNotDefined(error, [])
-    //         .map(e => ErrorTranslator.getErrorTranslateRoute(e));
+    //         .map(e => ErrorHelper.getErrorTranslateRoute(e));
     //       this.service.userEntity.whole.enable();
     //       this.showSpinner = false;
     //       return of(null);
