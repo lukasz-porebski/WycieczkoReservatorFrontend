@@ -92,6 +92,7 @@ export class AuthenticationService {
     if (isEmpty(json)) {
       return null;
     }
+
     return TokenModel.FromJson(json);
   }
 

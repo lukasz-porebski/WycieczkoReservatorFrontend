@@ -151,7 +151,6 @@ export class UsersListComponent implements OnInit {
     this._modalService.open(UserListActionConfirmationModalComponent, {
       data: modalData,
       afterClosed: (result: boolean) => {
-        console.log('Action result', result);
         if (result) {
           this.tableComponent.refreshDataSource();
         }

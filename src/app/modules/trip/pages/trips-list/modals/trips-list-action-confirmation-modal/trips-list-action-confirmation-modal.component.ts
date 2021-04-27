@@ -3,12 +3,12 @@ import { AppModalModel } from '../../../../../../shared/components/wrappers/app-
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
-import { TripListModel } from '../../models/trip-list-model';
+import { TripListApiModel } from '../../models/trip-list-api-model';
 
 export interface ITripsListActionConfirmationModalData {
   actionText: string;
-  trip: TripListModel;
-  action: (trip: TripListModel) => Observable<any>;
+  trip: TripListApiModel;
+  action: (trip: TripListApiModel) => Observable<any>;
 }
 
 @Component({

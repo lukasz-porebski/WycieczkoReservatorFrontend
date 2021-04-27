@@ -20,7 +20,6 @@ export class TripPersisterApiService {
   }
 
   public getTrip(tripId: number): Observable<TripApiModel> {
-    console.log('getTrip', tripId);
     const trip = new TripApiModel({
       id: 1,
       title: 'Wycieczka do Kazimierza',

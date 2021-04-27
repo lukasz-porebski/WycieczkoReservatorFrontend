@@ -7,7 +7,7 @@ import { IAppTableColumnConfiguration } from '../../../../shared/components/wrap
 import { AppTableColumnType } from '../../../../shared/components/wrappers/app-table/enums/app-table-column-type.enum';
 import { IAppTableColumnActionConfiguration } from '../../../../shared/components/wrappers/app-table/models/app-table-column-action.model';
 import { AppIcon } from '../../../../shared/enums/app-icon.enum';
-import { TripListModel } from './models/trip-list-model';
+import { TripListApiModel } from './models/trip-list-api-model';
 import { TripsListApiService } from './services/trips-list-api.service';
 import { ITripsListActionConfirmationModalData, TripsListActionConfirmationModalComponent } from './modals/trips-list-action-confirmation-modal/trips-list-action-confirmation-modal.component';
 import { AppRouting } from '../../../../core/configurations/routing/app-routing';
@@ -26,7 +26,7 @@ export class TripsListComponent implements OnInit {
 
   public readonly translateRoute = 'MODULES.TRIP.PAGES.TRIPS_LIST.';
 
-  public tableConfig: AppTableModel<TripListModel>;
+  public tableConfig: AppTableModel<TripListApiModel>;
 
   constructor(private readonly _apiService: TripsListApiService,
               private readonly _router: Router,
@@ -35,7 +35,7 @@ export class TripsListComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.tableConfig = new AppTableModel<TripListModel>({
+    this.tableConfig = new AppTableModel<TripListApiModel>({
       translateRout: this.translateRoute + 'COLUMNS',
       headerSticky: true,
       dataSource: this._apiService.getTrips(),
@@ -45,7 +45,7 @@ export class TripsListComponent implements OnInit {
     });
   }
 
-  private _getColumns(): IAppTableColumnConfiguration<TripListModel>[] {
+  private _getColumns(): IAppTableColumnConfiguration<TripListApiModel>[] {
     return [
       {
         field: 'title',
@@ -59,8 +59,8 @@ export class TripsListComponent implements OnInit {
     ];
   }
 
-  private _getActionsDefinition(): IAppTableColumnActionsConfiguration<TripListModel> {
-    let result: IAppTableColumnActionsConfiguration<TripListModel> = {
+  private _getActionsDefinition(): IAppTableColumnActionsConfiguration<TripListApiModel> {
+    let result: IAppTableColumnActionsConfiguration<TripListApiModel> = {
       actions: []
     };
 
@@ -85,7 +85,7 @@ export class TripsListComponent implements OnInit {
     return result;
   }
 
-  private _getAdminActions(): IAppTableColumnActionConfiguration<TripListModel>[] {
+  private _getAdminActions(): IAppTableColumnActionConfiguration<TripListApiModel>[] {
     return [
       {
         icon: AppIcon.Cancel,
@@ -113,7 +113,6 @@ export class TripsListComponent implements OnInit {
           this._modalService.open(GuideToTripAssignerModalComponent, {
             data: trip,
             afterClosed: (result: boolean) => {
-              console.log('Action result', result);
               if (result) {
                 this.tableComponent.refreshDataSource();
               }
@@ -128,7 +127,6 @@ export class TripsListComponent implements OnInit {
     this._modalService.open(TripsListActionConfirmationModalComponent, {
       data: modalData,
       afterClosed: (result: boolean) => {
-        console.log('Action result', result);
         if (result) {
           this.tableComponent.refreshDataSource();
         }

@@ -7,7 +7,7 @@ import { AppModalModel } from '../../../../../../shared/components/wrappers/app-
 import { isDefined } from '../../../../../../shared/utils/utils';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TripListModel } from '../../models/trip-list-model';
+import { TripListApiModel } from '../../models/trip-list-api-model';
 import { AssigneGuideToTripRequestModel } from './models/requests/assigne-guide-to-trip-request-model';
 
 @Component({
@@ -28,7 +28,7 @@ export class GuideToTripAssignerModalComponent implements OnInit {
   public selectedGuide: UserListModel;
   public button: AppButtonModel;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: TripListModel,
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: TripListApiModel,
               private readonly _matDialogRef: MatDialogRef<GuideToTripAssignerModalComponent>,
               private readonly _apiService: TripsListApiService) {
   }
