@@ -10,6 +10,7 @@ import { AppRouting } from '../../configurations/routing/app-routing';
 import { LogInRequestModel } from '../models/requests/log-in-request-model';
 import { Router } from '@angular/router';
 import { UserRole } from '../enums/user-role.enum';
+import { EnumTransformer } from '../../../shared/utils/enum-transformer';
 
 @Injectable({
   providedIn: 'root',
@@ -56,7 +57,7 @@ export class AuthenticationService {
   public fakeLogIn(userRole: UserRole): Observable<TokenModel> {
     const accessTokenApiModel = new AccessTokenApiModel({
       token: TokenModel.fakeAccessToken,
-      role: this._parseRole(userRole)
+      role: EnumTransformer.ToApiRequestUserRole(userRole)
     });
 
     return of(accessTokenApiModel)
@@ -94,16 +95,5 @@ export class AuthenticationService {
     }
 
     return TokenModel.FromJson(json);
-  }
-
-  private _parseRole(role: UserRole): string {
-    switch (role) {
-      case UserRole.User:
-        return 'ROLE_USER';
-      case UserRole.Guide:
-        return 'ROLE_GUIDE';
-      case UserRole.Admin:
-        return 'ROLE_ADMIN';
-    }
   }
 }

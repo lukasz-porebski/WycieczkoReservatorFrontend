@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserListModel } from '../../models/user-list-model';
+import { UserListApiModel } from '../../models/user-list-api-model';
 import { UserRoleFactory } from '../../../../../../core/user-identity/factories/user-role-factory';
 import { UsersListApiService } from '../../services/users-list-api.service';
 import { ChangeUserRoleRequestModel } from './models/requests/change-user-role-request-model';
@@ -28,7 +28,7 @@ export class UserRoleChangeModalComponent implements OnInit {
 
   private _showSpinner = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: UserListModel,
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: UserListApiModel,
               private readonly _matDialogRef: MatDialogRef<UserRoleChangeModalComponent>,
               private readonly _userRoleFactory: UserRoleFactory,
               private readonly _adminApiService: UsersListApiService) {

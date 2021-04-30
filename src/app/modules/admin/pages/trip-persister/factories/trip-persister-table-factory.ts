@@ -5,7 +5,7 @@ import { AppTableModel } from '../../../../../shared/components/wrappers/app-tab
 import { ImagesListModel } from '../models/images-list-model';
 import { AppTableColumnType } from '../../../../../shared/components/wrappers/app-table/enums/app-table-column-type.enum';
 import { AppIcon } from '../../../../../shared/enums/app-icon.enum';
-import { UserListModel } from '../../users-list/models/user-list-model';
+import { UserListApiModel } from '../../users-list/models/user-list-api-model';
 import { TripPersisterApiService } from '../services/trip-persister-api.service';
 import { AppTablePaginatorPageSize } from '../../../../../shared/components/wrappers/app-table/enums/app-table-paginator-page-size.enum';
 
@@ -36,8 +36,8 @@ export class TripPersisterTableFactory {
     });
   }
 
-  public createGuides(entity: TripPersisterEntity, translateRoute: string): AppTableModel<UserListModel> {
-    return new AppTableModel<UserListModel>({
+  public createGuides(entity: TripPersisterEntity, translateRoute: string): AppTableModel<UserListApiModel> {
+    return new AppTableModel<UserListApiModel>({
       translateRout: translateRoute + 'GUIDES_COLUMNS',
       selection: {
         onRowSelect: row => entity.guideId.value = row?.id,

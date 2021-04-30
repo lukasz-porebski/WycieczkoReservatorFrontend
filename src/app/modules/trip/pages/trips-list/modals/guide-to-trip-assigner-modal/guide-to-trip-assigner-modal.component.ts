@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AppTableModel } from '../../../../../../shared/components/wrappers/app-table/models/app-table.model';
 import { AppTableColumnType } from '../../../../../../shared/components/wrappers/app-table/enums/app-table-column-type.enum';
 import { TripsListApiService } from '../../services/trips-list-api.service';
-import { UserListModel } from '../../../../../admin/pages/users-list/models/user-list-model';
+import { UserListApiModel } from '../../../../../admin/pages/users-list/models/user-list-api-model';
 import { AppModalModel } from '../../../../../../shared/components/wrappers/app-modal/models/app-modal.model';
 import { isDefined } from '../../../../../../shared/utils/utils';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
@@ -24,8 +24,8 @@ export class GuideToTripAssignerModalComponent implements OnInit {
 
   public showSpinner: boolean;
   public modalConfig: AppModalModel;
-  public tableConfig: AppTableModel<UserListModel>;
-  public selectedGuide: UserListModel;
+  public tableConfig: AppTableModel<UserListApiModel>;
+  public selectedGuide: UserListApiModel;
   public button: AppButtonModel;
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: TripListApiModel,
@@ -38,7 +38,7 @@ export class GuideToTripAssignerModalComponent implements OnInit {
       text: this.translateRoute + 'TITLE',
     });
 
-    this.tableConfig = new AppTableModel<UserListModel>({
+    this.tableConfig = new AppTableModel<UserListApiModel>({
       translateRout: this.translateRoute + 'COLUMNS',
       selection: {
         onRowSelect: row => this.selectedGuide = row

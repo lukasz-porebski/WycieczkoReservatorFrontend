@@ -3,9 +3,10 @@ import { TripServiceModule } from '../../../trip-service.module';
 import { HttpService } from '../../../../../core/services/http.service';
 import { Observable, of } from 'rxjs';
 import { TripListApiModel } from '../models/trip-list-api-model';
-import { UserListModel } from '../../../../admin/pages/users-list/models/user-list-model';
+import { UserListApiModel } from '../../../../admin/pages/users-list/models/user-list-api-model';
 import { UserRole } from '../../../../../core/user-identity/enums/user-role.enum';
 import { map } from 'rxjs/operators';
+import { AuthenticationService } from '../../../../../core/user-identity/services/authentication.service';
 
 @Injectable({
   providedIn: TripServiceModule
@@ -14,21 +15,25 @@ export class TripsListApiService {
 
   private readonly _baseUrl = `${this._http.baseUrl}/trips/`;
 
-  constructor(private readonly _http: HttpService) {
+  constructor(private readonly _http: HttpService,
+              private readonly _authenticationService: AuthenticationService) {
   }
 
   public getTrips(): Observable<TripListApiModel[]> {
-    return this._http.get<TripListApiModel[]>(`${this._baseUrl}getUserTrips`).pipe(
+    const url = this._authenticationService.token.userRole === UserRole.Guide
+      ? 'getGuideTrips'
+      : 'getAllTrips';
+    return this._http.get<TripListApiModel[]>(`${this._baseUrl}${url}`).pipe(
       map(trips => trips.map(trip => new TripListApiModel(trip)))
     );
   }
 
-  public cancelTrip(tripId: number): Observable<boolean> {
-    return of(true);
+  public cancelTrip(tripId: number): Observable<void> {
+    return this._http.delete(`${this._baseUrl}deleteTrip?tripId=${tripId}`);
   }
 
-  public getGuidesToTripAssigne(tripId: number): Observable<UserListModel[]> {
-    const users: UserListModel[] = [];
+  public getGuidesToTripAssigne(tripId: number): Observable<UserListApiModel[]> {
+    const users: UserListApiModel[] = [];
 
     users.push({
       id: 1,

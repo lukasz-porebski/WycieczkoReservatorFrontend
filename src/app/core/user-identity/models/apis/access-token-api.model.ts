@@ -1,4 +1,5 @@
 import { UserRole } from '../../enums/user-role.enum';
+import { EnumTransformer } from '../../../../shared/utils/enum-transformer';
 
 export interface AccessTokenApiResponse {
   token: string;
@@ -11,20 +12,6 @@ export class AccessTokenApiModel {
 
   constructor(response: AccessTokenApiResponse) {
     this.token = response.token;
-    this.role = this._parseRole(response.role);
-  }
-
-  private _parseRole(roleAsString: string): UserRole {
-    switch (roleAsString) {
-      case 'ROLE_USER':
-        return UserRole.User;
-      case 'ROLE_GUIDE':
-        return UserRole.Guide;
-      case 'ROLE_ADMIN':
-        return UserRole.Admin;
-      default:
-        console.error('Unknown user role:', roleAsString);
-        return -1;
-    }
+    this.role = EnumTransformer.ToUserRole(response.role);
   }
 }

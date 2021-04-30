@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppTableColumnType } from '../../../../shared/components/wrappers/app-table/enums/app-table-column-type.enum';
 import { AppTableModel } from '../../../../shared/components/wrappers/app-table/models/app-table.model';
-import { UserListModel } from './models/user-list-model';
+import { UserListApiModel } from './models/user-list-api-model';
 import { Router } from '@angular/router';
 import { UsersListApiService } from './services/users-list-api.service';
 import { AppIcon } from '../../../../shared/enums/app-icon.enum';
@@ -24,7 +24,7 @@ export class UsersListComponent implements OnInit {
 
   public readonly translateRoute = 'MODULES.ADMIN.PAGES.USERS_LIST.';
 
-  public tableConfig: AppTableModel<UserListModel>;
+  public tableConfig: AppTableModel<UserListApiModel>;
 
   constructor(private readonly _adminApiService: UsersListApiService,
               private readonly _router: Router,
@@ -33,7 +33,7 @@ export class UsersListComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.tableConfig = new AppTableModel<UserListModel>({
+    this.tableConfig = new AppTableModel<UserListApiModel>({
       translateRout: this.translateRoute + 'COLUMNS',
       headerSticky: true,
       dataSource: this._adminApiService.getUsers(),
@@ -46,7 +46,7 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-  private _getColumns(): IAppTableColumnConfiguration<UserListModel>[] {
+  private _getColumns(): IAppTableColumnConfiguration<UserListApiModel>[] {
     return [
       {
         field: 'email',
@@ -76,7 +76,7 @@ export class UsersListComponent implements OnInit {
     ];
   }
 
-  private _getActions(): IAppTableColumnActionConfiguration<UserListModel>[] {
+  private _getActions(): IAppTableColumnActionConfiguration<UserListApiModel>[] {
     return [
       {
         icon: AppIcon.Edit,
