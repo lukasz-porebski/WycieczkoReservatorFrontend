@@ -49,7 +49,7 @@ export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposabl
     this._meal = configuration.meal;
     const sub = this._meal.formControl.valueChanges.subscribe((isMeal: boolean) => {
       if (!isMeal) {
-        this.value = null;
+        this.value = 0;
       }
       this.formControl.updateValueAndValidity();
     });

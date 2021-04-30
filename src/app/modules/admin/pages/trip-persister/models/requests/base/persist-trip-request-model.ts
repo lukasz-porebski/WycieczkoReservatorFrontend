@@ -1,5 +1,3 @@
-import { FormOfTransport } from '../../../../../../_domain-common/enums/form-of-transport.enum';
-
 export abstract class PersistTripRequestModel {
   public title: string;
   public description: string;
@@ -13,8 +11,8 @@ export abstract class PersistTripRequestModel {
   public tripLocation: string;
   public startDate: Date;
   public endDate: Date;
-  public formOfTransport: FormOfTransport;
+  public formOfTransport: string;
   public guideId: number;
   public mainImageUrl: string;
-  public otherImageUrls: string[];
+  public otherImagesUrl: string[];
 }

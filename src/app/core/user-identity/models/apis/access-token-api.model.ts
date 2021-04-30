@@ -1,13 +1,17 @@
 import { UserRole } from '../../enums/user-role.enum';
+import { EnumTransformer } from '../../../../shared/utils/enum-transformer';
+
+export interface AccessTokenApiResponse {
+  token: string;
+  role: string;
+}
 
 export class AccessTokenApiModel {
-  public accessToken: string;
-  public expireDate: Date;
-  public userRole: UserRole;
+  public token: string;
+  public role: UserRole;
 
-  constructor(response: AccessTokenApiModel) {
-    this.accessToken = response.accessToken;
-    this.expireDate = new Date(response.expireDate.toISOString());
-    this.userRole = response.userRole;
+  constructor(response: AccessTokenApiResponse) {
+    this.token = response.token;
+    this.role = EnumTransformer.ToUserRole(response.role);
   }
 }

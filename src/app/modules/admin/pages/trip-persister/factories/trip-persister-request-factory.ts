@@ -4,6 +4,7 @@ import { TripPersisterEntity } from '../entities/trip-persister-entity';
 import { CreateTripRequestModel } from '../models/requests/create-trip-request-model';
 import { EditTripRequestModel } from '../models/requests/edit-trip-request-model';
 import { PersistTripRequestModel } from '../models/requests/base/persist-trip-request-model';
+import { EnumTransformer } from '../../../../../shared/utils/enum-transformer';
 
 @Injectable({
   providedIn: AdminServiceModule
@@ -11,18 +12,18 @@ import { PersistTripRequestModel } from '../models/requests/base/persist-trip-re
 export class TripPersisterRequestFactory {
   public createTripCreate(entity: TripPersisterEntity): CreateTripRequestModel {
     const request = new CreateTripRequestModel();
-    this.setPersistRequest(entity, request);
+    this._setPersistRequest(entity, request);
     return request;
   }
 
   public createTripEdit(entity: TripPersisterEntity): EditTripRequestModel {
     const request = new EditTripRequestModel();
     request.id = entity.tripId;
-    this.setPersistRequest(entity, request);
+    this._setPersistRequest(entity, request);
     return request;
   }
 
-  private setPersistRequest(entity: TripPersisterEntity, request: PersistTripRequestModel): void {
+  private _setPersistRequest(entity: TripPersisterEntity, request: PersistTripRequestModel): void {
     request.title = entity.title.value;
     request.description = entity.description.value;
     request.participants = [ ...entity.participants.value ];
@@ -35,9 +36,9 @@ export class TripPersisterRequestFactory {
     request.tripLocation = entity.tripLocation.value;
     request.startDate = entity.startDate.value;
     request.endDate = entity.endDate.value;
-    request.formOfTransport = entity.formOfTransport.value;
+    request.formOfTransport = EnumTransformer.ToApiRequestFormOfTransport(entity.formOfTransport.value);
     request.guideId = entity.guideId.value;
     request.mainImageUrl = entity.mainImageUrl.value;
-    request.otherImageUrls = entity.otherImages.map(i => i.url);
+    request.otherImagesUrl = entity.otherImages.map(i => i.url);
   }
 }

@@ -1,55 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../../../../../core/services/http.service';
 import { Observable, of } from 'rxjs';
-import { UserListModel } from '../models/user-list-model';
-import { UserRole } from '../../../../../core/user-identity/enums/user-role.enum';
+import { UserListApiModel, UserListApiResponse } from '../models/user-list-api-model';
 import { AdminServiceModule } from '../../../admin-service.module';
 import { ChangeUserRoleRequestModel } from '../modals/user-role-change-modal/models/requests/change-user-role-request-model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: AdminServiceModule
 })
 export class UsersListApiService {
 
-  private readonly _baseUrl = `${this._http.baseUrl}/admin/`;
+  private readonly _baseUrl = `${this._http.baseUrl}/users/`;
 
   constructor(private readonly _http: HttpService) {
   }
 
-  public getUsers(): Observable<UserListModel[]> {
-    const users: UserListModel[] = [];
-
-    users.push({
-      id: 1,
-      email: 'test1@email.com',
-      firstName: 'Adam',
-      lastName: 'Małysz',
-      role: UserRole.User,
-      isBlocked: true,
-      isForcedPasswordChange: true
-    });
-
-    users.push({
-      id: 2,
-      email: 'test2@email.com',
-      firstName: 'Ewa',
-      lastName: 'Ewart',
-      role: UserRole.Guide,
-      isBlocked: false,
-      isForcedPasswordChange: false
-    });
-
-    users.push({
-      id: 3,
-      email: 'test3@email.com',
-      firstName: 'Krystyna',
-      lastName: 'Zbieg',
-      role: UserRole.Admin,
-      isBlocked: false,
-      isForcedPasswordChange: true
-    });
-
-    return of(users);
+  public getUsers(): Observable<UserListApiModel[]> {
+    return this._http.get<UserListApiResponse[]>(`${this._baseUrl}getAllUsers`).pipe(
+      map(trips => trips.map(trip => new UserListApiModel(trip)))
+    );
   }
 
   public changeRole(request: ChangeUserRoleRequestModel): Observable<boolean> {

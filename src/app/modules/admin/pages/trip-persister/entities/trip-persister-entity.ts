@@ -83,7 +83,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
     this.pricePerSingleParticipant = new NumberAttribute({
       translateRoute: translateRoute + 'PRICE_PER_SINGLE_PARTICIPANT.',
       min: 1,
-      defaultValue: apiModel?.pricePerSingleParticipant
+      defaultValue: apiModel?.pricePerSingleParticipant ?? 0
     });
 
     this.roomSizes = new MultipleSelectAttribute<number>({
@@ -95,7 +95,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
     this.pricePerSingleRoom = new NumberAttribute({
       translateRoute: translateRoute + 'PRICE_PER_SINGLE_ROOM.',
       min: 1,
-      defaultValue: apiModel?.pricePerSingleRoom
+      defaultValue: apiModel?.pricePerSingleRoom ?? 0
     });
 
     this.meal = new CheckboxAttribute({
@@ -104,7 +104,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
     });
     this.pricePerSingleDayOfMeals = new PricePerSingleDayOfMealsAttribute({
       meal: this.meal,
-      defaultValue: apiModel?.pricePerSingleDayOfMeals
+      defaultValue: apiModel?.pricePerSingleDayOfMeals ?? 0
     });
 
     this.departureLocation = new TextAttribute({
@@ -155,7 +155,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
     });
 
     this.otherImages = isDefined(apiModel)
-      ? apiModel.otherImageUrls.map(i => new ImagesListModel(i))
+      ? apiModel.otherImagesUrl.map(i => new ImagesListModel(i))
       : [];
 
     this._otherImagesSubject = new BehaviorSubject<ImagesListModel[]>(this.otherImages);

@@ -8,7 +8,10 @@ import { AppRouting } from '../../configurations/routing/app-routing';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   private readonly _anonymousUrls: string[] = [
-    AppRouting.user.root,
+    AppRouting.user.logIn.absolutePath,
+    AppRouting.user.registration.absolutePath,
+    AppRouting.user.passwordReminder.absolutePath,
+    AppRouting.user.passwordChanger.absolutePath,
   ];
 
   constructor(private readonly _authenticationService: AuthenticationService) {
@@ -34,7 +37,7 @@ export class JwtInterceptor implements HttpInterceptor {
   private _injectToken(request: HttpRequest<any>): HttpRequest<any> {
     return request.clone({
       setHeaders: {
-        Authorization: this._authenticationService.token.accessToken,
+        Authorization: `Bearer ${this._authenticationService.token.accessToken}`,
       },
     });
   }

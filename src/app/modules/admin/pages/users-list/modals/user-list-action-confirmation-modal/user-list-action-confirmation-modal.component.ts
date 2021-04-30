@@ -2,13 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AppModalModel } from '../../../../../../shared/components/wrappers/app-modal/models/app-modal.model';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserListModel } from '../../models/user-list-model';
+import { UserListApiModel } from '../../models/user-list-api-model';
 import { Observable } from 'rxjs/internal/Observable';
 
 export interface IUserListActionConfirmationModalData {
   actionText: string;
-  user: UserListModel;
-  action: (user: UserListModel) => Observable<any>;
+  user: UserListApiModel;
+  action: (user: UserListApiModel) => Observable<any>;
 }
 
 @Component({

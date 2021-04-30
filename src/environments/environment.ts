@@ -1,7 +1,7 @@
 import { DevelopmentEnvironmentMode } from './development-environment-mode.enum';
 import { UserRole } from '../app/core/user-identity/enums/user-role.enum';
 
-const mode = DevelopmentEnvironmentMode.FullAccess;
+const mode = DevelopmentEnvironmentMode.Prod;
 
 function isLoggedInMode(mode: DevelopmentEnvironmentMode): boolean {
   switch (mode) {
@@ -33,7 +33,7 @@ function userRole(mode: DevelopmentEnvironmentMode): UserRole {
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:12345',
+  apiUrl: 'http://localhost:2507',
   appUrl: 'http://localhost:4200',
   mode: mode,
   autoLogIn: isLoggedInMode(mode),

@@ -15,9 +15,8 @@ import { TripPersisterMode } from './enums/trip-persister-mode.enum';
 import { TripPersisterTableFactory } from './factories/trip-persister-table-factory';
 import { ActivatedRoute } from '@angular/router';
 import { TripPersisterEntityFactory } from './factories/trip-persister-entity-factory';
-import { TripPersisterRequestFactory } from './factories/trip-persister-request-factory';
 import { TripPersisterApiService } from './services/trip-persister-api.service';
-import { UserListModel } from '../users-list/models/user-list-model';
+import { UserListApiModel } from '../users-list/models/user-list-api-model';
 
 @Component({
   selector: 'app-trip-persister',
@@ -65,7 +64,7 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
 
   public formOfTransportSelect: AppSelectModel;
 
-  public guidesTableConfig: AppTableModel<UserListModel>;
+  public guidesTableConfig: AppTableModel<UserListApiModel>;
 
   public mainImageUrlInput: AppInputModel;
   public otherImageUrlInput: AppInputModel;
@@ -80,7 +79,6 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
               private readonly _selectFactory: TripPersisterSelectFactory,
               private readonly _buttonFactory: TripPersisterButtonFactory,
               private readonly _tableFactory: TripPersisterTableFactory,
-              private readonly _requestFactory: TripPersisterRequestFactory,
               private readonly _route: ActivatedRoute,
               private readonly _apiService: TripPersisterApiService) {
   }
@@ -133,31 +131,6 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
 
     this.otherImagesTableConfig = this._tableFactory.createOtherImages(entity, this.translateRoute);
 
-    const onPersist = mode === TripPersisterMode.Creator ? this._createTrip : this._editTrip;
-    this.persistButton = this._buttonFactory.createPersist(entity, this.translateRoute, onPersist, mode);
-  }
-
-  private _createTrip(): void {
-    this.entity.whole.disable();
-    const request = this._requestFactory.createTripCreate(this.entity);
-
-    // this._userApiService.register()
-    //   .pipe(
-    //     switchMap(() => this._authenticationService.login(
-    //       this.service.userEntity.email.value, this.service.userEntity.password.value)),
-    //     catchError((error: string[]) => {
-    //       this.errors = replaceIfNotDefined(error, [])
-    //         .map(e => ErrorTranslator.getErrorTranslateRoute(e));
-    //       this.service.userEntity.whole.enable();
-    //       this.showSpinner = false;
-    //       return of(null);
-    //     }),
-    //   )
-    //   .subscribe(() => this.goToNextStep.emit());
-  }
-
-  private _editTrip(): void {
-    this.entity.whole.disable();
-    const request = this._requestFactory.createTripEdit(this.entity);
+    this.persistButton = this._buttonFactory.createPersist(entity, this.translateRoute, mode);
   }
 }

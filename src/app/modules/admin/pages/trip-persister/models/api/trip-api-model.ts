@@ -1,4 +1,25 @@
 import { FormOfTransport } from '../../../../../_domain-common/enums/form-of-transport.enum';
+import { EnumTransformer } from '../../../../../../shared/utils/enum-transformer';
+
+export interface TripApiResponse {
+  id: number;
+  title: string;
+  description: string;
+  participants: number[];
+  pricePerSingleParticipant: number;
+  roomSizes: number[];
+  pricePerSingleRoom: number;
+  meal: boolean;
+  pricePerSingleDayOfMeals: number;
+  departureLocation: string;
+  tripLocation: string;
+  startDate: string;
+  endDate: string;
+  formOfTransport: string;
+  guideId: number;
+  mainImageUrl: string;
+  otherImagesUrl: string[];
+}
 
 export class TripApiModel {
   public id: number;
@@ -17,9 +38,9 @@ export class TripApiModel {
   public formOfTransport: FormOfTransport;
   public guideId: number;
   public mainImageUrl: string;
-  public otherImageUrls: string[];
+  public otherImagesUrl: string[];
 
-  constructor(response: TripApiModel) {
+  constructor(response: TripApiResponse) {
     this.id = response.id;
     this.title = response.title;
     this.description = response.description;
@@ -33,9 +54,11 @@ export class TripApiModel {
     this.tripLocation = response.tripLocation;
     this.startDate = new Date(response.startDate);
     this.endDate = new Date(response.endDate);
-    this.formOfTransport = response.formOfTransport;
+    this.formOfTransport = EnumTransformer.ToFormOfTransport(response.formOfTransport);
     this.guideId = response.guideId;
     this.mainImageUrl = response.mainImageUrl;
-    this.otherImageUrls = [ ...response.otherImageUrls ];
+    this.otherImagesUrl = [ ...response.otherImagesUrl ];
   }
+
+
 }

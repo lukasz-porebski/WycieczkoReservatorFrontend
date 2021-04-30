@@ -6,10 +6,11 @@ import { AppButtonModel } from '../../../../shared/components/wrappers/app-butto
 import { AppInputModel } from '../../../../shared/components/wrappers/app-input/models/app-input.model';
 import { AppInputBasicModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-basic.model';
 import { replaceIfNotDefined } from '../../../../shared/utils/utils';
-import { ErrorTranslator } from '../../../../shared/utils/error-translator';
+import { ErrorHelper } from '../../../../shared/utils/error-helper';
 import { AppInputBasicType } from '../../../../shared/components/wrappers/app-input/enums/app-input-basic-type.enum';
 import { AppRouting } from '../../../../core/configurations/routing/app-routing';
 import { UserRouting } from '../../../../core/configurations/routing/children/user-routing';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -76,9 +77,8 @@ export class LogInComponent implements OnInit {
       .subscribe(
         () => {
         },
-        (error: string[]) => {
-          this.errors = replaceIfNotDefined(error, [])
-            .map(e => ErrorTranslator.getErrorTranslateRoute(e));
+        (error: HttpErrorResponse) => {
+          this.errors = ErrorHelper.extractSingleMessageAsCollection(error);
           this.entity.whole.enable();
         });
   }
