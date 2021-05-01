@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpService } from '../../../../../core/services/http.service';
 import { AdminServiceModule } from '../../../admin-service.module';
 import { TripApiModel, TripApiResponse } from '../models/api/trip-api-model';
