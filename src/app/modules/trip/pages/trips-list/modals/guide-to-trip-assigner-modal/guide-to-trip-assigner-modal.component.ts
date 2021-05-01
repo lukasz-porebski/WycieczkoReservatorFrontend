@@ -65,6 +65,7 @@ export class GuideToTripAssignerModalComponent implements OnInit {
 
     this.button = new AppButtonModel({
       onClick: () => {
+        this.showSpinner = true;
         const request = new AssigneGuideToTripRequestModel(this.data.id, this.selectedGuide.id);
         this._matDialogRef.close(true);
       },
@@ -73,5 +74,4 @@ export class GuideToTripAssignerModalComponent implements OnInit {
       },
     });
   }
-
 }
