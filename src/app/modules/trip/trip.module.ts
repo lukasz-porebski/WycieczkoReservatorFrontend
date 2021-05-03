@@ -6,6 +6,7 @@ import { TripsListActionConfirmationModalComponent } from './pages/trips-list/mo
 import { GuideToTripAssignerModalComponent } from './pages/trips-list/modals/guide-to-trip-assigner-modal/guide-to-trip-assigner-modal.component';
 import { DomainCommonModule } from '../_domain-common/domain-common.module';
 import { TripViewComponent } from './pages/trip-view/trip-view.component';
+import { TripCustomizeComponent } from './pages/trip-view/trip-customize/trip-customize.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { TripViewComponent } from './pages/trip-view/trip-view.component';
     TripsListComponent,
     TripsListActionConfirmationModalComponent,
     GuideToTripAssignerModalComponent,
-    TripViewComponent
+    TripViewComponent,
+    TripCustomizeComponent
   ],
   imports: [
     TripRoutingModule,
