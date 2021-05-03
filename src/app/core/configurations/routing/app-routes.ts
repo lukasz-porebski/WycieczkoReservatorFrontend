@@ -19,7 +19,8 @@ export const AppRoutes = {
   trip: {
     path: 'trip',
     children: {
-      tripsList: 'trips-list'
+      tripsList: 'trips-list',
+      tripView: 'trip-view'
     }
   }
 };

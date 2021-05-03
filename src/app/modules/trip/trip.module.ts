@@ -5,13 +5,15 @@ import { TripServiceModule } from './trip-service.module';
 import { TripsListActionConfirmationModalComponent } from './pages/trips-list/modals/trips-list-action-confirmation-modal/trips-list-action-confirmation-modal.component';
 import { GuideToTripAssignerModalComponent } from './pages/trips-list/modals/guide-to-trip-assigner-modal/guide-to-trip-assigner-modal.component';
 import { DomainCommonModule } from '../_domain-common/domain-common.module';
+import { TripViewComponent } from './pages/trip-view/trip-view.component';
 
 
 @NgModule({
   declarations: [
     TripsListComponent,
     TripsListActionConfirmationModalComponent,
-    GuideToTripAssignerModalComponent
+    GuideToTripAssignerModalComponent,
+    TripViewComponent
   ],
   imports: [
     TripRoutingModule,

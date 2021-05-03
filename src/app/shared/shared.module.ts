@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppErrorComponent } from './components/wrappers/app-error/app-error.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -38,6 +39,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AppSelectComponent } from './components/wrappers/app-select/app-select.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -64,7 +66,8 @@ const MATERIAL_MODULES = [
   MatSortModule,
   MatSelectModule,
   MatPaginatorModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatGridListModule
 ];
 
 const APP_EXPORT_PARTS = [
@@ -95,6 +98,7 @@ const APP_EXPORT_PARTS = [
     ...APP_EXPORT_PARTS,
     ...MATERIAL_MODULES,
     FormsModule,
+    NgImageSliderModule
   ],
   imports: [
     TranslateModule,
@@ -105,6 +109,7 @@ const APP_EXPORT_PARTS = [
     FormsModule,
     ...MATERIAL_MODULES,
     NgxMaskModule.forRoot(),
+    NgImageSliderModule
   ],
   providers: [
     TimeSpanPipe,
