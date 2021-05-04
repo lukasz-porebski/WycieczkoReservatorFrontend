@@ -46,18 +46,6 @@ export class TripPersisterInputFactory {
     });
   }
 
-  public createPricePerSingleRoom(entity: TripPersisterEntity): AppInputModel {
-    return new AppInputModel({
-      label: {
-        text: entity.pricePerSingleRoom.translateRoute,
-      },
-      input: new AppInputBasicModel({
-        type: AppInputBasicType.price,
-        attribute: entity.pricePerSingleRoom,
-      }),
-    });
-  }
-
   public createMeal(entity: TripPersisterEntity): AppInputModel {
     return new AppInputModel({
       label: {

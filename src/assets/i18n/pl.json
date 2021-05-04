@@ -193,12 +193,6 @@
             "PRICE_PER_SINGLE_PARTICIPANT": {
               "FIELD_NAME": "Cena za jednego uczestnika"
             },
-            "ROOM_SIZES": {
-              "FIELD_NAME": "Dozwolone rozmiary pokojów"
-            },
-            "PRICE_PER_SINGLE_ROOM": {
-              "FIELD_NAME": "Cena za pojedynczy pokój"
-            },
             "MEAL": {
               "FIELD_NAME": "Wyżywienie"
             },

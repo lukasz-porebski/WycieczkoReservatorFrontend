@@ -31,9 +31,6 @@ export class TripPersisterEntity implements IEntity, IDisposable {
   public readonly participants: MultipleSelectAttribute<number>;
   public readonly pricePerSingleParticipant: NumberAttribute;
 
-  public readonly roomSizes: MultipleSelectAttribute<number>;
-  public readonly pricePerSingleRoom: NumberAttribute;
-
   public readonly meal: CheckboxAttribute;
   public readonly pricePerSingleDayOfMeals: PricePerSingleDayOfMealsAttribute;
 
@@ -84,18 +81,6 @@ export class TripPersisterEntity implements IEntity, IDisposable {
       translateRoute: translateRoute + 'PRICE_PER_SINGLE_PARTICIPANT.',
       min: 1,
       defaultValue: apiModel?.pricePerSingleParticipant ?? 0
-    });
-
-    this.roomSizes = new MultipleSelectAttribute<number>({
-      translateRoute: translateRoute + 'ROOM_SIZES.',
-      dataSource: oneToTenNumbers,
-      required: true,
-      defaultValue: apiModel?.roomSizes
-    });
-    this.pricePerSingleRoom = new NumberAttribute({
-      translateRoute: translateRoute + 'PRICE_PER_SINGLE_ROOM.',
-      min: 1,
-      defaultValue: apiModel?.pricePerSingleRoom ?? 0
     });
 
     this.meal = new CheckboxAttribute({
@@ -164,7 +149,6 @@ export class TripPersisterEntity implements IEntity, IDisposable {
       title: this.title.formControl,
       description: this.description.formControl,
       minNumberOfPersons: this.pricePerSingleParticipant.formControl,
-      maxNumberOfPersons: this.pricePerSingleRoom.formControl,
       departureLocation: this.departureLocation.formControl,
       tripLocation: this.tripLocation.formControl,
       startDate: this.startDate.formControl,

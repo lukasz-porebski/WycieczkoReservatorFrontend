@@ -28,8 +28,6 @@ export class TripPersisterRequestFactory {
     request.description = entity.description.value;
     request.participants = [ ...entity.participants.value ];
     request.pricePerSingleParticipant = entity.pricePerSingleParticipant.value;
-    request.roomSizes = [ ...entity.roomSizes.value ];
-    request.pricePerSingleRoom = entity.pricePerSingleRoom.value;
     request.meal = entity.meal.value;
     request.pricePerSingleDayOfMeals = entity.pricePerSingleDayOfMeals.value;
     request.departureLocation = entity.departureLocation.value;
