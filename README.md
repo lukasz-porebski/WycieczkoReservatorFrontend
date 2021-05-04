@@ -6,7 +6,7 @@
 2. Uruchomienie terminala (np. CMD)
 3. Zainstalowanie Angulara przy pomocy komendy `npm install -g @angular/cli`
 4. Przejście terminalem do folderu z projektem aplikacji (folder `WycieczkoReservatorFrontend`)
-5. Zainstalowanie paczek wchodzących w skład projektu aplikacji przy pomocy komendy `npm-install`
+5. Zainstalowanie paczek wchodzących w skład projektu aplikacji przy pomocy komendy `npm install`
 
 ## Uruchomienie aplikacji
 Aplikację uruchamia się przy pomocy komendy `ng serve`.
