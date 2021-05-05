@@ -19,9 +19,9 @@ export abstract class PasswordValidator {
     return null;
   }
 
-  public static properLength(min: number, max: number): ValidatorFn {
+  public static properLength(min: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (isNotDefined(control.value) || !PasswordValidator._isLengthValid(control.value, min, max)) {
+      if (isNotDefined(control.value) || !PasswordValidator._isLengthValid(control.value, min)) {
         return { length: true };
       }
       return null;
@@ -45,8 +45,8 @@ export abstract class PasswordValidator {
   }
 
 
-  private static _isLengthValid(value: string, min: number, max: number): boolean {
-    return value.length >= min && value.length <= max;
+  private static _isLengthValid(value: string, min: number): boolean {
+    return value.length >= min;
   }
 
   private static _containsWhiteSpace(value: string): boolean {

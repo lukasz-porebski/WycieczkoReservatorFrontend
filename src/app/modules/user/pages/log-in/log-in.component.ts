@@ -5,12 +5,10 @@ import { Router } from '@angular/router';
 import { AppButtonModel } from '../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { AppInputModel } from '../../../../shared/components/wrappers/app-input/models/app-input.model';
 import { AppInputBasicModel } from '../../../../shared/components/wrappers/app-input/models/input-types/app-input-basic.model';
-import { replaceIfNotDefined } from '../../../../shared/utils/utils';
-import { ErrorHelper } from '../../../../shared/utils/error-helper';
 import { AppInputBasicType } from '../../../../shared/components/wrappers/app-input/enums/app-input-basic-type.enum';
-import { AppRouting } from '../../../../core/configurations/routing/app-routing';
 import { UserRouting } from '../../../../core/configurations/routing/children/user-routing';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +35,8 @@ export class LogInComponent implements OnInit {
   public button: AppButtonModel;
 
   constructor(private readonly _authenticationService: AuthenticationService,
-              private readonly _router: Router) {
+              private readonly _router: Router,
+              private readonly _errorService: ErrorService) {
   }
 
   public ngOnInit(): void {
@@ -78,7 +77,7 @@ export class LogInComponent implements OnInit {
         () => {
         },
         (error: HttpErrorResponse) => {
-          this.errors = ErrorHelper.extractSingleMessageAsCollection(error);
+          this.errors = this._errorService.extractSingleMessageAsCollection(error);
           this.entity.whole.enable();
         });
   }
