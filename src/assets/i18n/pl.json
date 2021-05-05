@@ -196,8 +196,8 @@
             "MEAL": {
               "FIELD_NAME": "Wyżywienie"
             },
-            "PRICE_PER_SINGLE_DAY_OF_MEALS": {
-              "FIELD_NAME": "Cena za jeden dzień wyżywienia"
+            "MEAL_PRICE_PER_PERSON": {
+              "FIELD_NAME": "Cena za wyżywienia na osobę"
             },
             "DEPERTURE_LOCATION": {
               "FIELD_NAME": "Miejsce wyjazdu"

@@ -9,7 +9,7 @@ import { NumberAttribute } from '../../../../../shared/attributes/number-attribu
 import { MultipleSelectAttribute } from '../../../../../shared/attributes/select/multiple-select-attribute';
 import { SingleSelectAttribute } from '../../../../../shared/attributes/select/single-select-attribute';
 import { FormOfTransportFactory } from '../../../../_domain-common/factories/form-of-transport-factory';
-import { PricePerSingleDayOfMealsAttribute } from './attributes/price-per-single-day-of-meals/price-per-single-day-of-meals-attribute';
+import { MealPricePerPersonAttribute } from './attributes/price-per-single-day-of-meals/meal-price-per-person-attribute';
 import { IDisposable } from '../../../../../shared/interfaces/disposable.interface';
 import { ImagesListModel } from '../models/images-list-model';
 import { Observable } from 'rxjs/internal/Observable';
@@ -32,7 +32,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
   public readonly pricePerSingleParticipant: NumberAttribute;
 
   public readonly meal: CheckboxAttribute;
-  public readonly pricePerSingleDayOfMeals: PricePerSingleDayOfMealsAttribute;
+  public readonly mealPricePerPerson: MealPricePerPersonAttribute;
 
   public readonly departureLocation: TextAttribute;
   public readonly tripLocation: TextAttribute;
@@ -87,9 +87,9 @@ export class TripPersisterEntity implements IEntity, IDisposable {
       translateRoute: translateRoute + 'MEAL.',
       defaultValue: apiModel?.meal
     });
-    this.pricePerSingleDayOfMeals = new PricePerSingleDayOfMealsAttribute({
+    this.mealPricePerPerson = new MealPricePerPersonAttribute({
       meal: this.meal,
-      defaultValue: apiModel?.pricePerSingleDayOfMeals ?? 0
+      defaultValue: apiModel?.mealPricePerPerson ?? 0
     });
 
     this.departureLocation = new TextAttribute({
@@ -154,6 +154,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
       startDate: this.startDate.formControl,
       endDate: this.endDate.formControl,
       meal: this.meal.formControl,
+      mealPricePerPerson: this.mealPricePerPerson.formControl,
       formOfTransport: this.formOfTransport.formControl,
       mainImageUrl: this.mainImageUrl.formControl,
       guidId: this.guideId.formControl
@@ -172,7 +173,7 @@ export class TripPersisterEntity implements IEntity, IDisposable {
   }
 
   public dispose(): void {
-    this.pricePerSingleDayOfMeals.dispose();
+    this.mealPricePerPerson.dispose();
     this._otherImagesSubject.complete();
   }
 

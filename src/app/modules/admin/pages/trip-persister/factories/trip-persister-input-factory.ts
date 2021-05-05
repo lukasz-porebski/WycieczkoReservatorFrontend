@@ -57,14 +57,14 @@ export class TripPersisterInputFactory {
     });
   }
 
-  public createPricePerSingleDayOfMeals(entity: TripPersisterEntity): AppInputModel {
+  public createMealPricePerPerson(entity: TripPersisterEntity): AppInputModel {
     return new AppInputModel({
       label: {
-        text: entity.pricePerSingleDayOfMeals.translateRoute,
+        text: entity.mealPricePerPerson.translateRoute,
       },
       input: new AppInputBasicModel({
         type: AppInputBasicType.price,
-        attribute: entity.pricePerSingleDayOfMeals,
+        attribute: entity.mealPricePerPerson,
       }),
     });
   }
