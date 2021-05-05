@@ -88,6 +88,7 @@
           "REPEAT_NEW_PASSWORD": "Powtórz nowe hasło",
           "BACK_TO_LOG_IN": "Wróc do logowania",
           "CHANGE_PASSWORD": "Zmień hasło",
+          "CHANGED_PASSWORD": "Zmieniono hasło",
           "ATTRIBUTES": {
             "NEW_PASSWORD": {
               "FIELD_NAME": "Nowe hasło",
@@ -101,11 +102,11 @@
       "ATTRIBUTES": {
         "PASSWORD": {
           "FIELD_NAME": "Hasło",
-          "HINT": "Ilość znaków musi mieścić się w przedziale 10-30",
+          "HINT": "Ilość znaków nie może być mniejsza niż 6",
           "ERRORS": {
             "INCORRECT_FORMAT": "Hasło musi zawierać małą i wielką literę, cyfrę oraz znak specjalny",
             "WHITE_SPACE": "Hasło nie może zawierać spacji",
-            "LENGTH": "Ilość znaków musi mieścić się w przedziale 10-30"
+            "LENGTH": "Ilość znaków nie może być mniejsza niż 6"
           }
         },
         "REPEATED_PASSWORD": {
@@ -301,12 +302,10 @@
       }
     }
   },
-  "ERRORS": {
-    "USER": {
-      "AHC": {
-        "5": "Podany adreas email jest już zajęty",
-        "6": "Nieprawidłowy login lub hasło"
-      }
-    }
+  "ERROR_CODES": {
+    "1001": "Nie istnieje użytkownik o podanym adresie email",
+    "1002": "Hasło jest niepoprawne",
+    "1003": "Hasło musi mieć co najmniej 6 znaków",
+    "1004": "Nowe hasło musi być inne niż poprzednie"
   }
 }

@@ -40,8 +40,7 @@ export class PasswordAttribute implements IAttribute {
   }
 
   public readonly translateRoute = 'MODULES.USER.ATTRIBUTES.PASSWORD.';
-  public readonly minLength = 10;
-  public readonly maxLength = 30;
+  public readonly minLength = 6;
   public readonly formControl: FormControl;
 
   protected readonly _error = new ErrorModel();
@@ -51,7 +50,7 @@ export class PasswordAttribute implements IAttribute {
       Validators.required,
       // PasswordValidator.format, //TODO: Dodać potem
       PasswordValidator.containsWhiteSpace,
-      // PasswordValidator.properLength(this.minLength, this.maxLength), //TODO: Dodać potem
+      PasswordValidator.properLength(this.minLength),
       ...replaceIfNotDefined(additionalValidators, [])
     ]);
   }

@@ -8,6 +8,11 @@ import { AppInputBasicType } from '../../../../shared/components/wrappers/app-in
 import { AppInputHintAlign } from '../../../../shared/components/wrappers/app-input/enums/app-input-hint-align.enum';
 import { PasswordChangerEntity } from './entities/password-changer-entity';
 import { ChangePasswordRequestModel } from './models/requests/change-password-request-model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../../shared/services/error.service';
+import { Router } from '@angular/router';
+import { AppRouting } from '../../../../core/configurations/routing/app-routing';
+import { NotificationService, NotificationType } from '../../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-password-changer',
@@ -35,7 +40,10 @@ export class PasswordChangerComponent implements OnInit {
   public button: AppButtonModel;
   public errors: string[] = [];
 
-  constructor(private readonly _userApiService: UserApiService) {
+  constructor(private readonly _userApiService: UserApiService,
+              private readonly _errorService: ErrorService,
+              private readonly _router: Router,
+              private readonly _notificationService: NotificationService) {
   }
 
   public ngOnInit(): void {
@@ -100,18 +108,17 @@ export class PasswordChangerComponent implements OnInit {
     const request = new ChangePasswordRequestModel(
       this.entity.email.value, this.entity.oldPassword.value, this.entity.newPassword.value);
 
-    // this._userApiService.register()
-    //   .pipe(
-    //     switchMap(() => this._authenticationService.login(
-    //       this.service.userEntity.email.value, this.service.userEntity.password.value)),
-    //     catchError((error: string[]) => {
-    //       this.errors = replaceIfNotDefined(error, [])
-    //         .map(e => ErrorHelper.getErrorTranslateRoute(e));
-    //       this.service.userEntity.whole.enable();
-    //       this.showSpinner = false;
-    //       return of(null);
-    //     }),
-    //   )
-    //   .subscribe(() => this.goToNextStep.emit());
+    this._userApiService
+      .changePassword(request)
+      .subscribe(
+        () => {
+          const message = this.translateRoute + 'CHANGED_PASSWORD';
+          this._notificationService.showNotification(message, NotificationType.Success);
+          this._router.navigateByUrl(AppRouting.user.logIn.absolutePath);
+        },
+        (error: HttpErrorResponse) => {
+          this.errors = this._errorService.extractSingleMessageAsCollection(error);
+          this.entity.whole.enable();
+        });
   }
 }
