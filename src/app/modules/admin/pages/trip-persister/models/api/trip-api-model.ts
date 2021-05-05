@@ -7,10 +7,8 @@ export interface TripApiResponse {
   description: string;
   participants: number[];
   pricePerSingleParticipant: number;
-  roomSizes: number[];
-  pricePerSingleRoom: number;
   meal: boolean;
-  pricePerSingleDayOfMeals: number;
+  mealPricePerPerson: number;
   departureLocation: string;
   tripLocation: string;
   startDate: string;
@@ -27,10 +25,8 @@ export class TripApiModel {
   public description: string;
   public participants: number[];
   public pricePerSingleParticipant: number;
-  public roomSizes: number[];
-  public pricePerSingleRoom: number;
   public meal: boolean;
-  public pricePerSingleDayOfMeals: number;
+  public mealPricePerPerson: number;
   public departureLocation: string;
   public tripLocation: string;
   public startDate: Date;
@@ -46,10 +42,8 @@ export class TripApiModel {
     this.description = response.description;
     this.participants = [ ...response.participants ];
     this.pricePerSingleParticipant = response.pricePerSingleParticipant;
-    this.roomSizes = [ ...response.roomSizes ];
-    this.pricePerSingleRoom = response.pricePerSingleRoom;
     this.meal = response.meal;
-    this.pricePerSingleDayOfMeals = response.pricePerSingleDayOfMeals;
+    this.mealPricePerPerson = response.mealPricePerPerson;
     this.departureLocation = response.departureLocation;
     this.tripLocation = response.tripLocation;
     this.startDate = new Date(response.startDate);
@@ -59,6 +53,4 @@ export class TripApiModel {
     this.mainImageUrl = response.mainImageUrl;
     this.otherImagesUrl = [ ...response.otherImagesUrl ];
   }
-
-
 }

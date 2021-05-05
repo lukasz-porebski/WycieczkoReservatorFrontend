@@ -8,7 +8,6 @@ import { isDefined } from '../../../../../../shared/utils/utils';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TripListApiModel } from '../../models/trip-list-api-model';
-import { AssigneGuideToTripRequestModel } from './models/requests/assigne-guide-to-trip-request-model';
 
 @Component({
   selector: 'app-guide-to-trip-assigner-modal',
@@ -41,7 +40,12 @@ export class GuideToTripAssignerModalComponent implements OnInit {
     this.tableConfig = new AppTableModel<UserListApiModel>({
       translateRout: this.translateRoute + 'COLUMNS',
       selection: {
-        onRowSelect: row => this.selectedGuide = row
+        onRowSelect: row => this.selectedGuide = row,
+        initialSelection: data => {
+          const guide = data.find(d => d.id === this.data.guideId);
+          this.selectedGuide = guide;
+          return guide;
+        }
       },
       dataSource: this._apiService.getGuidesToTripAssigne(this.data.id),
       paginator: {
@@ -66,8 +70,11 @@ export class GuideToTripAssignerModalComponent implements OnInit {
     this.button = new AppButtonModel({
       onClick: () => {
         this.showSpinner = true;
-        const request = new AssigneGuideToTripRequestModel(this.data.id, this.selectedGuide.id);
-        this._matDialogRef.close(true);
+        this._apiService
+          .assigneGuideToTrip(this.data.id, this.selectedGuide.id)
+          .subscribe(() => {
+            this._matDialogRef.close(true);
+          });
       },
       label: {
         text: this.translateRoute + 'ASSIGNE_GUID',

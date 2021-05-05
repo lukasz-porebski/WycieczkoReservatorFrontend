@@ -3,10 +3,8 @@ export abstract class PersistTripRequestModel {
   public description: string;
   public participants: number[];
   public pricePerSingleParticipant: number;
-  public roomSizes: number[];
-  public pricePerSingleRoom: number;
   public meal: boolean;
-  public pricePerSingleDayOfMeals: number;
+  public mealPricePerPerson: number;
   public departureLocation: string;
   public tripLocation: string;
   public startDate: Date;

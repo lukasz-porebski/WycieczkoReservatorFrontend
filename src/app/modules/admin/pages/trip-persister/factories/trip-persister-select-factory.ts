@@ -17,16 +17,6 @@ export class TripPersisterSelectFactory {
     });
   }
 
-  public createRoomSizes(entity: TripPersisterEntity): AppSelectModel {
-    return new AppSelectModel({
-      label: {
-        text: entity.roomSizes.translateRoute
-      },
-      attribute: entity.roomSizes,
-      maxWidth: true
-    });
-  }
-
   public createFormOfTransport(entity: TripPersisterEntity): AppSelectModel {
     return new AppSelectModel({
       label: {

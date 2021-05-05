@@ -2,13 +2,12 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@
 import { AppTableModel } from './models/app-table.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { toPercent, isDefined, isNotEmpty, toPrice } from '../../../utils/utils';
+import { toPercent, isDefined, isNotEmpty, toPrice, isEmpty } from '../../../utils/utils';
 import { AppTableColumnType } from './enums/app-table-column-type.enum';
 import { DateFormat } from '../../../enums/date-format.enum';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
-import { AppTableColumnActionModel } from './models/app-table-column-action.model';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -111,8 +110,9 @@ export class AppTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public onRowClick(row: any): void {
     if (this.isSelectionEnable) {
-      this.configuration.selection.onRowSelect(row);
       this.selection.toggle(row);
+      const selectedRow = isEmpty(this.selection.selected) ? null : this.selection.selected[0];
+      this.configuration.selection.onRowSelect(selectedRow);
     }
   }
 

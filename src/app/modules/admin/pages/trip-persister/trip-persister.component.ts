@@ -53,11 +53,8 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
   public participantsSelect: AppSelectModel;
   public pricePerSingleParticipantInput: AppInputModel;
 
-  public roomSizesSelect: AppSelectModel;
-  public pricePerSingleRoomInput: AppInputModel;
-
   public mealInput: AppInputModel;
-  public pricePerSingleDayOfMealsInput: AppInputModel;
+  public mealPricePerPersonInput: AppInputModel;
 
   public departureLocationInput: AppInputModel;
   public tripLocationInput: AppInputModel;
@@ -111,11 +108,8 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
     this.participantsSelect = this._selectFactory.createParticipants(entity);
     this.pricePerSingleParticipantInput = this._inputFactory.createPricePerSingleParticipant(entity);
 
-    this.roomSizesSelect = this._selectFactory.createRoomSizes(entity);
-    this.pricePerSingleRoomInput = this._inputFactory.createPricePerSingleRoom(entity);
-
     this.mealInput = this._inputFactory.createMeal(entity);
-    this.pricePerSingleDayOfMealsInput = this._inputFactory.createPricePerSingleDayOfMeals(entity);
+    this.mealPricePerPersonInput = this._inputFactory.createMealPricePerPerson(entity);
 
     this.departureLocationInput = this._inputFactory.createDepartureLocation(entity);
     this.tripLocationInput = this._inputFactory.createTripLocation(entity);

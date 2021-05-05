@@ -1,17 +1,17 @@
 import { IAttribute } from '../../../../../../../shared/interfaces/attribute.interface';
 import { ErrorModel } from '../../../../../../../shared/models/error.model';
 import { FormControl } from '@angular/forms';
-import { PricePerSingleDayOfMealsValidator } from './price-per-single-day-of-meals-validator';
+import { MealPricePerPersonValidator } from './meal-price-per-person-validator';
 import { CheckboxAttribute } from '../../../../../../../shared/attributes/checkbox-attribute';
 import { IDisposable } from '../../../../../../../shared/interfaces/disposable.interface';
 import { Subscription } from 'rxjs';
 
-export interface IPricePerSingleDayOfMealsAttributeConfiguration {
+export interface IMealPricePerPersonAttributeConfiguration {
   meal: CheckboxAttribute;
   defaultValue?: number;
 }
 
-export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposable {
+export class MealPricePerPersonAttribute implements IAttribute, IDisposable {
   public get value(): number {
     return this.formControl.value;
   }
@@ -37,7 +37,7 @@ export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposabl
     return this._error;
   }
 
-  public readonly translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.ATTRIBUTES.PRICE_PER_SINGLE_DAY_OF_MEALS.';
+  public readonly translateRoute = 'MODULES.ADMIN.PAGES.TRIP_PERSISTER.ATTRIBUTES.MEAL_PRICE_PER_PERSON.';
   public readonly formControl: FormControl;
 
   private readonly _error = new ErrorModel();
@@ -45,7 +45,7 @@ export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposabl
   private readonly _minPrice = 1;
   private readonly _meal: CheckboxAttribute;
 
-  constructor(configuration: IPricePerSingleDayOfMealsAttributeConfiguration) {
+  constructor(configuration: IMealPricePerPersonAttributeConfiguration) {
     this._meal = configuration.meal;
     const sub = this._meal.formControl.valueChanges.subscribe((isMeal: boolean) => {
       if (!isMeal) {
@@ -57,8 +57,8 @@ export class PricePerSingleDayOfMealsAttribute implements IAttribute, IDisposabl
     this._subscription.add(sub);
 
     this.formControl = new FormControl(configuration.defaultValue, [
-      PricePerSingleDayOfMealsValidator.requiredPrice(this._meal.formControl),
-      PricePerSingleDayOfMealsValidator.greaterOrEqualToMinPrice(this._meal.formControl, this._minPrice)
+      MealPricePerPersonValidator.requiredPrice(this._meal.formControl),
+      MealPricePerPersonValidator.greaterOrEqualToMinPrice(this._meal.formControl, this._minPrice)
     ]);
   }
 
