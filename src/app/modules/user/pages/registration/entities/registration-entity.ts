@@ -31,28 +31,35 @@ export class RegistrationEntity implements IEntity {
     this.repeatedPassword = new RepeatedPasswordAttribute(this.password);
     this.firstName = new TextAttribute({
       translateRoute: translateRoute + 'FIRST_NAME.',
-      isRequired: true
+      isRequired: true,
+      maxLength: 45
     });
     this.lastName = new TextAttribute({
       translateRoute: translateRoute + 'LAST_NAME.',
-      isRequired: true
+      isRequired: true,
+      maxLength: 45
     });
     this.city = new TextAttribute({
       translateRoute: translateRoute + 'CITY.',
-      isRequired: true
+      isRequired: true,
+      maxLength: 45
     });
     this.zipCode = new ZipCodeAttribute();
     this.streetAndNumber = new TextAttribute({
       translateRoute: translateRoute + 'STREET_AND_NUMBER.',
-      isRequired: true
+      isRequired: true,
+      maxLength: 100
     });
     this.phoneNumber = new TextAttribute({
       translateRoute: translateRoute + 'PHONE_NUMBER.',
-      isRequired: true
+      isRequired: true,
+      minLength: 7,
+      maxLength: 15
     });
     this.passwordHelpQuestionAnswer = new TextAttribute({
       translateRoute: translateRoute + 'PASSWORD_HELP_QUESTION_ANSWER.',
-      isRequired: true
+      isRequired: true,
+      maxLength: 100
     });
     this.selectedPasswordHelpQuestion = defaultPasswordHelpQuestion;
 
@@ -66,6 +73,7 @@ export class RegistrationEntity implements IEntity {
       zipCode: this.zipCode.formControl,
       streetAndNumber: this.streetAndNumber.formControl,
       phoneNumber: this.phoneNumber.formControl,
+      passwordHelpQuestionAnswer: this.passwordHelpQuestionAnswer.formControl,
     });
   }
 

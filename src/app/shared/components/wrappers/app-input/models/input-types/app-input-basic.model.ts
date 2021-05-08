@@ -74,7 +74,7 @@ export class AppInputBasicModel {
       case AppInputBasicType.price:
         return ' zł';
       default:
-        return null;
+        return '';
     }
   }
 }

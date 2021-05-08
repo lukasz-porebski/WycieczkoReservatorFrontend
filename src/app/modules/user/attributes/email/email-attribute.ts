@@ -26,11 +26,19 @@ export class EmailAttribute implements IAttribute {
       return this._error.setMessage(`${this.translateRoute}ERRORS.INCORRECT_FORMAT`);
     }
 
+    if (this.formControl.errors?.maxlength) {
+      return this._error.setMessage(`${this.translateRoute}ERRORS.TO_LONG`);
+    }
+
     return this._error;
   }
 
   public readonly translateRoute = 'SHARED.ATTRIBUTES.EMAIL.';
-  public readonly formControl = new FormControl(null, [Validators.required, Validators.email]);
+  public readonly formControl = new FormControl(null, [
+    Validators.required,
+    Validators.email,
+    Validators.maxLength(45)
+  ]);
 
   private readonly _error = new ErrorModel();
 }
