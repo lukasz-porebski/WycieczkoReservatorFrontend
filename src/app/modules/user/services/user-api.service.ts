@@ -5,19 +5,24 @@ import { Observable, of } from 'rxjs';
 import { RemindPasswordRequestModel } from '../pages/password-reminder/models/requests/remind-password-request-model';
 import { PasswordHelpQuestion } from '../pages/registration/enums/password-help-question.enum';
 import { ChangePasswordRequestModel } from '../pages/password-changer/models/requests/change-password-request-model';
+import { RegisterUserRequest } from '../pages/registration/models/requests/register-user-request';
 
 @Injectable({
   providedIn: UserApiServiceModule
 })
 export class UserApiService {
 
-  private readonly _baseUrl = `${this._http.baseUrl}/account/`;
+  private readonly _baseUrl = `${this._http.baseUrl}/account`;
 
   constructor(private readonly _http: HttpService) {
   }
 
+  public register(request: RegisterUserRequest): Observable<any> {
+    return this._http.post(this._baseUrl, request);
+  }
+
   public changePassword(request: ChangePasswordRequestModel): Observable<void> {
-    return this._http.put(`${this._baseUrl}change-password`, request);
+    return this._http.put(`${this._baseUrl}/change-password`, request);
   }
 
   public getPasswordHelpQuestion(email: string): Observable<PasswordHelpQuestion> {

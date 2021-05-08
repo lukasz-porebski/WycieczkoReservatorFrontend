@@ -43,7 +43,7 @@
               "FIELD_NAME": "Nazwisko"
             },
             "STREET_AND_NUMBER": {
-              "FIELD_NAME": "Ulica i numer"
+              "FIELD_NAME": "Ulica i numer domu"
             },
             "ZIP_CODE": {
               "FIELD_NAME": "Kod pocztowy",
@@ -102,11 +102,11 @@
       "ATTRIBUTES": {
         "PASSWORD": {
           "FIELD_NAME": "Hasło",
-          "HINT": "Ilość znaków nie może być mniejsza niż 6",
+          "HINT": "Liczba znaków nie może być mniejsza niż 6",
           "ERRORS": {
             "INCORRECT_FORMAT": "Hasło musi zawierać małą i wielką literę, cyfrę oraz znak specjalny",
             "WHITE_SPACE": "Hasło nie może zawierać spacji",
-            "LENGTH": "Ilość znaków nie może być mniejsza niż 6"
+            "LENGTH": "Liczba znaków nie może być mniejsza niż 6"
           }
         },
         "REPEATED_PASSWORD": {
@@ -269,13 +269,17 @@
       "EMAIL": {
         "FIELD_NAME": "Email",
         "ERRORS": {
-          "INCORRECT_FORMAT": "Nieprawidłowy format adresu email"
+          "INCORRECT_FORMAT": "Nieprawidłowy format adresu email",
+          "TO_LONG": "Email może mieć maksymalnie 45 znaków"
         }
       },
       "ERRORS": {
         "REQUIRED": "To pole jest wymagane",
         "MIN": "Minimalna wartość to {{minValue}}",
-        "MAX": "Maksymalna wartość to {{maxValue}}"
+        "MAX": "Maksymalna wartość to {{maxValue}}",
+        "MIN_LENGTH": "Minimalna liczba znaków to {{minLength}}",
+        "MAX_LENGTH": "Maksymalna liczba znaków to {{maxLength}}",
+        "LENGTH": "Liczba znaków musi mieścić się w przedziale od {{minLength}} do {{maxLength}}"
       }
     },
     "COMPONENTS": {
@@ -303,9 +307,39 @@
     }
   },
   "ERROR_CODES": {
-    "1001": "Nie istnieje użytkownik o podanym adresie email",
+    "1001": "Nie istnieje konto o podanym adresie email",
     "1002": "Hasło jest niepoprawne",
     "1003": "Hasło musi mieć co najmniej 6 znaków",
-    "1004": "Nowe hasło musi być inne niż poprzednie"
+    "1004": "Nowe hasło musi być inne niż poprzednie",
+    "2001": "Użytkownik nie istnieje",
+    "2002": "Wycieczka nie istnieje",
+    "2003": "Użytkownik nie jest przewodnikiem",
+    "3001": "Kwota musi być dodatnia",
+    "4001": "Email jest wymagany",
+    "4002": "Email jest niepoprawny",
+    "4003": "Email może mieć maksymalnie 45 znaków",
+    "4004": "Hasło jest wymagany",
+    "4005": "Hasło musi mieć minimalnie 6 znaków",
+    "4006": "Imie jest wymagany",
+    "4007": "Imie musi mieć między 1 a 45 liter",
+    "4008": "Nazwisko jest wymagany",
+    "4009": "Nazwisko musi mieć między 1 a 45 liter",
+    "4010": "Ulica i numer domu są wymagane",
+    "4011": "Ulica i numer domu muszą mieć między 1 a 100 znaków",
+    "4012": "Kod pocztowy jest wymagany",
+    "4013": "Kod pocztowy musi mieć 6 znaków",
+    "4014": "Miejscowość jest wymagana",
+    "4015": "Miejscowość musi mieć między 1 a 45 liter",
+    "4016": "Numer telefonu jest wymagany",
+    "4017": "Numer telefonu musi mieć między 7 a 15 znaków",
+    "4018": "Odpowiedź na pytanie pomocnicze jest wymagana",
+    "4019": "Odpowiedź na pytanie pomocnicze musi mieć między 1 a 100 znaków",
+    "4020": "Pytanie pomocnicze jest wymagana",
+    "4021": "Pytanie pomocnicze musi mieć wartość od 1 do 3",
+    "4022": "Konto o podanym adresie email już istnieje",
+    "5001": "Email jest wymagany",
+    "5002": "Odpowiedź na pytanie pomocnicze jest wymagana",
+    "5003": "Nie istnieje konto o podanym adresie email",
+    "5004": "Odpowiedź jest niepoprawna"
   }
 }

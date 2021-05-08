@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { UserApiServiceModule } from '../../../user-api-service.module';
-import { PasswordHelpQuestion } from '../enums/password-help-question.enum';
-import { TranslateService } from '@ngx-translate/core';
-import { ValueTextPairModel } from '../../../../../shared/models/value-text-pair-model';
 import { RegisterUserRequest } from '../models/requests/register-user-request';
 import { RegistrationEntity } from '../entities/registration-entity';
 
@@ -19,12 +16,16 @@ export class RegistrationRequestFactory {
     request.firstName = entity.firstName.value;
     request.lastName = entity.lastName.value;
     request.streetAndNumber = entity.streetAndNumber.value;
-    request.zipCode = entity.zipCode.value;
+    request.zipCode = this._toZipCodeFormat(entity.zipCode.value);
     request.city = entity.city.value;
     request.phoneNumber = entity.phoneNumber.value;
     request.passwordHelpQuestionAnswer = entity.passwordHelpQuestionAnswer.value;
     request.selectedPasswordHelpQuestion = entity.selectedPasswordHelpQuestion;
 
     return request;
+  }
+
+  private _toZipCodeFormat(zipCode: string): string {
+    return `${zipCode[0]}${zipCode[1]}-${zipCode[2]}${zipCode[3]}${zipCode[4]}`;
   }
 }

@@ -9,6 +9,10 @@ import { AppInputHintAlign } from '../../../../shared/components/wrappers/app-in
 import { RegistrationEntity } from './entities/registration-entity';
 import { PasswordHelpQuestionsFactory } from './factories/password-help-questions-factory';
 import { RegistrationRequestFactory } from './factories/registration-request-factory';
+import { AuthenticationService } from '../../../../core/user-identity/services/authentication.service';
+import { switchMap } from 'rxjs/operators';
+import { ErrorService } from '../../../../shared/services/error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -16,6 +20,14 @@ import { RegistrationRequestFactory } from './factories/registration-request-fac
   styleUrls: [ './registration.component.scss' ]
 })
 export class RegistrationComponent implements OnInit {
+  public get showSpinner(): boolean {
+    return this.entity.whole.disabled;
+  }
+
+  public get disableRegisterButton(): boolean {
+    return this.entity.whole.invalid || this.entity.whole.disabled;
+  }
+
   public readonly passwordHelpQuestions = this._passwordHelpQuestionsFactory.createPasswordHelpQuestions();
   public readonly entity = new RegistrationEntity(this.passwordHelpQuestions[0].value);
   public readonly translateRoute = 'MODULES.USER.PAGES.REGISTRATION.';
@@ -34,11 +46,12 @@ export class RegistrationComponent implements OnInit {
 
   public button: AppButtonModel;
   public errors: string[] = [];
-  public showSpinner = false;
 
   constructor(private readonly _userApiService: UserApiService,
               private readonly _passwordHelpQuestionsFactory: PasswordHelpQuestionsFactory,
-              private readonly _requestFactory: RegistrationRequestFactory) {
+              private readonly _requestFactory: RegistrationRequestFactory,
+              private readonly _authenticationService: AuthenticationService,
+              private readonly _errorService: ErrorService) {
   }
 
   public ngOnInit(): void {
@@ -155,21 +168,19 @@ export class RegistrationComponent implements OnInit {
 
   public onSave(): void {
     this.entity.whole.disable();
-    this.showSpinner = true;
     const request = this._requestFactory.createRegister(this.entity);
 
-    // this._userApiService.register()
-    //   .pipe(
-    //     switchMap(() => this._authenticationService.login(
-    //       this.service.userEntity.email.value, this.service.userEntity.password.value)),
-    //     catchError((error: string[]) => {
-    //       this.errors = replaceIfNotDefined(error, [])
-    //         .map(e => ErrorHelper.getErrorTranslateRoute(e));
-    //       this.service.userEntity.whole.enable();
-    //       this.showSpinner = false;
-    //       return of(null);
-    //     }),
-    //   )
-    //   .subscribe(() => this.goToNextStep.emit());
+    this._userApiService
+      .register(request)
+      .pipe(
+        switchMap(() => this._authenticationService.logInAndRedirectToTripsList(request.email, request.password))
+      )
+      .subscribe(
+        () => {
+        },
+        (error: HttpErrorResponse) => {
+          this.errors = this._errorService.extractSingleMessageAsCollection(error);
+          this.entity.whole.enable();
+        });
   }
 }

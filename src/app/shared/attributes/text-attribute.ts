@@ -1,11 +1,14 @@
 import { IAttribute } from '../interfaces/attribute.interface';
 import { ErrorModel } from '../models/error.model';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { isDefined } from '../utils/utils';
 
 export interface ITextAttributeConfiguration {
   translateRoute: string;
   defaultValue?: string;
   isRequired?: boolean;
+  minLength?: number;
+  maxLength?: number;
 }
 
 export class TextAttribute implements IAttribute {
@@ -24,6 +27,30 @@ export class TextAttribute implements IAttribute {
       return this._error.setMessage('SHARED.ATTRIBUTES.ERRORS.REQUIRED');
     }
 
+    if (isDefined(this._configuration.minLength) && isDefined(this._configuration.maxLength)) {
+      if (this.formControl.errors?.minlength || this.formControl.errors?.maxlength) {
+        return this._error.setMessage('SHARED.ATTRIBUTES.ERRORS.LENGTH',
+          {
+            minLength: this._configuration.minLength,
+            maxLength: this._configuration.maxLength
+          });
+      }
+    } else {
+      if (this.formControl.errors?.minlength) {
+        return this._error.setMessage('SHARED.ATTRIBUTES.ERRORS.MIN_LENGTH',
+          {
+            minLength: this._configuration.minLength
+          });
+      }
+
+      if (this.formControl.errors?.maxlength) {
+        return this._error.setMessage('SHARED.ATTRIBUTES.ERRORS.MAX_LENGTH',
+          {
+            maxLength: this._configuration.maxLength
+          });
+      }
+    }
+
     return this._error;
   }
 
@@ -32,10 +59,23 @@ export class TextAttribute implements IAttribute {
 
   private readonly _error = new ErrorModel();
 
-  public constructor(configuration: ITextAttributeConfiguration) {
-    this.translateRoute = configuration.translateRoute;
-    const validators = configuration.isRequired ? [ Validators.required ] : [];
-    this.formControl = new FormControl(configuration.defaultValue, validators);
+  public constructor(private readonly _configuration: ITextAttributeConfiguration) {
+    this.translateRoute = _configuration.translateRoute;
+    const validators: ValidatorFn[] = [];
+
+    if (_configuration.isRequired) {
+      validators.push(Validators.required);
+    }
+
+    if (_configuration.minLength) {
+      validators.push(Validators.minLength(_configuration.minLength));
+    }
+
+    if (_configuration.maxLength) {
+      validators.push(Validators.maxLength(_configuration.maxLength));
+    }
+
+    this.formControl = new FormControl(_configuration.defaultValue, validators);
   }
 }
 
