@@ -30,7 +30,8 @@ export class TripsListApiService {
   }
 
   public getGuidesToTripAssigne(tripId: number): Observable<UserListApiModel[]> {
-    return this._http.get<UserListApiResponse[]>(`${this._http.baseUrl}/users/getAllGuides`).pipe(
+    return this._http.get<UserListApiResponse[]>(
+      `${this._http.baseUrl}/users/getAvailableGuides?tripId=${tripId}`).pipe(
       map(trips => trips.map(trip => new UserListApiModel(trip)))
     );
   }

@@ -125,6 +125,6 @@ export class TripPersisterComponent implements OnInit, OnDestroy {
 
     this.otherImagesTableConfig = this._tableFactory.createOtherImages(entity, this.translateRoute);
 
-    this.persistButton = this._buttonFactory.createPersist(entity, this.translateRoute, mode);
+    this.persistButton = this._buttonFactory.createPersist(entity, this.translateRoute, mode, this.errors);
   }
 }

@@ -314,6 +314,7 @@
     "2001": "Użytkownik nie istnieje",
     "2002": "Wycieczka nie istnieje",
     "2003": "Użytkownik nie jest przewodnikiem",
+    "2004": "Przewodnik jest niedostępny w terminie trwania tej wycieczki",
     "3001": "Kwota musi być dodatnia",
     "4001": "Email jest wymagany",
     "4002": "Email jest niepoprawny",
