@@ -8,6 +8,8 @@ import { isDefined } from '../../../../../../shared/utils/utils';
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TripListApiModel } from '../../models/trip-list-api-model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-guide-to-trip-assigner-modal',
@@ -15,8 +17,8 @@ import { TripListApiModel } from '../../models/trip-list-api-model';
   styleUrls: [ './guide-to-trip-assigner-modal.component.scss' ]
 })
 export class GuideToTripAssignerModalComponent implements OnInit {
-  public get isGuideSelected(): boolean {
-    return isDefined(this.selectedGuide);
+  public get selectedDifferentGuide(): boolean {
+    return isDefined(this.selectedGuide) && (this.selectedGuide.id !== this.data.guideId);
   }
 
   public readonly translateRoute = 'MODULES.TRIP.PAGES.TRIPS_LIST.MODALS.GUIDE_TO_TRIP_ASSIGNER.';
@@ -26,10 +28,12 @@ export class GuideToTripAssignerModalComponent implements OnInit {
   public tableConfig: AppTableModel<UserListApiModel>;
   public selectedGuide: UserListApiModel;
   public button: AppButtonModel;
+  public errors: string[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: TripListApiModel,
               private readonly _matDialogRef: MatDialogRef<GuideToTripAssignerModalComponent>,
-              private readonly _apiService: TripsListApiService) {
+              private readonly _apiService: TripsListApiService,
+              private readonly _errorService: ErrorService) {
   }
 
   public ngOnInit(): void {
@@ -73,8 +77,12 @@ export class GuideToTripAssignerModalComponent implements OnInit {
         this._apiService
           .assigneGuideToTrip(this.data.id, this.selectedGuide.id)
           .subscribe(() => {
-            this._matDialogRef.close(true);
-          });
+              this._matDialogRef.close(true);
+            },
+            (error: HttpErrorResponse) => {
+              this.errors = this._errorService.extractSingleMessageAsCollection(error);
+              this.showSpinner = false;
+            });
       },
       label: {
         text: this.translateRoute + 'ASSIGNE_GUID',

@@ -9,9 +9,11 @@
     <p class="select-guide">{{translateRoute + 'SELECT_GUIDE' | translate}}</p>
     <app-table [configuration]="tableConfig"></app-table>
 
+    <app-error [messages]="errors"></app-error>
+
     <div class="button-container">
       <app-button class="center-button"
-                  [disabled]="showSpinner || !isGuideSelected"
+                  [disabled]="showSpinner || !selectedDifferentGuide"
                   [configuration]="button">
       </app-button>
     </div>
