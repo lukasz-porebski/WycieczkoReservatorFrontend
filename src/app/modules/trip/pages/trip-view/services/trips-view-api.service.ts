@@ -23,7 +23,7 @@ export class TripViewApiService {
       title: 'Playa Bachata Resort (ex. Riu Merengue)',
       description: 'to jest super opis wycieczki',
       pricePerSingleParticipant: 1252.65,
-      roomSizes: [],
+      participants: [1,3,4],
       meal: true,
       departureLocation: 'Katowice',
       tripLocation: 'Dominikana',

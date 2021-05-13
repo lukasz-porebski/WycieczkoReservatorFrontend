@@ -1,1 +1,17 @@
-<p>trip-customize works!</p>
+<app-async-page>
+    <mat-card-content>
+        <p> Data wyjazdu: {{tripViewModel.startDate| date:'dd.MM.YYYY'}} - {{tripViewModel.endDate| date:'dd.MM.YYYY'}}</p>
+        <p> Środek transportu: {{tripViewModel.formOfTransport}} </p>
+        <p *ngIf="tripViewModel.meal; else notShow">Wyżywienie: TAK</p>
+        <ng-template #notShow> <p> Wyżywienie: Brak </p> </ng-template>
+        <p>Ilość osób:</p>
+        <mat-form-field appearance="fill" [x]="tripViewModel.participants[1]">
+        <mat-select>
+            <mat-label>Wybierz ilość</mat-label>
+        <mat-option *ngFor="let x of tripViewModel.participants" value="x">{{x}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p>Cena razem:{{x * tripViewModel.pricePerSingleParticipant}} </p>
+    </mat-card-content>
+
+</app-async-page>

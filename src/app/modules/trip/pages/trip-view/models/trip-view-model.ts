@@ -5,7 +5,7 @@ export class TripViewModel {
     public title: string;
     public description: string;
     public pricePerSingleParticipant: number;
-    public roomSizes: Room[];
+    public participants: number[];
     public meal: boolean;
     public departureLocation: string;
     public tripLocation: string;
