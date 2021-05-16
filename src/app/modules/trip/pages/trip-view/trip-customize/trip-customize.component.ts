@@ -13,9 +13,12 @@ export class TripCustomizeComponent implements OnInit {
 
   constructor(private readonly tripViewApiService: TripViewApiService) { }
 
+  number_of_participants: number;
+
   ngOnInit(): void {
     this.tripViewApiService.getTrip(1).subscribe(trip=>{
-      this.tripViewModel=trip;})
+      this.tripViewModel=trip;
+      this.number_of_participants=trip.participants[0]})
   }
 
 }
