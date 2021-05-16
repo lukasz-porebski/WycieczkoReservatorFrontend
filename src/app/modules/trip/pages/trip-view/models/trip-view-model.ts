@@ -1,4 +1,3 @@
-import { Room } from "./room-model";
 
 export class TripViewModel {
     public tripId: number;

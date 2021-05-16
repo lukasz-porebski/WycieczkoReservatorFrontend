@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TripBookModel } from '../models/trip-book-model';
 import { TripViewModel } from '../models/trip-view-model';
 import { TripViewApiService } from '../services/trips-view-api.service';
 
@@ -20,5 +21,15 @@ export class TripCustomizeComponent implements OnInit {
       this.tripViewModel=trip;
       this.number_of_participants=trip.participants[0]})
   }
+
+  bookTrip(): void{
+    let booking ={ participants : this.number_of_participants,
+          pricePerSingleParticipant : this.tripViewModel.pricePerSingleParticipant,
+          tripId:  this.tripViewModel.tripId,
+          meal: this.tripViewModel.meal
+    }
+    this.tripViewApiService.bookTrip(booking);
+}
+
 
 }

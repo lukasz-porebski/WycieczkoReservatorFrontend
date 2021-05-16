@@ -3,6 +3,7 @@ import { TripServiceModule } from '../../../trip-service.module';
 import { HttpService } from '../../../../../core/services/http.service';
 import { Observable, of } from 'rxjs';
 import { TripViewModel } from '../models/trip-view-model';
+import { TripBookModel } from '../models/trip-book-model';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { TripViewModel } from '../models/trip-view-model';
 })
 export class TripViewApiService {
 
-  private readonly _baseUrl = `${this._http.baseUrl}/trip/`;
+  private readonly _baseUrl = `${this._http.baseUrl}/trips/`;
 
   constructor(private readonly _http: HttpService) {
   }
@@ -39,6 +40,11 @@ export class TripViewApiService {
     };
 
     return of(trip);
+  }
+
+  public bookTrip(booking:TripBookModel): Observable<TripBookModel>{
+    
+    return of(booking);
   }
 
 }
