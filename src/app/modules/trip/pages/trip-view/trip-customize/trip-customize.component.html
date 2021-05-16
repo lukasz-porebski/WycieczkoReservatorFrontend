@@ -4,14 +4,13 @@
         <p> Środek transportu: {{tripViewModel.formOfTransport}} </p>
         <p *ngIf="tripViewModel.meal; else notShow">Wyżywienie: TAK</p>
         <ng-template #notShow> <p> Wyżywienie: Brak </p> </ng-template>
-        <p>Ilość osób:</p>
         <mat-form-field appearance="fill">
             <mat-label>Wybierz liczbę gości:</mat-label>
             <mat-select [(value)]="number_of_participants">
                 <mat-option *ngFor="let x of tripViewModel.participants" [value]="x">{{x}}</mat-option>
             </mat-select>
         </mat-form-field>
-    <p>Cena razem: {{number_of_participants * tripViewModel.pricePerSingleParticipant| number:'1.2-2'}} zł </p>
+    <p>Cena razem: <b>{{number_of_participants * tripViewModel.pricePerSingleParticipant| number:'1.2-2'}} zł</b> </p>
     
     <button mat-stroked-button color="primary">Zarezerwuj</button>
     </mat-card-content>
