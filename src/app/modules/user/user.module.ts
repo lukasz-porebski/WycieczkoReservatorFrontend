@@ -10,6 +10,7 @@ import { PasswordReminderUserRecognitionComponent } from './pages/password-remin
 import { PasswordReminderUserAnswerComponent } from './pages/password-reminder/components/password-reminder-user-answer/password-reminder-user-answer.component';
 import { PasswordChangerComponent } from './pages/password-changer/password-changer.component';
 import { DomainCommonModule } from '../_domain-common/domain-common.module';
+import { MyTripsComponent } from './pages/my-trips/my-trips.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { DomainCommonModule } from '../_domain-common/domain-common.module';
     PasswordReminderComponent,
     PasswordReminderUserRecognitionComponent,
     PasswordReminderUserAnswerComponent,
-    PasswordChangerComponent
+    PasswordChangerComponent,
+    MyTripsComponent
   ],
 })
 export class UserModule {
