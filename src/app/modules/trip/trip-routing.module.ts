@@ -16,7 +16,7 @@ const routes: Routes = [
     component: TripsListComponent
   },
   {
-    path: TripRouting.tripView.path,
+    path: `${TripRouting.tripView.path}/:id`,
     component: TripViewComponent
   }
 ];

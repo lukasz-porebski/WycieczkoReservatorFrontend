@@ -17,7 +17,7 @@ export class TripCustomizeComponent implements OnInit {
   number_of_participants: number;
 
   ngOnInit(): void {
-    this.tripViewApiService.getTrip(1).subscribe(trip=>{
+    this.tripViewApiService.getTrip('1').subscribe(trip=>{
       this.tripViewModel=trip;
       this.number_of_participants=trip.participants[0]})
   }
