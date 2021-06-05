@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TripBookModel } from '../models/trip-book-model';
+import { ActivatedRoute } from '@angular/router';
 import { TripViewModel } from '../models/trip-view-model';
 import { TripViewApiService } from '../services/trips-view-api.service';
 
@@ -12,12 +12,13 @@ export class TripCustomizeComponent implements OnInit {
 
   private tripViewModel: TripViewModel;
 
-  constructor(private readonly tripViewApiService: TripViewApiService) { }
+  constructor(private readonly tripViewApiService: TripViewApiService,  private readonly _route: ActivatedRoute) { }
 
   number_of_participants: number;
 
   ngOnInit(): void {
-    this.tripViewApiService.getTrip('1').subscribe(trip=>{
+    const id = this._route.snapshot.paramMap.get('id');
+    this.tripViewApiService.getTrip(id).subscribe(trip=>{
       this.tripViewModel=trip;
       this.number_of_participants=trip.participants[0]})
   }

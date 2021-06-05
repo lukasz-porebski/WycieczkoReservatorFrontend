@@ -14,6 +14,5 @@ export class TripViewModel {
     public formOfTransport: string;
 
     public mainImageUrl: string;
-    public otherImageUrl: string[];
-    public minPrice: number;
+    public otherImagesUrl: string[];
   }

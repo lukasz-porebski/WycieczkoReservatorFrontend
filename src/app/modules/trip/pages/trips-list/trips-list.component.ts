@@ -90,6 +90,7 @@ export class TripsListComponent implements OnInit {
         icon: AppIcon.Forward,
         name: 'DETAILS',
         onClick: trip => {
+          actionText: 'DETAILS'
           this._router.navigateByUrl(`${AppRouting.trip.tripView.absolutePath}/${trip.id}`);
         }
       }

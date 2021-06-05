@@ -28,7 +28,7 @@ export class TripViewComponent implements OnInit {
     const id = this._route.snapshot.paramMap.get('id');
     this.tripViewApiService.getTrip(id).subscribe(trip=>{
       this.tripViewModel=trip;
-      this.imagesSlider = trip.otherImageUrl.map(url => {
+      this.imagesSlider = trip.otherImagesUrl.map(url => {
         return {image:url, thumbImage:url}
       });
     });
