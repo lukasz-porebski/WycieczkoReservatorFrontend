@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._addTripsMenu();
     this._tryAddTripCreatorMenu();
     this._tryAddUsersMenu();
+    this._tryMyTripsMenu
 
     this._setActiveMenuElements(this._router.url);
 
@@ -103,6 +104,21 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.menu.push(menu);
   }
 
+  private _tryMyTripsMenu(): void{
+    if (!this._showMenuForUser()) {
+      return;
+    }
+
+    const appTranslateRoute = this.translateRoute + 'MENU.MYTRIPS.';
+    const menu = new MenuFirstLevelModel(
+      appTranslateRoute + 'MENU_NAME',
+      AppRouting.user.myTrips.absolutePath,
+      AppIcon.Lock,
+    );
+    this.menu.push(menu);
+
+  }
+
   private _setActiveMenuElements(url: string): void {
     if (isEmpty(url)) {
       return;
@@ -112,6 +128,18 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   private _showMenuForAdmin(): boolean {
     if (this.authenticationService.token?.userRole === UserRole.Admin) {
+      return true;
+    }
+
+    if (environment.mode === DevelopmentEnvironmentMode.FullAccess) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private _showMenuForUser(): boolean {
+    if (this.authenticationService.token?.userRole === UserRole.User) {
       return true;
     }
 

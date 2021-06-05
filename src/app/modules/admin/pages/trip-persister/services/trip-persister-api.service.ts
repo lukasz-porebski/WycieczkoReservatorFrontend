@@ -33,4 +33,5 @@ export class TripPersisterApiService {
       map(trips => trips.map(trip => new UserListApiModel(trip)))
     );
   }
+  
 }

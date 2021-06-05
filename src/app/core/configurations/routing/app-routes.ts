@@ -5,7 +5,8 @@ export const AppRoutes = {
       logIn: 'log-in',
       registration: 'registration',
       passwordReminder: 'password-reminder',
-      passwordChanger: 'password-changer'
+      passwordChanger: 'password-changer',
+      myTrips: 'my-trips'
     }
   },
   admin: {
