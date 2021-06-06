@@ -1,1 +1,7 @@
-<p>my-trips works!</p>
+<app-async-page>
+    <mat-card-header>
+      <mat-card-title>{{translateRoute + 'TITLE' | translate}}</mat-card-title>
+    </mat-card-header>
+    <app-table [configuration]="tableConfig"></app-table>
+  </app-async-page>
+

@@ -10,7 +10,7 @@ import { TripServiceModule } from "../../../trip-service.module";
 @Injectable({
     providedIn: TripServiceModule
   })
-  export class TripsListApiService {
+  export class MyTripsApiService {
     constructor(private readonly _http: HttpService,
                 private readonly _authenticationService: AuthenticationService) {
     }
