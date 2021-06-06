@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TripsListComponent } from './pages/trips-list/trips-list.component';
 import { TripRouting } from '../../core/configurations/routing/children/trip-routing';
 import { TripViewComponent } from './pages/trip-view/trip-view.component';
+import { MyTripsComponent } from './pages/my-trips/my-trips.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: `${TripRouting.tripView.path}/:id`,
     component: TripViewComponent
+  },
+  {
+    path: TripRouting.myTrips.path,
+    component: MyTripsComponent
   }
 ];
 

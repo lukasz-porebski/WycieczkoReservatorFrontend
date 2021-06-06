@@ -296,6 +296,9 @@
         },
         "TRIP_CREATOR": {
           "MENU_NAME": "Dodaj wycieczkę"
+        },
+        "MYTRIPS":{
+          "MENU_NAME":"Moje wycieczki"
         }
       },
       "APP_TABLE": {

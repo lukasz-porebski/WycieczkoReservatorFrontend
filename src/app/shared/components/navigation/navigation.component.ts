@@ -35,7 +35,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._addTripsMenu();
     this._tryAddTripCreatorMenu();
     this._tryAddUsersMenu();
-    this._tryMyTripsMenu
+    this._tryMyTripsMenu();
 
     this._setActiveMenuElements(this._router.url);
 
@@ -112,7 +112,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     const appTranslateRoute = this.translateRoute + 'MENU.MYTRIPS.';
     const menu = new MenuFirstLevelModel(
       appTranslateRoute + 'MENU_NAME',
-      AppRouting.user.myTrips.absolutePath,
+      AppRouting.trip.myTrips.absolutePath,
       AppIcon.Lock,
     );
     this.menu.push(menu);

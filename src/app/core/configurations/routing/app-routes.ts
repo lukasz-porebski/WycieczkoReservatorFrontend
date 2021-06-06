@@ -6,7 +6,6 @@ export const AppRoutes = {
       registration: 'registration',
       passwordReminder: 'password-reminder',
       passwordChanger: 'password-changer',
-      myTrips: 'my-trips'
     }
   },
   admin: {
@@ -21,7 +20,8 @@ export const AppRoutes = {
     path: 'trip',
     children: {
       tripsList: 'trips-list',
-      tripView: 'trip-view'
+      tripView: 'trip-view',
+      myTrips: 'my-trips'
     }
   }
 };
