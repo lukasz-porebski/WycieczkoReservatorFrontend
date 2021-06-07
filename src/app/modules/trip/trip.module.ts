@@ -8,6 +8,7 @@ import { DomainCommonModule } from '../_domain-common/domain-common.module';
 import { TripViewComponent } from './pages/trip-view/trip-view.component';
 import { TripCustomizeComponent } from './pages/trip-view/trip-customize/trip-customize.component';
 import { MyTripsComponent } from './pages/my-trips/my-trips.component';
+import { BookingDetailsComponent } from './pages/my-trips/modals/booking-details/booking-details.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MyTripsComponent } from './pages/my-trips/my-trips.component';
     GuideToTripAssignerModalComponent,
     TripViewComponent,
     TripCustomizeComponent,
-    MyTripsComponent
+    MyTripsComponent,
+    BookingDetailsComponent
   ],
   imports: [
     TripRoutingModule,

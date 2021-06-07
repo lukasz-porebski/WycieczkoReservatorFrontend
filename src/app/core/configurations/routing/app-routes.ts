@@ -21,7 +21,8 @@ export const AppRoutes = {
     children: {
       tripsList: 'trips-list',
       tripView: 'trip-view',
-      myTrips: 'my-trips'
+      myTrips: 'my-trips',
+      bookingDetails: 'booking-details'
     }
   }
 };

@@ -81,7 +81,7 @@ private _getUserActions(): IAppTableColumnActionConfiguration<MyTripsApiModel>[]
       name: 'DETAILS',
       onClick: trip => {
         actionText: 'DETAILS'
-        this._router.navigateByUrl(`${AppRouting.trip.tripView.absolutePath}/${trip.reservationId}`);
+        this._router.navigateByUrl(`${AppRouting.trip.bookingDetails.absolutePath}/${trip.reservationId}`);
       }
     }
   ]

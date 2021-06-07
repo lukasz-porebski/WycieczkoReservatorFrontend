@@ -11,7 +11,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DomainCommonModule } from './modules/_domain-common/domain-common.module';
 import { JwtInterceptor } from './core/user-identity/interceptors/jwt.interceptor';
-import { BookingDetailsComponent } from './modules/trip/pages/my-trips/modals/booking-details/booking-details.component';
 
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -20,8 +19,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BookingDetailsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

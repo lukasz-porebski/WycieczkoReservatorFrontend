@@ -4,6 +4,7 @@ import { TripsListComponent } from './pages/trips-list/trips-list.component';
 import { TripRouting } from '../../core/configurations/routing/children/trip-routing';
 import { TripViewComponent } from './pages/trip-view/trip-view.component';
 import { MyTripsComponent } from './pages/my-trips/my-trips.component';
+import { BookingDetailsComponent } from './pages/my-trips/modals/booking-details/booking-details.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,11 @@ const routes: Routes = [
   {
     path: TripRouting.myTrips.path,
     component: MyTripsComponent
-  }
+  },
+  {
+    path: `${TripRouting.bookingDetails.path}/:id`,
+    component: BookingDetailsComponent
+  },
 ];
 
 @NgModule({
