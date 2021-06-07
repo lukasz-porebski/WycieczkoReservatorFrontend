@@ -15,8 +15,8 @@ export class BookingDetailsComponent implements OnInit {
   constructor(private readonly bookingDetailsApiService: BookingDetailsApiService, private readonly _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const bookingId = this._route.snapshot.paramMap.get('reservationId');
-    this.bookingDetailsApiService.getBookingDetails('reservationId').subscribe(trip=>{
+    const bookingId = this._route.snapshot.paramMap.get('id');
+    this.bookingDetailsApiService.getBookingDetails(bookingId).subscribe(trip=>{
       this.bookingDetailsModel=trip})
   }
 

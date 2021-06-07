@@ -1,1 +1,28 @@
-<p>booking-details works!</p>
+<app-async-page>
+    <mat-card-header>
+        <mat-card-title>{{bookingDetailsModel.title}}</mat-card-title>
+        <mat-card-subtitle>{{bookingDetailsModel.tripLocation}}</mat-card-subtitle>
+        <mat-card-title style="float: right;"><p *ngIf="bookingDetailsModel.meal; else notShow">Cena razem: <b>{{bookingDetailsModel.participants * (bookingDetailsModel.pricePerSingleParticipant + bookingDetailsModel.mealPricePerPerson) | number:'1.2-2'}} zł</b> </p>
+            <ng-template #notShow> <p> Cena razem: <b>{{bookingDetailsModel.participants * bookingDetailsModel.pricePerSingleParticipant | number:'1.2-2'}} zł</b> </p> </ng-template></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-grid-list cols="4" rowHeight="1:2">
+            <mat-grid-tile colspan=3><img src= {{bookingDetailsModel.mainImageUrl}}></mat-grid-tile>
+            <mat-grid-tile colspan=1> 
+                <mat-card-content>
+                    <p> Data wyjazdu: {{bookingDetailsModel.startDate| date:'dd.MM.YYYY'}} - {{bookingDetailsModel.endDate| date:'dd.MM.YYYY'}}</p>
+                    <p> Środek transportu: {{bookingDetailsModel.formOfTransport}} </p>
+                    <p *ngIf="bookingDetailsModel.meal; else notShow">Wyżywienie: TAK</p>
+                    <ng-template #notShow> <p> Wyżywienie: Brak </p> </ng-template>
+                    <p> Liczba gości: {{bookingDetailsModel.participants}} </p>
+                    <p *ngIf="bookingDetailsModel.meal; else notShow1">Cena razem: <b>{{bookingDetailsModel.participants * (bookingDetailsModel.pricePerSingleParticipant + bookingDetailsModel.mealPricePerPerson) | number:'1.2-2'}} zł</b> </p>
+                    <ng-template #notShow1> <p> Cena razem: <b>{{bookingDetailsModel.participants * bookingDetailsModel.pricePerSingleParticipant | number:'1.2-2'}} zł</b> </p> </ng-template>
+                    <button mat-stroked-button color="primary"> Anulowanie wycieczki </button>
+                </mat-card-content>
+                
+            
+            </mat-grid-tile>
+        </mat-grid-list>
+        <p>{{bookingDetailsModel.description}}</p>
+        <ng-image-slider [images]=imagesSlider #nav></ng-image-slider>
+    </mat-card-content>

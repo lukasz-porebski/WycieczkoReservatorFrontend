@@ -8,6 +8,7 @@ export class TripViewModel {
     public meal: boolean;
     public departureLocation: string;
     public tripLocation: string;
+    public mealPricePerPerson: number;
 
     public startDate: Date;
     public endDate: Date;
