@@ -9,6 +9,8 @@ import { EmailAttribute } from '../../../../attributes/email/email-attribute';
 import { PasswordReminderHelpQuestionModel } from '../../models/password-reminder-help-question-model';
 import { UserApiService } from '../../../../services/user-api.service';
 import { PasswordHelpQuestionsFactory } from '../../../registration/factories/password-help-questions-factory';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-password-reminder-user-recognition',
@@ -41,7 +43,8 @@ export class PasswordReminderUserRecognitionComponent implements OnInit {
   private readonly _email = new EmailAttribute();
 
   constructor(private readonly _userApiService: UserApiService,
-              private readonly _passwordHelpQuestionsFactory: PasswordHelpQuestionsFactory) {
+              private readonly _passwordHelpQuestionsFactory: PasswordHelpQuestionsFactory,
+              private readonly _errorService: ErrorService) {
   }
 
   public ngOnInit(): void {
@@ -68,10 +71,14 @@ export class PasswordReminderUserRecognitionComponent implements OnInit {
 
     this._userApiService.getPasswordHelpQuestion(this._email.value)
       .subscribe(value => {
-        const questions = this._passwordHelpQuestionsFactory.createPasswordHelpQuestions();
-        const userQuestion = questions.find(q => q.value === value);
-        const eventData = new PasswordReminderHelpQuestionModel(this._email.value, userQuestion);
-        this.goToNextStep.emit(eventData);
-      });
+          const questions = this._passwordHelpQuestionsFactory.createPasswordHelpQuestions();
+          const userQuestion = questions.find(q => q.value === value);
+          const eventData = new PasswordReminderHelpQuestionModel(this._email.value, userQuestion);
+          this.goToNextStep.emit(eventData);
+        },
+        (error: HttpErrorResponse) => {
+          this.errors = this._errorService.extractSingleMessageAsCollection(error);
+          this._form.enable();
+        });
   }
 }

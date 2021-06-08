@@ -53,6 +53,15 @@ export class ErrorService {
       return customErrorInfo;
     }
 
+    const castedJsonCustomErrorInfo = JSON.parse(error) as CustomErrorInfo;
+    if (isDefined(castedJsonCustomErrorInfo?.errorCode)) {
+      const customErrorInfo = new CustomErrorInfo();
+      customErrorInfo.message = castedJsonCustomErrorInfo.message;
+      customErrorInfo.errorCode = castedJsonCustomErrorInfo.errorCode;
+
+      return customErrorInfo;
+    }
+
     const castedDefaultErrorInfo = JSON.parse(`{${error}}`) as DefaultErrorInfo;
 
     const defaultErrorInfo = new DefaultErrorInfo();
