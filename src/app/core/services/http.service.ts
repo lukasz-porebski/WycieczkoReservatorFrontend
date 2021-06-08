@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpOptions } from '../configurations/http-options';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../environments/environment';
+import { HttpOptions } from '../configurations/http-options';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +21,18 @@ export class HttpService {
 
   public post<T>(url: string, request: any, httpOptions: HttpOptions = this._httpOptions): Observable<T> {
     return this._http.post<T>(url, JSON.stringify(request), httpOptions);
+  }
+
+  public postText(url: string, request: any): Observable<string> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const params = new HttpParams();
+
+    return this._http.post(url, JSON.stringify(request), {
+      responseType: 'text',
+      headers,
+      params
+    });
   }
 
   public patch<T>(url: string, request: any, httpOptions: HttpOptions = this._httpOptions): Observable<T> {

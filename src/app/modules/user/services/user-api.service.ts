@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { UserApiServiceModule } from '../user-api-service.module';
 import { HttpService } from '../../../core/services/http.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RemindPasswordRequestModel } from '../pages/password-reminder/models/requests/remind-password-request-model';
 import { PasswordHelpQuestion } from '../pages/registration/enums/password-help-question.enum';
 import { ChangePasswordRequestModel } from '../pages/password-changer/models/requests/change-password-request-model';
 import { RegisterUserRequest } from '../pages/registration/models/requests/register-user-request';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: UserApiServiceModule
@@ -26,15 +27,15 @@ export class UserApiService {
   }
 
   public getPasswordHelpQuestion(email: string): Observable<PasswordHelpQuestion> {
-    // return this._http.get<string>(`${this._baseUrl}get-password-help-question/${email}`)
-    //   .pipe(map(value => PasswordHelpQuestion.BandName));
+    const httpParams = new HttpParams()
+      .append('email', email);
 
-    return of(PasswordHelpQuestion.FriendName);
+    return this._http.get<PasswordHelpQuestion>(`${this._baseUrl}/security-question`, {
+      params: httpParams
+    });
   }
 
   public remindPassword(request: RemindPasswordRequestModel): Observable<string> {
-    // return this._http.post<AccessTokenApiModel>(`${this._baseUrl}remind-password`, request)
-    //   .pipe(map(value => 'H@sło123'));
-    return of('H@sło123');
+    return this._http.postText(`${this._baseUrl}/remind-password`, request);
   }
 }
