@@ -8,6 +8,9 @@ import { AppModalModel } from '../../../../../../shared/components/wrappers/app-
 import { AppButtonModel } from '../../../../../../shared/components/wrappers/app-button/models/app-button.model';
 import { ValueTextPairModel } from '../../../../../../shared/models/value-text-pair-model';
 import { UserRole } from '../../../../../../core/user-identity/enums/user-role.enum';
+import { NotificationService, NotificationType } from '../../../../../../shared/services/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-user-role-change-modal',
@@ -25,13 +28,16 @@ export class UserRoleChangeModalComponent implements OnInit {
   public otherRoles: ValueTextPairModel<UserRole>[] = [];
   public modalConfig: AppModalModel;
   public button: AppButtonModel;
+  public errors: string[] = [];
 
   private _showSpinner = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: UserListApiModel,
               private readonly _matDialogRef: MatDialogRef<UserRoleChangeModalComponent>,
               private readonly _userRoleFactory: UserRoleFactory,
-              private readonly _adminApiService: UsersListApiService) {
+              private readonly _adminApiService: UsersListApiService,
+              private readonly _errorService: ErrorService,
+              private readonly _notificationService: NotificationService) {
   }
 
   public ngOnInit(): void {
@@ -53,12 +59,19 @@ export class UserRoleChangeModalComponent implements OnInit {
 
   public onChangeRole(): void {
     this._showSpinner = true;
-    const request = new ChangeUserRoleRequestModel(this.data.id, this.selectedRole.value);
+    const request = new ChangeUserRoleRequestModel(this.selectedRole.value);
 
     this._adminApiService
-      .changeRole(request)
+      .changeRole(this.data.id, request)
       .subscribe(
-        () => this._matDialogRef.close(true)
-      );
+        () => {
+          const message = this.translateRoute + 'SUCCESS_MESSAGE';
+          this._notificationService.showNotification(message, NotificationType.Success);
+          this._matDialogRef.close(true);
+        },
+        (error: HttpErrorResponse) => {
+          this.errors = this._errorService.extractSingleMessageAsCollection(error);
+          this._showSpinner = false;
+        });
   }
 }

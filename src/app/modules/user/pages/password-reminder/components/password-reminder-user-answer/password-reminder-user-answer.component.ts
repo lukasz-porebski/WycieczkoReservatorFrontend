@@ -9,6 +9,8 @@ import { TextAttribute } from '../../../../../../shared/attributes/text-attribut
 import { PasswordReminderHelpQuestionModel } from '../../models/password-reminder-help-question-model';
 import { UserApiService } from '../../../../services/user-api.service';
 import { RemindPasswordRequestModel } from '../../models/requests/remind-password-request-model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-password-reminder-user-answer',
@@ -45,7 +47,8 @@ export class PasswordReminderUserAnswerComponent implements OnInit {
     maxLength: 100
   });
 
-  constructor(private readonly _userApiService: UserApiService) {
+  constructor(private readonly _userApiService: UserApiService,
+              private readonly _errorService: ErrorService) {
   }
 
   public ngOnInit(): void {
@@ -68,11 +71,18 @@ export class PasswordReminderUserAnswerComponent implements OnInit {
   }
 
   public remindPassword(): void {
+    this._form.disable();
+
     const request = new RemindPasswordRequestModel(this.data.email, this._answer.value);
     this._userApiService.remindPassword(request)
       .subscribe(value => {
-        this.correctAnswer = value;
-      });
+          this.correctAnswer = value;
+          this.errors = [];
+        },
+        (error: HttpErrorResponse) => {
+          this.errors = this._errorService.extractSingleMessageAsCollection(error);
+          this._form.enable();
+        });
   }
 }
 

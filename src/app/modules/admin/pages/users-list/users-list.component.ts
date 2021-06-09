@@ -99,6 +99,7 @@ export class UsersListComponent implements OnInit {
         onClick: userr => {
           const modalData: IUserListActionConfirmationModalData = {
             actionText: 'ARE_YOU_SURE_YOU_WANT_TO_BLOCK_USER',
+            successText: 'SUCCESS_BLOCK_USER',
             user: userr,
             action: user => this._adminApiService.blockUser(user.id)
           };
@@ -112,6 +113,7 @@ export class UsersListComponent implements OnInit {
         onClick: userr => {
           const modalData: IUserListActionConfirmationModalData = {
             actionText: 'ARE_YOU_SURE_YOU_WANT_TO_UNBLOCK_USER',
+            successText: 'SUCCESS_UNBLOCK_USER',
             user: userr,
             action: user => this._adminApiService.unblockUser(user.id)
           };
@@ -125,6 +127,7 @@ export class UsersListComponent implements OnInit {
         onClick: userr => {
           const modalData: IUserListActionConfirmationModalData = {
             actionText: 'ARE_YOU_SURE_YOU_WANT_TO_FORCE_PASSWORD_CHANGE',
+            successText: 'SUCCESS_FORCE_PASSWORD_CHANGE',
             user: userr,
             action: user => this._adminApiService.forcePasswordChange(user.id)
           };
@@ -132,14 +135,15 @@ export class UsersListComponent implements OnInit {
         }
       },
       {
-        icon: AppIcon.Undo,
-        name: 'UNDO_FORCE_PASSWORD_CHANGE',
+        icon: AppIcon.Cancel,
+        name: 'CANCEL_FORCE_PASSWORD_CHANGE',
         hide: user => !user.isForcedPasswordChange,
         onClick: userr => {
           const modalData: IUserListActionConfirmationModalData = {
-            actionText: 'ARE_YOU_SURE_YOU_WANT_TO_UNDO_FORCE_PASSWORD_CHANGE',
+            actionText: 'ARE_YOU_SURE_YOU_WANT_TO_CANCEL_FORCE_PASSWORD_CHANGE',
+            successText: 'SUCCESS_CANCEL_FORCE_PASSWORD_CHANGE',
             user: userr,
-            action: user => this._adminApiService.undoForcePasswordChange(user.id)
+            action: user => this._adminApiService.cancelForcePasswordChange(user.id)
           };
           this._openUserListActionConfirmationModal(modalData);
         }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpOptions } from '../configurations/http-options';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../environments/environment';
+import { HttpOptions } from '../configurations/http-options';
+import { isDefined } from '../../shared/utils/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -23,12 +24,25 @@ export class HttpService {
     return this._http.post<T>(url, JSON.stringify(request), httpOptions);
   }
 
+  public postText(url: string, request: any): Observable<string> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const params = new HttpParams();
+
+    return this._http.post(url, JSON.stringify(request), {
+      responseType: 'text',
+      headers,
+      params
+    });
+  }
+
   public patch<T>(url: string, request: any, httpOptions: HttpOptions = this._httpOptions): Observable<T> {
     return this._http.patch<T>(url, JSON.stringify(request), httpOptions);
   }
 
-  public put<T>(url: string, request: any, httpOptions: HttpOptions = this._httpOptions): Observable<T> {
-    return this._http.put<T>(url, JSON.stringify(request), httpOptions);
+  public put<T>(url: string, request: any = null, httpOptions: HttpOptions = this._httpOptions): Observable<T> {
+    const stringifiedRequest = isDefined(request) ? JSON.stringify(request) : null;
+    return this._http.put<T>(url, stringifiedRequest, httpOptions);
   }
 
   public delete(url: string, httpOptions: HttpOptions = this._httpOptions): Observable<void> {
