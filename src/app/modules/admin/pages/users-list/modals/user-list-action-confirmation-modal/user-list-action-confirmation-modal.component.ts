@@ -4,9 +4,13 @@ import { AppButtonModel } from '../../../../../../shared/components/wrappers/app
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserListApiModel } from '../../models/user-list-api-model';
 import { Observable } from 'rxjs/internal/Observable';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../../../../shared/services/error.service';
+import { NotificationService, NotificationType } from '../../../../../../shared/services/notification.service';
 
 export interface IUserListActionConfirmationModalData {
   actionText: string;
+  successText: string;
   user: UserListApiModel;
   action: (user: UserListApiModel) => Observable<any>;
 }
@@ -26,11 +30,14 @@ export class UserListActionConfirmationModalComponent implements OnInit {
   public modalConfig: AppModalModel;
   public yesButton: AppButtonModel;
   public noButton: AppButtonModel;
+  public errors: string[] = [];
 
   private _showSpinner = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: IUserListActionConfirmationModalData,
-              private readonly _matDialogRef: MatDialogRef<UserListActionConfirmationModalComponent>) {
+              private readonly _matDialogRef: MatDialogRef<UserListActionConfirmationModalComponent>,
+              private readonly _errorService: ErrorService,
+              private readonly _notificationService: NotificationService) {
   }
 
   public ngOnInit(): void {
@@ -40,8 +47,15 @@ export class UserListActionConfirmationModalComponent implements OnInit {
       onClick: () => {
         this._showSpinner = true;
         this.data.action(this.data.user).subscribe(
-          () => this._matDialogRef.close(true)
-        );
+          () => {
+            const message = this.translateRoute + this.data.successText;
+            this._notificationService.showNotification(message, NotificationType.Success);
+            this._matDialogRef.close(true);
+          },
+          (error: HttpErrorResponse) => {
+            this.errors = this._errorService.extractSingleMessageAsCollection(error);
+            this._showSpinner = false;
+          });
       },
       label: {
         text: this.translateRoute + 'YES',

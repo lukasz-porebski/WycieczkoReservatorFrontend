@@ -145,21 +145,26 @@
             "BLOCK": "Zablokuj",
             "UNBLOCK": "Odblokuj",
             "FORCE_PASSWORD_CHANGE": "Wymuś zmianę hasła",
-            "UNDO_FORCE_PASSWORD_CHANGE": "Cofnij wymuszenie zmiany hasła"
+            "CANCEL_FORCE_PASSWORD_CHANGE": "Anuluj wymuszenie zmiany hasła"
           },
           "MODALS": {
             "USER_ROLE_CHANGE": {
               "TITLE": "Zmiana roli użytkownika",
               "CHANGE_ROLE": "Zmień rolę",
-              "OTHER_ROLES": "Inne role"
+              "OTHER_ROLES": "Inne role",
+              "SUCCESS_MESSAGE": "Zmieniono rolę użytkownika"
             },
             "USER_LIST_ACTION": {
               "ARE_YOU_SURE_YOU_WANT_TO_BLOCK_USER": "Czy na pewno zablokować użytkownika",
               "ARE_YOU_SURE_YOU_WANT_TO_UNBLOCK_USER": "Czy na pewno odblokować użytkownika",
               "ARE_YOU_SURE_YOU_WANT_TO_FORCE_PASSWORD_CHANGE": "Czy na pewno wymuśić zmianę hasła użytkownika",
-              "ARE_YOU_SURE_YOU_WANT_TO_UNDO_FORCE_PASSWORD_CHANGE": "Czy na pewno cofnąć wymuszenie zmiany hasła użytkownika",
+              "ARE_YOU_SURE_YOU_WANT_TO_CANCEL_FORCE_PASSWORD_CHANGE": "Czy na pewno anulować wymuszenie zmiany hasła użytkownika",
               "YES": "Tak",
-              "NO": "Nie"
+              "NO": "Nie",
+              "SUCCESS_BLOCK_USER": "Zablokowano użytkownika",
+              "SUCCESS_UNBLOCK_USER": "Odblokowano użytkownika",
+              "SUCCESS_FORCE_PASSWORD_CHANGE": "Wymuszono zmianę hasła użytkownika",
+              "SUCCESS_CANCEL_FORCE_PASSWORD_CHANGE": "Anulowano wymuszenie zmiany hasła użytkownika"
             }
           }
         },
