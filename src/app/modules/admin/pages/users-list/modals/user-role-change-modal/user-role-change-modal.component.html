@@ -9,6 +9,8 @@
       </mat-select>
     </mat-form-field>
 
+    <app-error [messages]="errors"></app-error>
+
     <div class="button-container">
       <app-button class="center-button"
                   [disabled]="showSpinner"

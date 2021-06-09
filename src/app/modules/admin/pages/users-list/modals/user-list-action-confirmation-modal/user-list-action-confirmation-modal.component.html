@@ -1,3 +1,4 @@
+<script src="../user-role-change-modal/user-role-change-modal.component.ts"></script>
 <app-modal [configuration]="modalConfig">
   <app-async-page [showSpinner]="showSpinner">
     <p>
@@ -5,6 +6,8 @@
       <strong>{{data.user.firstName}}{{data.user.lastName}}</strong>
       ?
     </p>
+
+    <app-error [messages]="errors"></app-error>
 
     <div class="container">
       <div class="row">
