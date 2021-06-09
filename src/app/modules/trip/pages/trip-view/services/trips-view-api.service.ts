@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { TripServiceModule } from '../../../trip-service.module';
 import { HttpService } from '../../../../../core/services/http.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { TripViewModel } from '../models/trip-view-model';
 import { TripBookModel } from '../models/trip-book-model';
 import { HttpParams } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -25,9 +26,12 @@ export class TripViewApiService {
     return this._http.get<TripViewModel>(url, {params: params});
   }
 
-  public bookTrip(booking:TripBookModel): Observable<TripBookModel>{
-    
-    return of(booking);
+  public bookTrip(request: TripBookModel): Observable<void> {
+    return this._http.post<void>( this._baseUrl + '/book', request).pipe(catchError((err:any) => {
+      console.log('error caught in service')
+      console.error(err)
+      return throwError(err);
+    }));
   }
 
 }

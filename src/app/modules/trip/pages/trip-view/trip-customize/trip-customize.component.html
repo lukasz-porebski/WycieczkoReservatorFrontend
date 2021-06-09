@@ -13,7 +13,7 @@
         <p *ngIf="tripViewModel.meal; else notShow"> Cena razem: <b>{{number_of_participants * (tripViewModel.pricePerSingleParticipant + tripViewModel.mealPricePerPerson)| number:'1.2-2'}} zł</b> </p>
         <ng-template #notShow> <p> Cena razem: <b>{{number_of_participants * tripViewModel.pricePerSingleParticipant | number:'1.2-2'}} zł</b> </p> </ng-template>
     
-    <button mat-stroked-button color="primary">Zarezerwuj</button>
+    <button mat-stroked-button color="primary" (click)="bookTrip()">Zarezerwuj</button>
     </mat-card-content>
 
 </app-async-page>

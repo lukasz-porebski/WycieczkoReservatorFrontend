@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppRouting } from 'src/app/core/configurations/routing/app-routing';
 import { TripViewModel } from '../models/trip-view-model';
 import { TripViewApiService } from '../services/trips-view-api.service';
 
@@ -11,10 +12,12 @@ import { TripViewApiService } from '../services/trips-view-api.service';
 export class TripCustomizeComponent implements OnInit {
 
   private tripViewModel: TripViewModel;
+  private number_of_participants: number;
 
-  constructor(private readonly tripViewApiService: TripViewApiService,  private readonly _route: ActivatedRoute) { }
+  constructor(private readonly tripViewApiService: TripViewApiService,  
+    private readonly _route: ActivatedRoute,
+    private readonly _router: Router) { }
 
-  number_of_participants: number;
 
   ngOnInit(): void {
     const id = this._route.snapshot.paramMap.get('id');
@@ -24,12 +27,13 @@ export class TripCustomizeComponent implements OnInit {
   }
 
   bookTrip(): void{
+    const id = this._route.snapshot.paramMap.get('id');
     let booking ={ participants : this.number_of_participants,
           pricePerSingleParticipant : this.tripViewModel.pricePerSingleParticipant,
-          tripId:  this.tripViewModel.tripId,
+          tripId: parseInt(id),
           meal: this.tripViewModel.meal
     }
-    this.tripViewApiService.bookTrip(booking);
+    this.tripViewApiService.bookTrip(booking).subscribe( () => this._router.navigateByUrl(AppRouting.trip.myTrips.absolutePath));
 }
 
 
