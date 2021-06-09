@@ -17,7 +17,9 @@
                     <p> Liczba gości: {{bookingDetailsModel.participants}} </p>
                     <p *ngIf="bookingDetailsModel.meal; else notShow1">Cena razem: <b>{{bookingDetailsModel.participants * (bookingDetailsModel.pricePerSingleParticipant + bookingDetailsModel.mealPricePerPerson) | number:'1.2-2'}} zł</b> </p>
                     <ng-template #notShow1> <p> Cena razem: <b>{{bookingDetailsModel.participants * bookingDetailsModel.pricePerSingleParticipant | number:'1.2-2'}} zł</b> </p> </ng-template>
-                    <button mat-stroked-button color="primary"> Anulowanie wycieczki </button>
+                    <button mat-stroked-button color="primary" 
+                    [disabled]="!canBeCanceled"
+                    (click)="cancelTrip()"> Anulowanie wycieczki </button>
                 </mat-card-content>
                 
             

@@ -10,7 +10,7 @@ export class BookingDetailsApiModel {
    
     public tripLocation: string;
 
-    public startDate: Date;
+    public startDate: string;
     public endDate: Date;
     public formOfTransport: string;
 

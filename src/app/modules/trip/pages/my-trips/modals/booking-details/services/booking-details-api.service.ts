@@ -22,5 +22,13 @@ import { BookingDetailsApiModel } from "../models/booking-details-api-model";
         return this._http.get<BookingDetailsApiModel>(url, {params: params});
       }
 
+    public cancelReservation(id:string): Observable<BookingDetailsApiModel> {
+      const url = this._baseUrl + '/book/cancel';
+      let params = new HttpParams();
+      params = params.append('reservationId', id);
+  
+      return this._http.put(url,null, {params: params});
+    }
+
 
   }
