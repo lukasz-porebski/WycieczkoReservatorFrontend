@@ -36,6 +36,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._tryAddTripCreatorMenu();
     this._tryAddUsersMenu();
     this._tryMyTripsMenu();
+    this._tryMyPayments();
 
     this._setActiveMenuElements(this._router.url);
 
@@ -114,6 +115,21 @@ export class NavigationComponent implements OnInit, OnDestroy {
       appTranslateRoute + 'MENU_NAME',
       AppRouting.trip.myTrips.absolutePath,
       AppIcon.Lock,
+    );
+    this.menu.push(menu);
+
+  }
+
+  private _tryMyPayments(): void{
+    if (!this._showMenuForUser()) {
+      return;
+    }
+
+    const appTranslateRoute = this.translateRoute + 'MENU.MYPAYMENTS.';
+    const menu = new MenuFirstLevelModel(
+      appTranslateRoute + 'MENU_NAME',
+      AppRouting.trip.myFinances.absolutePath,
+      AppIcon.Payments,
     );
     this.menu.push(menu);
 

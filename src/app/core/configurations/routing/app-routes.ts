@@ -22,7 +22,8 @@ export const AppRoutes = {
       tripsList: 'trips-list',
       tripView: 'trip-view',
       myTrips: 'my-trips',
-      bookingDetails: 'booking-details'
+      bookingDetails: 'booking-details',
+      myFinances: 'my-finances'
     }
   }
 };

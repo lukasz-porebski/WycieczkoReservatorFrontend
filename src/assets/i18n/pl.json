@@ -304,6 +304,9 @@
         },
         "MYTRIPS":{
           "MENU_NAME":"Moje wycieczki"
+        },
+        "MYPAYMENTS":{
+          "MENU_NAME": "Moje płatności"
         }
       },
       "APP_TABLE": {
