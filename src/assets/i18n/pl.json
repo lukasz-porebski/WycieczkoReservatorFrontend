@@ -319,6 +319,9 @@
     }
   },
   "ERROR_CODES": {
+    "0": "Konto zostało zablokowane",
+    "1": "Została wymuszona zmiana hasła. Zmień hasło",
+    "2": "Nieprawidłowy email lub hasło",
     "1001": "Nie istnieje konto o podanym adresie email",
     "1002": "Hasło jest niepoprawne",
     "1003": "Hasło musi mieć co najmniej 6 znaków",
