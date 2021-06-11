@@ -53,24 +53,50 @@ export class ErrorService {
       return customErrorInfo;
     }
 
-    const castedJsonCustomErrorInfo = JSON.parse(error) as CustomErrorInfo;
-    if (isDefined(castedJsonCustomErrorInfo?.errorCode)) {
-      const customErrorInfo = new CustomErrorInfo();
-      customErrorInfo.message = castedJsonCustomErrorInfo.message;
-      customErrorInfo.errorCode = castedJsonCustomErrorInfo.errorCode;
+    let jsonString = error;
+    if (this._isJson(jsonString)) {
+      const castedJsonCustomErrorInfo = JSON.parse(jsonString) as CustomErrorInfo;
+      if (isDefined(castedJsonCustomErrorInfo?.errorCode)) {
+        const customErrorInfo = new CustomErrorInfo();
+        customErrorInfo.message = castedJsonCustomErrorInfo.message;
+        customErrorInfo.errorCode = castedJsonCustomErrorInfo.errorCode;
 
-      return customErrorInfo;
+        return customErrorInfo;
+      }
     }
 
-    const castedDefaultErrorInfo = JSON.parse(`{${error}}`) as DefaultErrorInfo;
+    jsonString = `{${error}}`;
+    if (this._isJson(jsonString)) {
+      const castedJsonCustomErrorInfo = JSON.parse(jsonString) as CustomErrorInfo;
+      if (isDefined(castedJsonCustomErrorInfo?.errorCode)) {
+        const customErrorInfo = new CustomErrorInfo();
+        customErrorInfo.message = castedJsonCustomErrorInfo.message;
+        customErrorInfo.errorCode = castedJsonCustomErrorInfo.errorCode;
+
+        return customErrorInfo;
+      }
+    }
 
     const defaultErrorInfo = new DefaultErrorInfo();
-    defaultErrorInfo.message = castedDefaultErrorInfo?.message;
+    defaultErrorInfo.message = 'Błąd';
+    if (this._isJson(jsonString)) {
+      const castedDefaultErrorInfo = JSON.parse(jsonString) as DefaultErrorInfo;
+      defaultErrorInfo.message = castedDefaultErrorInfo?.message;
+    }
 
     return defaultErrorInfo;
   }
 
   private _getTranslateRoute(errorInfo: CustomErrorInfo): string {
     return `ERROR_CODES.${errorInfo.errorCode}`;
+  }
+
+  private _isJson(str: any): boolean {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }
