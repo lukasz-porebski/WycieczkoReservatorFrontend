@@ -5,7 +5,7 @@ export const AppRoutes = {
       logIn: 'log-in',
       registration: 'registration',
       passwordReminder: 'password-reminder',
-      passwordChanger: 'password-changer'
+      passwordChanger: 'password-changer',
     }
   },
   admin: {
@@ -19,7 +19,11 @@ export const AppRoutes = {
   trip: {
     path: 'trip',
     children: {
-      tripsList: 'trips-list'
+      tripsList: 'trips-list',
+      tripView: 'trip-view',
+      myTrips: 'my-trips',
+      bookingDetails: 'booking-details',
+      myFinances: 'my-finances'
     }
   }
 };

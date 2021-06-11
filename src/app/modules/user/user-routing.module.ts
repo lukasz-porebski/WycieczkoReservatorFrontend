@@ -7,6 +7,7 @@ import { PasswordReminderComponent } from './pages/password-reminder/password-re
 import { PasswordChangerComponent } from './pages/password-changer/password-changer.component';
 
 
+
 const routes: Routes = [
   {
     path: '',

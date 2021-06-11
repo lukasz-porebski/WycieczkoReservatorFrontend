@@ -1,0 +1,19 @@
+<app-async-page>
+    <mat-card-content>
+        <p> Data wyjazdu: {{tripViewModel.startDate| date:'dd.MM.YYYY'}} - {{tripViewModel.endDate| date:'dd.MM.YYYY'}}</p>
+        <p> Środek transportu: {{tripViewModel.formOfTransport}} </p>
+        <p *ngIf="tripViewModel.meal; else notShow">Wyżywienie: TAK</p>
+        <ng-template #notShow> <p> Wyżywienie: Brak </p> </ng-template>
+        <mat-form-field appearance="fill">
+            <mat-label>Wybierz liczbę gości:</mat-label>
+            <mat-select [(value)]="number_of_participants">
+                <mat-option *ngFor="let x of tripViewModel.participants" [value]="x">{{x}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p *ngIf="tripViewModel.meal; else notShow"> Cena razem: <b>{{number_of_participants * (tripViewModel.pricePerSingleParticipant + tripViewModel.mealPricePerPerson)| number:'1.2-2'}} zł</b> </p>
+        <ng-template #notShow> <p> Cena razem: <b>{{number_of_participants * tripViewModel.pricePerSingleParticipant | number:'1.2-2'}} zł</b> </p> </ng-template>
+    
+    <button mat-stroked-button color="primary" (click)="bookTrip()">Zarezerwuj</button>
+    </mat-card-content>
+
+</app-async-page>

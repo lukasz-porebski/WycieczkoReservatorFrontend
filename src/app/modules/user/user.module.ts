@@ -11,6 +11,7 @@ import { PasswordReminderUserAnswerComponent } from './pages/password-reminder/c
 import { PasswordChangerComponent } from './pages/password-changer/password-changer.component';
 import { DomainCommonModule } from '../_domain-common/domain-common.module';
 
+
 @NgModule({
   imports: [
     UserRoutingModule,

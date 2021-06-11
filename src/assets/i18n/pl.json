@@ -245,7 +245,8 @@
             "MAIN_IMAGE_URL": "Zdjęcie",
             "CANCEL_TRIP": "Anuluj",
             "EDIT_TRIP": "Edytuj",
-            "ASSIGNE_GUID": "Przypisz przewodnika"
+            "ASSIGNE_GUID": "Przypisz przewodnika",
+            "DETAILS": "Szczegóły"
           },
           "MODALS": {
             "TRIPS_LIST_ACTION": {
@@ -300,6 +301,12 @@
         },
         "TRIP_CREATOR": {
           "MENU_NAME": "Dodaj wycieczkę"
+        },
+        "MYTRIPS":{
+          "MENU_NAME":"Moje wycieczki"
+        },
+        "MYPAYMENTS":{
+          "MENU_NAME": "Moje płatności"
         }
       },
       "APP_TABLE": {

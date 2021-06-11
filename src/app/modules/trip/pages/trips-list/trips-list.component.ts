@@ -68,7 +68,7 @@ export class TripsListComponent implements OnInit {
 
     switch (userRole) {
       case UserRole.User:
-        result = null;
+        result.actions = this._getUserActions();
         break;
       case UserRole.Guide:
         result = null;
@@ -84,6 +84,18 @@ export class TripsListComponent implements OnInit {
 
     return result;
   }
+  private _getUserActions(): IAppTableColumnActionConfiguration<TripListApiModel>[] {
+    return [
+      {
+        icon: AppIcon.Forward,
+        name: 'DETAILS',
+        onClick: trip => {
+          actionText: 'DETAILS'
+          this._router.navigateByUrl(`${AppRouting.trip.tripView.absolutePath}/${trip.id}`);
+        }
+      }
+    ]
+}
 
   private _getAdminActions(): IAppTableColumnActionConfiguration<TripListApiModel>[] {
     return [

@@ -16,4 +16,5 @@ export enum AppIcon {
   Users = 'people',
   Trips = 'hiking',
   AssignUser = 'person_add',
+  Payments = 'payments'
 }
